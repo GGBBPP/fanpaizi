@@ -30,7 +30,7 @@
     pointer-events: none;
     z-index: 0;
     animation: floatAround 12s ease-in-out infinite;
-    opacity: 0.55;
+    opacity: 0.5;
     font-size: 1.6rem;
   }
   .bg-float:nth-child(1) { top: 6%; left: 4%; animation-delay: 0s; font-size: 2rem; }
@@ -44,8 +44,8 @@
 
   @keyframes floatAround {
     0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-    25% { transform: translate(10px, -15px) rotate(5deg) scale(1.1); }
-    50% { transform: translate(-5px, -25px) rotate(-3deg) scale(0.95); }
+    25% { transform: translate(10px, -14px) rotate(5deg) scale(1.1); }
+    50% { transform: translate(-5px, -24px) rotate(-3deg) scale(0.95); }
     75% { transform: translate(-12px, -8px) rotate(4deg) scale(1.05); }
   }
 
@@ -56,18 +56,18 @@
     background: linear-gradient(180deg, rgba(255,243,224,0.95) 60%, rgba(255,243,224,0) 100%);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 16px 16px 24px;
+    padding: 14px 14px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
   .header h1 {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 800;
     color: #e84393;
-    text-shadow: 2px 2px 0 rgba(255,107,138,0.15);
+    text-shadow: 2px 2px 0 rgba(255,107,138,0.12);
   }
   .header-actions { display: flex; gap: 6px; }
 
@@ -83,7 +83,6 @@
     transition: all 0.2s;
     font-family: inherit;
     white-space: nowrap;
-    backdrop-filter: blur(4px);
   }
   .btn:active { background: #fce4ec; transform: scale(0.94); }
   .btn-primary { background: #e84393; color: #fff; border-color: #e84393; }
@@ -92,22 +91,21 @@
   .main {
     position: relative;
     z-index: 1;
-    padding: 0 12px 50px;
+    padding: 0 10px 50px;
   }
 
   .stats {
     text-align: center;
-    margin-bottom: 18px;
-    font-size: 0.82rem;
+    margin-bottom: 16px;
+    font-size: 0.8rem;
     color: #e84393;
     background: rgba(255,255,255,0.5);
     display: inline-block;
-    padding: 5px 16px;
-    border-radius: 18px;
+    padding: 5px 15px;
+    border-radius: 16px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    backdrop-filter: blur(4px);
     font-weight: 600;
   }
   .stats span { color: #6c5ce7; }
@@ -118,7 +116,7 @@
     border: 2px dashed #ff6b8a;
     border-radius: 14px;
     padding: 9px 14px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
@@ -181,32 +179,46 @@
     overflow: hidden;
   }
 
-  /* 背面 — 小新人物图案 */
+  /* 背面 — 蜡笔小新图片 */
   .card-back {
-    border: 3px solid rgba(255,255,255,0.6);
+    border: 3px solid rgba(255,255,255,0.7);
     box-shadow: 0 5px 20px rgba(232,67,147,0.15);
-    position: relative;
+    background-color: #f0e0d0;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
-  .card-back-inner {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  .card-back::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 13px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 40%, rgba(0,0,0,0.15) 100%);
+    pointer-events: none;
   }
-  .card-back-inner svg {
-    width: 72%;
-    height: auto;
-    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.12));
-  }
-  .card-back .name-tag {
-    font-size: 0.65rem;
-    font-weight: 700;
+  .card-back .num-tag {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    background: rgba(232,67,147,0.85);
     color: #fff;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    margin-top: 2px;
-    letter-spacing: 0.04em;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 8px;
+    z-index: 2;
+  }
+  .card-back .shuffle-indicator {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    background: rgba(255,255,255,0.8);
+    color: #e84393;
+    font-size: 0.55rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 6px;
+    z-index: 2;
   }
 
   /* 正面 */
@@ -318,7 +330,7 @@
   @media (max-width: 380px) {
     :root { --card-w: 110px; --card-h: 145px; }
     .card-grid { gap: 8px; }
-    .header h1 { font-size: 1.2rem; }
+    .header h1 { font-size: 1.15rem; }
   }
   @media (min-width: 500px) {
     :root { --card-w: 150px; --card-h: 195px; }
@@ -380,31 +392,164 @@
   <div class="toast hidden" id="toast"></div>
 
   <script>
-  var STORAGE_KEY = "fanpaizi_v4_data";
+  // ===== 148 张蜡笔小新图片（来自互联网，每次重置随机选取）=====
+  var ALL_IMAGES = [
+    "https://safebooru.org/images/3321/00adb25b8570600473db8df250f9f9c8a92fac1e.jpg",
+    "https://safebooru.org/samples/2870/sample_71c14b47326d597e73883218d4a5cd32b255f7c7.jpg",
+    "https://safebooru.org/samples/2133/sample_5529479fef7b407ff216a4cfb08d87fc714adc0a.jpg",
+    "https://safebooru.org/samples/2133/sample_62e264a8cfd13de04b6314b40ff2925ee14c34be.jpg",
+    "https://safebooru.org/images/2009/5b6cd23ef383172cdeebb4a98acc98ea61a83c92.gif",
+    "https://safebooru.org/images/1997/2cbc373370e683633951ada247462763a1244b49.jpg",
+    "https://safebooru.org/images/1981/67e02868926d727851b2ef290d9ba78fa36b35cc.jpg",
+    "https://safebooru.org/images/1981/b379ca18d4032c99df63aed48bb28bbedfcbbc8a.jpg",
+    "https://safebooru.org/images/1981/5543b96a54a17e5fb6b30cc91bb19ed1f5268332.jpg",
+    "https://safebooru.org/images/1977/ac47f3108142c7e0082ab80f6af262e953ffaa21.jpg",
+    "https://safebooru.org/images/1967/a5d055155c6b0a9d516f3bb78ea8b72026dbef11.jpg",
+    "https://safebooru.org/images/1929/590769051370eb2c5d7233d3e4b3d3803fef4885.jpg",
+    "https://safebooru.org/images/1917/4ac4b35b61fab38bda52af353f0d6af81a4f0c45.jpg",
+    "https://safebooru.org/images/1917/98e8439731562020e4438888f17d1469313bc0cf.jpg",
+    "https://safebooru.org/images/1907/ad6fac32942c4cc82f8589e549d534485c0e8b30.jpg",
+    "https://safebooru.org/images/1566/023246e151a0e667e4e3135a4f5b85b1530c97ef.png",
+    "https://safebooru.org/images/1565/bdd337a2f0bc62dec749acc38d68abd83a66e77e.png",
+    "https://safebooru.org/images/1418/f6002988cc5ae6e480344acbdae89d8bed9ebd13.jpg",
+    "https://safebooru.org/images/974/80e018c30aebf10145bb99e15f26e7c8176233e5.jpg",
+    "https://safebooru.org/samples/837/sample_f78a3ed5c078526555302a73187848ebd4e9c812.jpg",
+    "https://safebooru.org/samples/618/sample_aac540d2fd688b1d724b099244184b7c046aff3c.jpg",
+    "https://safebooru.org/samples/618/sample_36aced87b82d9663c73bd2db8b5d40730f70df1e.jpg",
+    "https://safebooru.org/images/618/3f2186d36129da266462432910c733ec379b53e3.jpg",
+    "https://safebooru.org/images/618/c9f585b0c7cdd658cd2364a7c174c74a7fab0b25.jpg",
+    "https://safebooru.org/images/574/e52f2a2acc2cf1c30178ad6f812948f38f61115a.jpg",
+    "https://safebooru.org/images/454/d05b7fd8385093d592cc88c98beac878f1f26865.jpg",
+    "https://safebooru.org/images/302/13cf68913025987c79e9e564e71aa673a1fd0ac4.jpg",
+    "https://safebooru.org/images/286/9d077f1204d7cd8748d0cf0b5164bc4105a2a9a2.jpg",
+    "https://safebooru.org/images/278/eb8c4b077df79bafd83693239e07edd8bcaa0ca5.jpg",
+    "https://safebooru.org/images/275/ec80a2706322642fe35e181ff859df683e5a8039.jpg",
+    "https://safebooru.org/images/274/b2e5e39346f720bfeee8f7d81d1711d468f34c11.jpg",
+    "https://safebooru.org/images/270/d9d8fe576169f80b2128eccd6e92be1c6a44c90e.jpg",
+    "https://safebooru.org/images/249/dd36d9c73ea7c5e1556b2d440a41dd9fec57060d.png",
+    "https://safebooru.org/images/183/3f2c6db9a448696b4da26d701ceaa1064fdf69ce.jpg",
+    "https://safebooru.org/images/181/b5f0ff8fc4150a41e0ce40a00226f395091b5d05.png",
+    "https://safebooru.org/images/174/4a00e9d099ac6b725c07ad568888ee1227ea7865.jpg",
+    "https://safebooru.org/samples/1915/sample_f2972ea4c0143af3fecd7a25abfe1be3c66b1658.jpg",
+    "https://safebooru.org/images/4083/6a3fc65c2edf8659f8c9d0f080e807e24e571e8d.png",
+    "https://safebooru.org/images/3240/b870b93566817b4770c10dd3ef218b5a64017f62.png",
+    "https://safebooru.org/images/2284/423568fce8298536dab285ba8c99e6923601d4be.jpg",
+    "https://safebooru.org/images/252/f27c79fbf59353dd8c0034b79e4e00563cf150bd.jpg",
+    "https://safebooru.org/images/1315/656ebeb0caee74ddd327d418c7d1ee6e8aabfcef.jpg",
+    "https://safebooru.org/images/1315/cfbe7ee12e15f1a7c0dd491233099387332fe027.jpg",
+    "https://safebooru.org/images/1088/1a4bf46e763f467dca97026a2dd35872.jpeg",
+    "https://safebooru.org/samples/575/sample_ba3f51542d899c7e2a96b2da41e05c450e5bbdfb.jpg",
+    "https://safebooru.org/images/575/a55b72726e9052229c466f6edc8e0b215d9b718e.gif",
+    "https://safebooru.org/samples/575/sample_9af7427e6e493d9e2d63dffda20ce1da0192d675.jpg",
+    "https://safebooru.org/images/63/c5bcc94c78113200643f347d02028bf2c63a7d16.jpg",
+    "https://safebooru.org/samples/63/sample_870952cf4108a6b16243dc4d4ddc70455def2b7d.jpg",
+    "https://safebooru.org/samples/4414/sample_d0395c92696ec4a94cd9d000c48ad95ac6200113.jpg",
+    "https://safebooru.org/samples/3902/sample_950a9be395f0435eaa86c6a768222c613e25b1eb.jpg",
+    "https://safebooru.org/samples/3902/sample_94cf6a8dff8338be359d61d779b89851166a4189.jpg",
+    "https://safebooru.org/samples/830/sample_021f998adfb471357a5a2fc1cd84819313e32245.jpg",
+    "https://safebooru.org/samples/574/sample_187e13b07cc59e035039c03e5c38ad9b7813dad1.jpg",
+    "https://safebooru.org/samples/574/sample_f17dffcfbb0cf1a2413a5e915d9daa5b742c37ee.jpg",
+    "https://safebooru.org/images/62/750b90de74bb41da4a51892b2d56206a4c1e159f.png",
+    "https://safebooru.org/samples/62/sample_519626aa514cb1256400cef6c5f0db9a147a247d.jpg",
+    "https://safebooru.org/images/62/c5bae9cd14368e53e383ca6d89222a08329ceee3.png",
+    "https://safebooru.org/samples/4413/sample_730d6d834dce134de20df43cefa2e0987245d48b.jpg",
+    "https://safebooru.org/samples/3901/sample_5454adc942d1af9cc283602210e3e3ff0ee8b47f.jpg",
+    "https://safebooru.org/samples/3901/sample_23ec68f72be926c11c0493ee1341ea7c968368c5.jpg",
+    "https://safebooru.org/images/3901/e3afdef7ec4b74407f0eec230f3895c86cef47c2.jpg",
+    "https://safebooru.org/samples/1341/sample_f776582df11b1f06c4fb7a8aae634fc333c24464.jpg",
+    "https://safebooru.org/samples/829/sample_36b0adf0bb33b02a3b24d22385e2523543668751.jpg",
+    "https://safebooru.org/samples/61/sample_01b1648b158310bdd252cc1766ad5ac00dba9373.jpg",
+    "https://safebooru.org/samples/61/sample_633088d82d249e83eed9ab74fc5287a32241ac38.jpg",
+    "https://safebooru.org/samples/316/sample_d961fd30ea0258cba9a2a44d3ef59781de781450.jpg",
+    "https://safebooru.org/samples/316/sample_c471d35815b57a6a4fc1f82709b6ff08fb76bdb4.jpg",
+    "https://safebooru.org/samples/3899/sample_bfbd2877719b36acc296ae0a84f413e43fd62eae.jpg",
+    "https://safebooru.org/samples/3899/sample_d8337a500d85ddf02077a5ad7f75dfb5b9d635e0.jpg",
+    "https://safebooru.org/samples/1339/sample_0f8d0c37dffe53fe0495e7a89ba45f17d2fdf42c.jpg",
+    "https://safebooru.org/samples/571/sample_44fe3b00ef7ebe1a346c9d27a69e45f300157161.jpg",
+    "https://safebooru.org/samples/571/sample_6f92325315fc7fc3549089b302fdf8c84d0ecf5f.jpg",
+    "https://safebooru.org/samples/571/sample_5e6e73431dc213f31ae7833233b32d9509066e50.jpg",
+    "https://safebooru.org/samples/571/sample_62b39da68fe07a46f573d555a05018a24881ef9a.jpg",
+    "https://safebooru.org/images/59/4760cc7c1475e659dce397e58054cb40189ad56e.jpg",
+    "https://safebooru.org/images/4154/67bb003a4fa2ac9e284bf4750eba7582c8ace32c.jpg",
+    "https://safebooru.org/samples/4154/sample_7ea4dcc5d8970b3c948077d5590e3b7176aff2c1.jpg",
+    "https://safebooru.org/samples/1082/sample_43faf9f1895d9515bba620014653086bc4a306ec.jpg",
+    "https://safebooru.org/samples/1082/sample_903cfbbd2d2f0d103a670898d605da9cb6a5620c.jpg",
+    "https://safebooru.org/images/826/40d333d4c591a177485dc1e161d11186ccbd26c4.jpg",
+    "https://safebooru.org/samples/570/sample_e09d72264feece221a5b67691c95f1de61a3bd01.jpg",
+    "https://safebooru.org/images/570/15c03a6cd974a5adad418490b93afa62e32da6f2.png",
+    "https://safebooru.org/images/314/a199be6d107341d75d0ad353be1c6319841c7658.jpg",
+    "https://safebooru.org/samples/4409/sample_9e9aef9d40de68ee6890f9a00f5b744aed6a3fbc.jpg",
+    "https://safebooru.org/samples/4153/sample_67fd3173ccc553fdfade5ef3c6e7d63fb6878c48.jpg",
+    "https://safebooru.org/samples/4153/sample_64d429d2d06796bf4a4c8c588b6b60f071842980.jpg",
+    "https://safebooru.org/samples/825/sample_850a77e7b6491fe54d0f9525b6b9a90302a52074.jpg",
+    "https://safebooru.org/samples/57/sample_b6e28fa53f8ff43ffd7c57d91403eb880fb6f031.jpg",
+    "https://safebooru.org/samples/57/sample_88f4cdf12565dea31acaba17c13e3c0bb04b299f.jpg",
+    "https://safebooru.org/samples/57/sample_8325e180cf528d3676483850d9f91ddfabf31637.jpg",
+    "https://safebooru.org/samples/3896/sample_81398cfc4e7047886978b4c254ad6b246c5d6ffd.jpg",
+    "https://safebooru.org/samples/3896/sample_8a2929788311775240ad9acf0dcb81d99b236105.jpg",
+    "https://safebooru.org/images/4115/e52d55f663ac25f9c6a7504cd3c564bf9c506472.png",
+    "https://safebooru.org/images/4115/797dd08cb6cfd041ff911528c330bdb097eccbff.png",
+    "https://safebooru.org/images/4115/c7dd67e951fc3ff8e5840ad467541367e25535c2.png",
+    "https://safebooru.org/images/4115/eb48cbe0528c79822ccb20c27a04c77f07fdd1d8.png",
+    "https://safebooru.org/samples/4115/sample_aa54095e57b92a16a94d618bdc3c42dbeee2704e.jpg",
+    "https://safebooru.org/images/4115/8238e32ad0e649be577151227141dc1883f89a1a.png",
+    "https://safebooru.org/images/4115/c14027cf998e6013d89ecaeee5acd66a7c48ee2b.png",
+    "https://safebooru.org/images/275/0657454473bc3d577523a85df17ca307eee6cf55.jpg",
+    "https://safebooru.org/samples/4370/sample_dc6f508d2dd18c4f96f053d1e52d5f381b17131b.jpg",
+    "https://safebooru.org/images/4370/ebbf665d79fe5e61361c2e6c417ccb1d89c5a5e8.jpg",
+    "https://safebooru.org/images/4370/d1cf65f20db804ad388816fb8c4b4c86eea59f22.jpg",
+    "https://safebooru.org/images/4370/e4ba6d5d93286dc95c076c89114edc5c5a6f33a9.jpg",
+    "https://safebooru.org/images/523/e9fba5bd013c2088c5c3e8b57764935ee41372eb.jpg",
+    "https://safebooru.org/images/523/1f3bc03fcc8204f62203ccf0171eb3d1dbb53ee5.jpg",
+    "https://safebooru.org/images/523/527a73b7d236c7b16add9437c051da93162ff91e.jpg",
+    "https://safebooru.org/images/4413/2f5aaf4312c0eacebcaeecb30af1a3c8afb55f1a.jpg",
+    "https://safebooru.org/images/4132/b5decb54ac9cb663f412706dcca6488905f8915b.jpg",
+    "https://safebooru.org/samples/3961/sample_74b4cf97f9be29d549ccc055b33326a770350ef0.jpg",
+    "https://safebooru.org/images/2447/8408a8ec4a91bf3114410761b64c9cff3c0fc479.jpg",
+    "https://safebooru.org/images/1916/a26fa5712959aea131786552bf59a2cc636e1c9b.jpg",
+    "https://safebooru.org/images/1390/c09a46bad7d98ed6bbf5a7a4fc0192eca12c2fcf.jpg",
+    "https://safebooru.org/images/622/82455b319915f468087e6507e6f604da19b5362f.png",
+    "https://safebooru.org/samples/78/sample_e4237769d3b8c72f61d079efa633fbfd9c6b222c.jpg",
+    "https://safebooru.org/images/78/d57bd45328d70f650d92cdf3d8c464954ccd679c.jpg",
+    "https://safebooru.org/images/78/b0defb7b7c215fe93d9326ac54643be437fc2f64.jpg",
+    "https://safebooru.org/images/3901/1370f684455adaef814bb7ea379ff1e66d165818.jpg",
+    "https://safebooru.org/images/4370/50adfa4611c0ce454753da49c009253cf58fc44e.jpg",
+    "https://safebooru.org/samples/4619/sample_d4615354827773748e32b235c05e176db29b8590.jpg",
+    "https://safebooru.org/images/4124/5f03e3ba3b559949686bb7fd0fe8a9a259674974.jpg",
+    "https://safebooru.org/images/2075/4b2be5bb73eb69d89ea91ba6a17d9333b5de8af7.jpg",
+    "https://safebooru.org/images/1884/30b14dec71e58b38b9f56d5d120ae562d4df7084.jpeg",
+    "https://safebooru.org/images/1768/8599af8d587e638589ca051e7c279eb679ef314e.jpg",
+    "https://safebooru.org/images/1767/90f456cbfad2600987c13973eb64e71df8f9049a.jpg",
+    "https://safebooru.org/images/1699/85fca95ab07a4dcb1b09a2affa63bd4da9ab6449.jpg",
+    "https://safebooru.org/images/420/c079926e4aa024ad8d83fd2b3fdd4426adf356ff.jpg",
+    "https://safebooru.org/images/146/3fa4725e3b138019be2be3869d43abdfd0ca3f07.jpg",
+    "https://safebooru.org/samples/3090/sample_4c3a54ccac55ba9709ace6cfaa55a6312eedb424.jpg",
+    "https://safebooru.org/samples/2064/sample_c873f1f15c31b6e1bf6799059e011a8b8b14b85d.jpg",
+    "https://safebooru.org/images/1032/536cc518d3a870af1506cdaf913a7a0e511bc21f.jpg",
+    "https://safebooru.org/images/1032/ebca16d9bf9c8d32c4f93f5b2525e47001a098b9.png",
+    "https://safebooru.org/images/4619/b19b1183da41308f0465a84d9070a20b863e0e5b.png",
+    "https://safebooru.org/images/2226/4055fd109cb58dd7b35e47046971b200.jpeg",
+    "https://safebooru.org/images/1913/9b0c9290e3d53f8bffce1311e53cd8971cb0ce3f.jpg",
+    "https://safebooru.org/images/1768/bc10b13e905866b447964d7f380d242ed51f404e.jpg",
+    "https://safebooru.org/images/1768/5586cc4130f771d45069954fcf18bd791c890634.jpg",
+    "https://safebooru.org/images/1767/b167fead6e2b30f0d24c71f5f4642a8dbc873ea4.jpg",
+    "https://safebooru.org/images/1766/ec94f467b1361232baaebdaaa00ae0e39112eb2c.png",
+    "https://safebooru.org/samples/1648/sample_8348ef9240b61bf71ae0b5694ea48573bca2d55d.jpg",
+    "https://safebooru.org/samples/1634/sample_8ac8be1a61b5aeeb71df2f48a9a9541a085aa621.jpg",
+    "https://safebooru.org/samples/1587/sample_6751913f2fb439554d3546eaa0f8733649835a28.jpg",
+    "https://safebooru.org/samples/1546/sample_cf1d1c8889df8396f8be9b8c38090d2aa91d9553.jpg",
+    "https://safebooru.org/images/1327/55255db2e1fe396f7100e45034fbbb4495e135f0.jpg",
+    "https://safebooru.org/images/1000/ff65fe052514bcf09e1250cb68a93820eb320ea2.jpg",
+    "https://safebooru.org/images/622/7ffce70e35b4067df6865e8f54312ea08c4fad5c.jpg",
+    "https://safebooru.org/images/294/22c69c13ab4f55a948c161753f5ad0ee56b43d71.gif"
+  ];
+  var TOTAL_IMAGES = ALL_IMAGES.length;
+
+  var STORAGE_KEY = "fanpaizi_v5_data";
   var cards = [];
   var flippedSet = new Set();
   var maxFlips = 2;
-
-  // 10 种不同表情的小新 SVG（纯矢量手绘风格）
-  var shinchanFaces = [
-    { name: "小新·微笑",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="30" y1="50" x2="48" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="48" x2="90" y2="50" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="39" cy="55" r="3.5" fill="#111"/><circle cx="81" cy="55" r="3.5" fill="#111"/><circle cx="38" cy="54" r="1.2" fill="#fff"/><circle cx="80" cy="54" r="1.2" fill="#fff"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M46 82 Q60 94 74 82" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
-    { name: "小新·大笑",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="30" y1="48" x2="46" y2="50" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="74" y1="50" x2="90" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><path d="M36 56 Q39 52 42 56" fill="none" stroke="#111" stroke-width="2"/><path d="M78 56 Q81 52 84 56" fill="none" stroke="#111" stroke-width="2"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><ellipse cx="60" cy="88" rx="16" ry="12" fill="#C0392B"/><ellipse cx="60" cy="85" rx="10" ry="6" fill="#E74C3C"/><rect x="50" y="72" width="20" height="3" rx="1.5" fill="#fff" opacity="0.7"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
-    { name: "小新·惊讶",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="30" y1="48" x2="48" y2="50" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="50" x2="90" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="39" cy="58" r="6" fill="#111"/><circle cx="81" cy="58" r="6" fill="#111"/><circle cx="38" cy="57" r="2" fill="#fff"/><circle cx="80" cy="57" r="2" fill="#fff"/><ellipse cx="60" cy="70" rx="6" ry="4" fill="#D4956B"/><ellipse cx="60" cy="90" rx="12" ry="14" fill="#C0392B"/><ellipse cx="60" cy="88" rx="9" ry="8" fill="#2C1810"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
-    { name: "小新·困倦",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="32" y1="52" x2="48" y2="52" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="52" x2="88" y2="52" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><path d="M33 56 Q39 60 45 56" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/><path d="M75 56 Q81 60 87 56" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="60" cy="70" rx="6" ry="4" fill="#D4956B"/><ellipse cx="60" cy="88" rx="10" ry="7" fill="#C0392B"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><text x="60" y="38" text-anchor="middle" font-size="24" fill="#7F8C8D">💤</text>' },
-    { name: "小新·调皮",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="32" y1="46" x2="48" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="48" x2="88" y2="46" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="36" cy="55" r="3.5" fill="#111"/><circle cx="84" cy="55" r="3.5" fill="#111"/><circle cx="35" cy="54" r="1.2" fill="#fff"/><circle cx="83" cy="54" r="1.2" fill="#fff"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M42 82 Q60 72 78 82" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="72" cy="84" rx="8" ry="12" fill="#E74C3C" opacity="0.7"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
-    { name: "小新·嘚瑟",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><path d="M30 46 Q34 42 48 48" fill="none" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><path d="M90 46 Q86 42 72 48" fill="none" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="39" cy="57" r="3" fill="#111"/><circle cx="81" cy="57" r="3" fill="#111"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M44 82 Q60 72 76 82" fill="none" stroke="#C0392B" stroke-width="2.8" stroke-linecap="round"/><ellipse cx="44" cy="82" rx="7" ry="7" fill="#E74C3C" opacity="0.6"/><ellipse cx="76" cy="82" rx="6" ry="6" fill="#E74C3C" opacity="0.5"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
-    { name: "小新·生气",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="26" y1="44" x2="52" y2="48" stroke="#222" stroke-width="4" stroke-linecap="round"/><line x1="68" y1="48" x2="94" y2="44" stroke="#222" stroke-width="4" stroke-linecap="round"/><circle cx="39" cy="57" r="3.5" fill="#111"/><circle cx="81" cy="57" r="3.5" fill="#111"/><circle cx="38" cy="56" r="1.2" fill="#fff"/><circle cx="80" cy="56" r="1.2" fill="#fff"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M48 85 Q56 78 60 85 Q64 78 72 85" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/><circle cx="26" cy="74" r="8" fill="#FF6B6B" opacity="0.7"/><circle cx="94" cy="74" r="8" fill="#FF6B6B" opacity="0.7"/>' },
-    { name: "小新·害羞",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="34" y1="46" x2="50" y2="48" stroke="#222" stroke-width="3" stroke-linecap="round"/><line x1="70" y1="48" x2="86" y2="46" stroke="#222" stroke-width="3" stroke-linecap="round"/><path d="M34 58 Q39 54 44 58" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/><path d="M76 58 Q81 54 86 58" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><ellipse cx="60" cy="84" rx="13" ry="9" fill="#C0392B"/><ellipse cx="60" cy="82" rx="9" ry="5" fill="#E74C3C"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.8"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.8"/>' },
-    { name: "小新·呆萌",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="34" y1="50" x2="50" y2="49" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="70" y1="49" x2="86" y2="50" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="39" cy="56" r="4" fill="#111"/><circle cx="81" cy="56" r="4" fill="#111"/><circle cx="40" cy="55" r="1.5" fill="#fff"/><circle cx="82" cy="55" r="1.5" fill="#fff"/><ellipse cx="60" cy="69" rx="6" ry="4" fill="#D4956B"/><ellipse cx="60" cy="84" rx="7" ry="5" fill="#C0392B"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.5"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.5"/>' },
-    { name: "小新·得意",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="28" y1="48" x2="48" y2="46" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="46" x2="92" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><path d="M34 56 Q39 52 44 56" fill="none" stroke="#111" stroke-width="2"/><path d="M76 56 Q81 52 86 56" fill="none" stroke="#111" stroke-width="2"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M38 82 Q60 96 82 82" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/><rect x="50" y="78" width="20" height="3" rx="1.5" fill="#fff" opacity="0.6"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' }
-  ];
-
-  var cardBgColors = [
-    "#FF6B8A", "#FFA502", "#7BED9F", "#70A1FF", "#A29BFE",
-    "#FD79A8", "#FDCB6E", "#55EFC4", "#FF9FF3", "#FF6B6B",
-    "#6C5CE7", "#E17055", "#00CEC9", "#F8B500", "#26DE81",
-    "#FC5C65", "#45AAF2", "#A55EEA", "#E84393", "#2ED573"
-  ];
+  var currentImageIndexes = []; // 当前这批牌子用的图片索引
 
   var defaultCards = [
     "今晚洗碗 🍽️",
@@ -417,6 +562,44 @@
     "无条件道歉一次 🙇"
   ];
 
+  // Fisher-Yates 洗牌
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  // 生成不重复的随机图片索引
+  function pickRandomImages(count, previous) {
+    // 把所有索引洗牌
+    var all = [];
+    for (var i = 0; i < TOTAL_IMAGES; i++) all.push(i);
+    var shuffled = shuffle(all);
+
+    // 如果之前有选过的，尽量避开（但不是必须）
+    if (previous && previous.length > 0 && count <= TOTAL_IMAGES - previous.length) {
+      var prevSet = {};
+      for (var p = 0; p < previous.length; p++) prevSet[previous[p]] = true;
+      var fresh = [];
+      var reused = [];
+      for (var s = 0; s < shuffled.length; s++) {
+        if (prevSet[shuffled[s]]) reused.push(shuffled[s]);
+        else fresh.push(shuffled[s]);
+      }
+      // 优先用没出现过的，不够再补
+      var picked = fresh.slice(0, count);
+      if (picked.length < count) {
+        picked = picked.concat(reused.slice(0, count - picked.length));
+      }
+      return picked;
+    }
+
+    return shuffled.slice(0, count);
+  }
+
   function loadData() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
@@ -425,32 +608,36 @@
         cards = data.cards || [];
         flippedSet = new Set(data.flipped || []);
         maxFlips = data.maxFlips != null ? data.maxFlips : 2;
+        currentImageIndexes = data.imgIndexes || [];
+        // 如果图片索引不够（牌子变多了），补充
+        while (currentImageIndexes.length < cards.length) {
+          var used = {};
+          for (var u = 0; u < currentImageIndexes.length; u++) used[currentImageIndexes[u]] = true;
+          for (var k = 0; k < TOTAL_IMAGES; k++) {
+            if (!used[k]) { currentImageIndexes.push(k); break; }
+          }
+          if (currentImageIndexes.length < cards.length) currentImageIndexes.push(0);
+        }
         return;
       }
     } catch(e) {}
     cards = defaultCards.slice();
     flippedSet = new Set();
     maxFlips = 2;
+    currentImageIndexes = pickRandomImages(cards.length, []);
   }
 
   function saveData() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       cards: cards,
       flipped: Array.from(flippedSet),
-      maxFlips: maxFlips
+      maxFlips: maxFlips,
+      imgIndexes: currentImageIndexes
     }));
   }
 
   function isLocked() {
     return maxFlips !== 99 && flippedSet.size >= maxFlips;
-  }
-
-  function makeShinchanSVG(index) {
-    var face = shinchanFaces[index % shinchanFaces.length];
-    return '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">'
-      + '<rect x="10" y="8" width="100" height="104" rx="20" fill="' + cardBgColors[index % cardBgColors.length] + '" opacity="0.12"/>'
-      + face.svg
-      + '</svg>';
   }
 
   function render() {
@@ -468,7 +655,7 @@
     var flippedCount = flippedSet.size;
     var locked = isLocked();
     var maxLabel = maxFlips === 99 ? "不限" : String(maxFlips);
-    stats.innerHTML = "已翻 <span>" + flippedCount + "</span> / " + cards.length + " 块 （最多" + maxLabel + "块）";
+    stats.innerHTML = "已翻 <span>" + flippedCount + "</span> / " + cards.length + " 块 · 图库 <span>" + TOTAL_IMAGES + "</span> 张 （最多" + maxLabel + "块）";
 
     if (locked) {
       limitBanner.innerHTML = '<div class="limit-banner">🔒 已翻满 ' + maxFlips + ' 块，其余牌子已锁定 · 点击「↺ 重翻」可重新来过</div>';
@@ -480,8 +667,8 @@
     for (var i = 0; i < cards.length; i++) {
       var isFlipped = flippedSet.has(i);
       var sceneLocked = locked && !isFlipped;
-      var face = shinchanFaces[i % shinchanFaces.length];
-      var bgColor = cardBgColors[i % cardBgColors.length];
+      var imgIdx = currentImageIndexes[i] || 0;
+      var imgUrl = ALL_IMAGES[imgIdx];
       var div = document.createElement("div");
       div.textContent = cards[i];
       var safeContent = div.innerHTML;
@@ -489,12 +676,11 @@
       html += '<div class="card-scene' + (sceneLocked ? " locked" : "") + '" onclick="' + (sceneLocked ? "" : "flipCard(" + i + ")") + '">';
       html += '<div class="card' + (isFlipped ? " flipped" : "") + '" id="card-' + i + '">';
 
-      // 背面：蜡笔小新 SVG
-      html += '<div class="card-face card-back" style="background:linear-gradient(145deg,' + bgColor + ',' + bgColor + 'dd);">';
-      html += '<div class="card-back-inner">';
-      html += makeShinchanSVG(i);
-      html += '<span class="name-tag">' + face.name + '</span>';
-      html += '</div></div>';
+      // 背面：小新图片
+      html += '<div class="card-face card-back" style="background-image:url(\'' + imgUrl + '\')">';
+      html += '<span class="shuffle-indicator">#' + (imgIdx + 1) + '</span>';
+      html += '<span class="num-tag">第' + (i + 1) + '号</span>';
+      html += '</div>';
 
       // 正面
       html += '<div class="card-face card-front">';
@@ -524,9 +710,11 @@
   function resetAll() {
     if (cards.length === 0) return;
     flippedSet.clear();
+    // 每次重置随机换一批图片，尽量不重复
+    currentImageIndexes = pickRandomImages(cards.length, currentImageIndexes);
     saveData();
     render();
-    showToast("已重置所有牌子 🔄");
+    showToast("已重置，图片已刷新 🎴");
   }
 
   function openSettings() {
@@ -553,12 +741,11 @@
     var list = document.getElementById("editorList");
     var html = "";
     for (var i = 0; i < count; i++) {
-      var face = shinchanFaces[i % shinchanFaces.length];
       var val = cards[i] || "";
       var div = document.createElement("div");
       div.textContent = val;
       html += '<div class="card-editor">';
-      html += '<div class="card-label">🖍️ 第 ' + (i + 1) + ' 号 · ' + face.name + '</div>';
+      html += '<div class="card-label">🖍️ 第 ' + (i + 1) + ' 号牌子</div>';
       html += '<input type="text" id="edit-' + i + '" value="' + div.innerHTML + '" placeholder="输入内容…" maxlength="50">';
       html += '</div>';
     }
@@ -574,11 +761,24 @@
       var val = (input ? input.value : "").trim();
       newCards.push(val || ("牌子 " + (i + 1)));
     }
+
+    var oldLen = cards.length;
     cards = newCards;
     maxFlips = newMaxFlips;
+
+    // 如果牌子数量变了，重新随机选图
+    if (cards.length !== oldLen) {
+      var used = {};
+      for (var u = 0; u < currentImageIndexes.length; u++) used[currentImageIndexes[u]] = true;
+      var prevArr = [];
+      for (var k in used) { if (used[k]) prevArr.push(parseInt(k)); }
+      currentImageIndexes = pickRandomImages(cards.length, prevArr);
+    }
+
     var arr = [];
     flippedSet.forEach(function(v) { if (v < cards.length) arr.push(v); });
     flippedSet = new Set(arr);
+
     saveData();
     document.getElementById("overlay").classList.add("hidden");
     render();
