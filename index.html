@@ -10,13 +10,6 @@
   :root {
     --card-w: 140px;
     --card-h: 180px;
-    --pink: #ff6b8a;
-    --yellow: #ffe066;
-    --green: #7bed9f;
-    --blue: #70a1ff;
-    --purple: #a29bfe;
-    --orange: #ffa502;
-    --white: #fffdf7;
   }
 
   body {
@@ -32,23 +25,22 @@
     -webkit-user-select: none;
   }
 
-  /* ===== 可爱浮动背景元素 ===== */
   .bg-float {
     position: fixed;
     pointer-events: none;
     z-index: 0;
     animation: floatAround 12s ease-in-out infinite;
-    opacity: 0.6;
+    opacity: 0.55;
     font-size: 1.6rem;
   }
-  .bg-float:nth-child(1) { top: 8%; left: 5%; animation-delay: 0s; font-size: 2rem; }
-  .bg-float:nth-child(2) { top: 15%; right: 8%; animation-delay: -3s; font-size: 1.4rem; }
-  .bg-float:nth-child(3) { top: 60%; left: 8%; animation-delay: -6s; font-size: 1.8rem; }
-  .bg-float:nth-child(4) { top: 75%; right: 5%; animation-delay: -9s; font-size: 1.5rem; }
-  .bg-float:nth-child(5) { top: 40%; left: 85%; animation-delay: -4s; font-size: 1.3rem; }
-  .bg-float:nth-child(6) { top: 85%; left: 40%; animation-delay: -7s; font-size: 1.7rem; }
-  .bg-float:nth-child(7) { top: 30%; left: 15%; animation-delay: -2s; font-size: 1.2rem; }
-  .bg-float:nth-child(8) { top: 50%; right: 12%; animation-delay: -5s; font-size: 1.6rem; }
+  .bg-float:nth-child(1) { top: 6%; left: 4%; animation-delay: 0s; font-size: 2rem; }
+  .bg-float:nth-child(2) { top: 12%; right: 7%; animation-delay: -3s; font-size: 1.4rem; }
+  .bg-float:nth-child(3) { top: 55%; left: 6%; animation-delay: -6s; font-size: 1.8rem; }
+  .bg-float:nth-child(4) { top: 72%; right: 4%; animation-delay: -9s; font-size: 1.5rem; }
+  .bg-float:nth-child(5) { top: 38%; left: 82%; animation-delay: -4s; font-size: 1.3rem; }
+  .bg-float:nth-child(6) { top: 82%; left: 35%; animation-delay: -7s; font-size: 1.7rem; }
+  .bg-float:nth-child(7) { top: 28%; left: 12%; animation-delay: -2s; font-size: 1.2rem; }
+  .bg-float:nth-child(8) { top: 48%; right: 10%; animation-delay: -5s; font-size: 1.6rem; }
 
   @keyframes floatAround {
     0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
@@ -68,22 +60,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .header h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: #e84393;
-    text-shadow: 2px 2px 0 rgba(255,107,138,0.2);
+    text-shadow: 2px 2px 0 rgba(255,107,138,0.15);
   }
-  .header-actions { display: flex; gap: 8px; }
+  .header-actions { display: flex; gap: 6px; }
 
   .btn {
     border: 2px solid #e84393;
     background: rgba(255,255,255,0.7);
     color: #e84393;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    padding: 7px 13px;
+    border-radius: 18px;
+    font-size: 0.82rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
@@ -98,18 +92,18 @@
   .main {
     position: relative;
     z-index: 1;
-    padding: 0 16px 50px;
+    padding: 0 12px 50px;
   }
 
   .stats {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 0.85rem;
+    margin-bottom: 18px;
+    font-size: 0.82rem;
     color: #e84393;
     background: rgba(255,255,255,0.5);
     display: inline-block;
-    padding: 6px 18px;
-    border-radius: 20px;
+    padding: 5px 16px;
+    border-radius: 18px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -120,35 +114,35 @@
 
   .limit-banner {
     text-align: center;
-    background: rgba(255,107,138,0.12);
+    background: rgba(255,107,138,0.1);
     border: 2px dashed #ff6b8a;
-    border-radius: 16px;
-    padding: 10px 16px;
-    margin-bottom: 20px;
-    max-width: 420px;
+    border-radius: 14px;
+    padding: 9px 14px;
+    margin-bottom: 18px;
+    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: #e84393;
     animation: fadeIn 0.4s ease;
     font-weight: 600;
   }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 
   .empty-state {
     text-align: center;
-    padding: 80px 20px;
+    padding: 70px 20px;
     color: #e84393;
     opacity: 0.5;
   }
-  .empty-state .icon { font-size: 3.5rem; margin-bottom: 12px; }
-  .empty-state p { font-size: 1rem; line-height: 1.8; }
+  .empty-state .icon { font-size: 3.5rem; margin-bottom: 10px; }
+  .empty-state p { font-size: 0.95rem; line-height: 1.8; }
 
   .card-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 14px;
     max-width: 700px;
     margin: 0 auto;
   }
@@ -160,7 +154,7 @@
   }
   .card-scene.locked {
     opacity: 0.4;
-    filter: grayscale(0.4);
+    filter: grayscale(0.5);
     pointer-events: none;
   }
 
@@ -169,7 +163,7 @@
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
   }
   .card.flipped { transform: rotateY(180deg); }
@@ -187,96 +181,61 @@
     overflow: hidden;
   }
 
-  /* ----- 背面（未翻）蜡笔小新主题 ----- */
+  /* 背面 — 小新人物图案 */
   .card-back {
     border: 3px solid rgba(255,255,255,0.6);
-    box-shadow:
-      0 6px 24px rgba(232,67,147,0.18),
-      inset 0 1px 0 rgba(255,255,255,0.4);
+    box-shadow: 0 5px 20px rgba(232,67,147,0.15);
     position: relative;
   }
-  .card-back::after {
-    content: "";
-    position: absolute;
-    inset: 4px;
-    border: 2px dashed rgba(255,255,255,0.5);
-    border-radius: 10px;
-    pointer-events: none;
-  }
   .card-back-inner {
-    text-align: center;
-    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  .card-back-inner .avatar {
-    font-size: 2.8rem;
-    display: block;
-    line-height: 1;
-    margin-bottom: 4px;
-    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.15));
-    animation: wiggle 2s ease-in-out infinite;
+  .card-back-inner svg {
+    width: 72%;
+    height: auto;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.12));
   }
-  .card-back-inner .label {
-    font-size: 0.72rem;
+  .card-back .name-tag {
+    font-size: 0.65rem;
     font-weight: 700;
     color: #fff;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    letter-spacing: 0.06em;
-  }
-  @keyframes wiggle {
-    0%, 100% { transform: rotate(0); }
-    25% { transform: rotate(3deg); }
-    75% { transform: rotate(-3deg); }
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    margin-top: 2px;
+    letter-spacing: 0.04em;
   }
 
-  /* ----- 多彩背面配色方案 ----- */
-  .card-back-0 { background: linear-gradient(145deg, #ff6b8a, #ff8e9e); }
-  .card-back-1 { background: linear-gradient(145deg, #ffa502, #ffbe76); }
-  .card-back-2 { background: linear-gradient(145deg, #7bed9f, #a3f7bf); }
-  .card-back-3 { background: linear-gradient(145deg, #70a1ff, #98bfff); }
-  .card-back-4 { background: linear-gradient(145deg, #a29bfe, #c4bfff); }
-  .card-back-5 { background: linear-gradient(145deg, #ff6b8a, #fd79a8); }
-  .card-back-6 { background: linear-gradient(145deg, #fdcb6e, #ffeaa7); }
-  .card-back-7 { background: linear-gradient(145deg, #55efc4, #81ecec); }
-  .card-back-8 { background: linear-gradient(145deg, #ff9ff3, #feca57); }
-  .card-back-9 { background: linear-gradient(145deg, #ff6b6b, #ff9a9e); }
-  .card-back-10 { background: linear-gradient(145deg, #a29bfe, #dfe6e9); }
-  .card-back-11 { background: linear-gradient(145deg, #fd79a8, #fab1a0); }
-  .card-back-12 { background: linear-gradient(145deg, #00cec9, #81ecec); }
-  .card-back-13 { background: linear-gradient(145deg, #e17055, #fab1a0); }
-  .card-back-14 { background: linear-gradient(145deg, #6c5ce7, #a29bfe); }
-  .card-back-15 { background: linear-gradient(145deg, #f8b500, #ffe066); }
-  .card-back-16 { background: linear-gradient(145deg, #26de81, #7bed9f); }
-  .card-back-17 { background: linear-gradient(145deg, #fc5c65, #ff6b8a); }
-  .card-back-18 { background: linear-gradient(145deg, #45aaf2, #70a1ff); }
-  .card-back-19 { background: linear-gradient(145deg, #a55eea, #c4bfff); }
-
-  /* ----- 正面（翻开）可爱风 ----- */
+  /* 正面 */
   .card-front {
     background: linear-gradient(145deg, #fffdf7 0%, #fff8e7 100%);
     border: 3px solid #ff6b8a;
     transform: rotateY(180deg);
     color: #5d4037;
-    padding: 16px 12px;
+    padding: 14px 10px;
     flex-direction: column;
     text-align: center;
-    gap: 8px;
-    box-shadow: 0 6px 24px rgba(232,67,147,0.2);
+    gap: 6px;
+    box-shadow: 0 5px 20px rgba(232,67,147,0.18);
   }
   .card-front .seal {
     display: inline-block;
     border: 2px solid #e84393;
     color: #e84393;
-    padding: 3px 12px;
-    border-radius: 12px;
-    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    transform: rotate(-3deg);
+    letter-spacing: 0.06em;
+    transform: rotate(-2deg);
   }
   .card-front .content {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    line-height: 1.5;
+    line-height: 1.45;
     word-break: break-all;
     flex: 1;
     display: flex;
@@ -288,7 +247,7 @@
   .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.45);
     z-index: 200;
     display: flex;
     align-items: flex-end;
@@ -299,143 +258,76 @@
 
   .settings-panel {
     background: #fffdf7;
-    border-radius: 24px 24px 0 0;
+    border-radius: 22px 22px 0 0;
     width: 100%;
     max-width: 500px;
     max-height: 85vh;
     max-height: 85dvh;
     overflow-y: auto;
-    padding: 28px 20px 36px;
-    animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
+    padding: 26px 18px 34px;
+    animation: slideUp 0.35s ease;
+    box-shadow: 0 -4px 28px rgba(0,0,0,0.08);
   }
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-  .settings-panel h2 {
-    font-size: 1.2rem;
-    color: #e84393;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 800;
-  }
+  .settings-panel h2 { font-size: 1.15rem; color: #e84393; margin-bottom: 18px; text-align: center; font-weight: 800; }
+  .form-group { margin-bottom: 12px; }
+  .form-group label { display: block; font-size: 0.82rem; color: #e84393; margin-bottom: 5px; font-weight: 700; }
+  .form-group input[type="range"] { width: 100%; accent-color: #e84393; height: 5px; }
+  .form-group .range-val { text-align: center; color: #6c5ce7; font-size: 1.05rem; font-weight: 700; }
 
-  .form-group { margin-bottom: 14px; }
-  .form-group label {
-    display: block;
-    font-size: 0.85rem;
-    color: #e84393;
-    margin-bottom: 6px;
-    font-weight: 700;
-  }
-  .form-group input[type="range"] {
-    width: 100%;
-    accent-color: #e84393;
-    height: 6px;
-  }
-  .form-group .range-val {
-    text-align: center;
-    color: #6c5ce7;
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  .max-flips-setting {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 2px dashed #fce4ec;
-  }
+  .max-flips-setting { margin-top: 12px; padding-top: 12px; border-top: 2px dashed #fce4ec; }
   .max-flips-setting select {
-    width: 100%;
-    padding: 10px 14px;
-    border: 2px solid #fce4ec;
-    border-radius: 12px;
-    background: #fff;
-    color: #5d4037;
-    font-size: 0.9rem;
-    font-family: inherit;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
+    width: 100%; padding: 9px 12px;
+    border: 2px solid #fce4ec; border-radius: 11px;
+    background: #fff; color: #5d4037; font-size: 0.85rem; font-family: inherit;
+    outline: none; cursor: pointer; font-weight: 600;
+    appearance: none; -webkit-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 stroke=%27%23e84393%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    cursor: pointer;
-    font-weight: 600;
+    background-repeat: no-repeat; background-position: right 12px center;
   }
 
   .card-editor {
-    border: 2px solid #fce4ec;
-    border-radius: 14px;
-    padding: 12px;
-    margin-bottom: 10px;
-    background: #fffbfc;
+    border: 2px solid #fce4ec; border-radius: 12px;
+    padding: 10px 12px; margin-bottom: 8px; background: #fffbfc;
   }
-  .card-editor .card-label {
-    font-size: 0.8rem;
-    color: #e84393;
-    margin-bottom: 6px;
-    font-weight: 700;
-  }
+  .card-editor .card-label { font-size: 0.78rem; color: #e84393; margin-bottom: 5px; font-weight: 700; }
   .card-editor input {
-    width: 100%;
-    padding: 10px 14px;
-    border: 2px solid #fce4ec;
-    border-radius: 12px;
-    background: #fff;
-    color: #5d4037;
-    font-size: 0.9rem;
-    font-family: inherit;
-    outline: none;
+    width: 100%; padding: 9px 12px;
+    border: 2px solid #fce4ec; border-radius: 10px;
+    background: #fff; color: #5d4037; font-size: 0.85rem;
+    font-family: inherit; outline: none; font-weight: 500;
     transition: border-color 0.2s;
-    font-weight: 500;
   }
   .card-editor input:focus { border-color: #ff6b8a; }
 
-  .settings-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-  }
+  .settings-actions { display: flex; gap: 8px; margin-top: 18px; }
   .settings-actions .btn { flex: 1; text-align: center; }
 
   .toast {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(232,67,147,0.92);
-    color: #fff;
-    padding: 14px 28px;
-    border-radius: 24px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    z-index: 999;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    text-align: center;
-    white-space: nowrap;
-    box-shadow: 0 4px 20px rgba(232,67,147,0.3);
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: rgba(232,67,147,0.9); color: #fff;
+    padding: 13px 26px; border-radius: 22px;
+    font-size: 0.9rem; font-weight: 700; z-index: 999;
+    pointer-events: none; transition: opacity 0.3s;
+    text-align: center; white-space: nowrap;
+    box-shadow: 0 4px 18px rgba(232,67,147,0.25);
   }
   .toast.hidden { opacity: 0; }
 
   @media (max-width: 380px) {
-    :root { --card-w: 115px; --card-h: 150px; }
-    .card-grid { gap: 10px; }
-    .header h1 { font-size: 1.25rem; }
-    .card-back-inner .avatar { font-size: 2.2rem; }
+    :root { --card-w: 110px; --card-h: 145px; }
+    .card-grid { gap: 8px; }
+    .header h1 { font-size: 1.2rem; }
   }
   @media (min-width: 500px) {
     :root { --card-w: 150px; --card-h: 195px; }
-    .card-grid { gap: 20px; }
+    .card-grid { gap: 18px; }
   }
 </style>
 </head>
 <body>
 
-  <!-- 浮动背景装饰 -->
   <div class="bg-float">🌸</div>
   <div class="bg-float">⭐</div>
   <div class="bg-float">💕</div>
@@ -488,33 +380,30 @@
   <div class="toast hidden" id="toast"></div>
 
   <script>
-  var STORAGE_KEY = "fanpaizi_v3_data";
+  var STORAGE_KEY = "fanpaizi_v4_data";
   var cards = [];
   var flippedSet = new Set();
   var maxFlips = 2;
 
-  // 每张牌子的专属图案（蜡笔小新主题，各不相同）
-  var cardThemes = [
-    { emoji: "🖍️", label: "小新蜡笔" },
-    { emoji: "🐶", label: "小白" },
-    { emoji: "🦸", label: "动感超人" },
-    { emoji: "🍡", label: "小新最愛" },
-    { emoji: "👶", label: "小葵" },
-    { emoji: "🎒", label: "幼稚园" },
-    { emoji: "🕺", label: "屁股舞" },
-    { emoji: "🐷", label: "不理不理" },
-    { emoji: "🌸", label: "妮妮" },
-    { emoji: "⚽", label: "足球小新" },
-    { emoji: "🎨", label: "画画时间" },
-    { emoji: "🍛", label: "咖喱饭" },
-    { emoji: "🎮", label: "电动宅" },
-    { emoji: "😎", label: "墨镜新" },
-    { emoji: "🛴", label: "小新座驾" },
-    { emoji: "🎤", label: "卡拉OK" },
-    { emoji: "📺", label: "最爱电视" },
-    { emoji: "🍭", label: "糖果" },
-    { emoji: "🦖", label: "恐龙新" },
-    { emoji: "💤", label: "午睡时间" }
+  // 10 种不同表情的小新 SVG（纯矢量手绘风格）
+  var shinchanFaces = [
+    { name: "小新·微笑",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="30" y1="50" x2="48" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="48" x2="90" y2="50" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="39" cy="55" r="3.5" fill="#111"/><circle cx="81" cy="55" r="3.5" fill="#111"/><circle cx="38" cy="54" r="1.2" fill="#fff"/><circle cx="80" cy="54" r="1.2" fill="#fff"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M46 82 Q60 94 74 82" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
+    { name: "小新·大笑",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="30" y1="48" x2="46" y2="50" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="74" y1="50" x2="90" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><path d="M36 56 Q39 52 42 56" fill="none" stroke="#111" stroke-width="2"/><path d="M78 56 Q81 52 84 56" fill="none" stroke="#111" stroke-width="2"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><ellipse cx="60" cy="88" rx="16" ry="12" fill="#C0392B"/><ellipse cx="60" cy="85" rx="10" ry="6" fill="#E74C3C"/><rect x="50" y="72" width="20" height="3" rx="1.5" fill="#fff" opacity="0.7"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
+    { name: "小新·惊讶",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="30" y1="48" x2="48" y2="50" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="50" x2="90" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="39" cy="58" r="6" fill="#111"/><circle cx="81" cy="58" r="6" fill="#111"/><circle cx="38" cy="57" r="2" fill="#fff"/><circle cx="80" cy="57" r="2" fill="#fff"/><ellipse cx="60" cy="70" rx="6" ry="4" fill="#D4956B"/><ellipse cx="60" cy="90" rx="12" ry="14" fill="#C0392B"/><ellipse cx="60" cy="88" rx="9" ry="8" fill="#2C1810"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
+    { name: "小新·困倦",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="32" y1="52" x2="48" y2="52" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="52" x2="88" y2="52" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><path d="M33 56 Q39 60 45 56" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/><path d="M75 56 Q81 60 87 56" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="60" cy="70" rx="6" ry="4" fill="#D4956B"/><ellipse cx="60" cy="88" rx="10" ry="7" fill="#C0392B"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><text x="60" y="38" text-anchor="middle" font-size="24" fill="#7F8C8D">💤</text>' },
+    { name: "小新·调皮",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="32" y1="46" x2="48" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="48" x2="88" y2="46" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="36" cy="55" r="3.5" fill="#111"/><circle cx="84" cy="55" r="3.5" fill="#111"/><circle cx="35" cy="54" r="1.2" fill="#fff"/><circle cx="83" cy="54" r="1.2" fill="#fff"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M42 82 Q60 72 78 82" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="72" cy="84" rx="8" ry="12" fill="#E74C3C" opacity="0.7"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
+    { name: "小新·嘚瑟",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><path d="M30 46 Q34 42 48 48" fill="none" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><path d="M90 46 Q86 42 72 48" fill="none" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="39" cy="57" r="3" fill="#111"/><circle cx="81" cy="57" r="3" fill="#111"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M44 82 Q60 72 76 82" fill="none" stroke="#C0392B" stroke-width="2.8" stroke-linecap="round"/><ellipse cx="44" cy="82" rx="7" ry="7" fill="#E74C3C" opacity="0.6"/><ellipse cx="76" cy="82" rx="6" ry="6" fill="#E74C3C" opacity="0.5"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' },
+    { name: "小新·生气",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="26" y1="44" x2="52" y2="48" stroke="#222" stroke-width="4" stroke-linecap="round"/><line x1="68" y1="48" x2="94" y2="44" stroke="#222" stroke-width="4" stroke-linecap="round"/><circle cx="39" cy="57" r="3.5" fill="#111"/><circle cx="81" cy="57" r="3.5" fill="#111"/><circle cx="38" cy="56" r="1.2" fill="#fff"/><circle cx="80" cy="56" r="1.2" fill="#fff"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M48 85 Q56 78 60 85 Q64 78 72 85" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/><circle cx="26" cy="74" r="8" fill="#FF6B6B" opacity="0.7"/><circle cx="94" cy="74" r="8" fill="#FF6B6B" opacity="0.7"/>' },
+    { name: "小新·害羞",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="34" y1="46" x2="50" y2="48" stroke="#222" stroke-width="3" stroke-linecap="round"/><line x1="70" y1="48" x2="86" y2="46" stroke="#222" stroke-width="3" stroke-linecap="round"/><path d="M34 58 Q39 54 44 58" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/><path d="M76 58 Q81 54 86 58" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><ellipse cx="60" cy="84" rx="13" ry="9" fill="#C0392B"/><ellipse cx="60" cy="82" rx="9" ry="5" fill="#E74C3C"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.8"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.8"/>' },
+    { name: "小新·呆萌",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="34" y1="50" x2="50" y2="49" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="70" y1="49" x2="86" y2="50" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><circle cx="39" cy="56" r="4" fill="#111"/><circle cx="81" cy="56" r="4" fill="#111"/><circle cx="40" cy="55" r="1.5" fill="#fff"/><circle cx="82" cy="55" r="1.5" fill="#fff"/><ellipse cx="60" cy="69" rx="6" ry="4" fill="#D4956B"/><ellipse cx="60" cy="84" rx="7" ry="5" fill="#C0392B"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.5"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.5"/>' },
+    { name: "小新·得意",    svg: '<ellipse cx="60" cy="72" rx="52" ry="55" fill="#FFD5B8" stroke="#D4956B" stroke-width="1.8"/><ellipse cx="60" cy="25" rx="36" ry="18" fill="#222"/><ellipse cx="60" cy="32" rx="42" ry="14" fill="#222"/><path d="M28 26 Q26 10 48 12 Q52 14 52 18" fill="#222"/><path d="M92 26 Q94 10 72 12 Q68 14 68 18" fill="#222"/><path d="M32 28 Q30 18 42 18" fill="#222"/><path d="M88 28 Q90 18 78 18" fill="#222"/><line x1="28" y1="48" x2="48" y2="46" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><line x1="72" y1="46" x2="92" y2="48" stroke="#222" stroke-width="3.5" stroke-linecap="round"/><path d="M34 56 Q39 52 44 56" fill="none" stroke="#111" stroke-width="2"/><path d="M76 56 Q81 52 86 56" fill="none" stroke="#111" stroke-width="2"/><ellipse cx="60" cy="68" rx="7" ry="4" fill="#D4956B"/><path d="M38 82 Q60 96 82 82" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/><rect x="50" y="78" width="20" height="3" rx="1.5" fill="#fff" opacity="0.6"/><circle cx="26" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/><circle cx="94" cy="74" r="8" fill="#FFB3B3" opacity="0.6"/>' }
+  ];
+
+  var cardBgColors = [
+    "#FF6B8A", "#FFA502", "#7BED9F", "#70A1FF", "#A29BFE",
+    "#FD79A8", "#FDCB6E", "#55EFC4", "#FF9FF3", "#FF6B6B",
+    "#6C5CE7", "#E17055", "#00CEC9", "#F8B500", "#26DE81",
+    "#FC5C65", "#45AAF2", "#A55EEA", "#E84393", "#2ED573"
   ];
 
   var defaultCards = [
@@ -556,13 +445,21 @@
     return maxFlips !== 99 && flippedSet.size >= maxFlips;
   }
 
+  function makeShinchanSVG(index) {
+    var face = shinchanFaces[index % shinchanFaces.length];
+    return '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">'
+      + '<rect x="10" y="8" width="100" height="104" rx="20" fill="' + cardBgColors[index % cardBgColors.length] + '" opacity="0.12"/>'
+      + face.svg
+      + '</svg>';
+  }
+
   function render() {
     var cardArea = document.getElementById("cardArea");
     var stats = document.getElementById("stats");
     var limitBanner = document.getElementById("limitBanner");
 
     if (cards.length === 0) {
-      cardArea.innerHTML = "<div class=\"empty-state\"><div class=\"icon\">🖍️</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>";
+      cardArea.innerHTML = '<div class="empty-state"><div class="icon">🖍️</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>';
       stats.innerHTML = "";
       limitBanner.innerHTML = "";
       return;
@@ -574,38 +471,38 @@
     stats.innerHTML = "已翻 <span>" + flippedCount + "</span> / " + cards.length + " 块 （最多" + maxLabel + "块）";
 
     if (locked) {
-      limitBanner.innerHTML = "<div class=\"limit-banner\">🔒 已翻满 " + maxFlips + " 块，其余牌子已锁定 · 点击「↺ 重翻」可重新来过</div>";
+      limitBanner.innerHTML = '<div class="limit-banner">🔒 已翻满 ' + maxFlips + ' 块，其余牌子已锁定 · 点击「↺ 重翻」可重新来过</div>';
     } else {
       limitBanner.innerHTML = "";
     }
 
-    var html = "<div class=\"card-grid\">";
+    var html = '<div class="card-grid">';
     for (var i = 0; i < cards.length; i++) {
       var isFlipped = flippedSet.has(i);
       var sceneLocked = locked && !isFlipped;
-      var theme = cardThemes[i % cardThemes.length];
-      var colorClass = "card-back-" + (i % 20);
+      var face = shinchanFaces[i % shinchanFaces.length];
+      var bgColor = cardBgColors[i % cardBgColors.length];
       var div = document.createElement("div");
       div.textContent = cards[i];
       var safeContent = div.innerHTML;
 
-      html += "<div class=\"card-scene" + (sceneLocked ? " locked" : "") + "\" onclick=\"" + (sceneLocked ? "" : "flipCard(" + i + ")") + "\">";
-      html += "<div class=\"card" + (isFlipped ? " flipped" : "") + "\" id=\"card-" + i + "\">";
+      html += '<div class="card-scene' + (sceneLocked ? " locked" : "") + '" onclick="' + (sceneLocked ? "" : "flipCard(" + i + ")") + '">';
+      html += '<div class="card' + (isFlipped ? " flipped" : "") + '" id="card-' + i + '">';
 
-      // 背面：专属图案
-      html += "<div class=\"card-face card-back " + colorClass + "\">";
-      html += "<div class=\"card-back-inner\">";
-      html += "<span class=\"avatar\">" + theme.emoji + "</span>";
-      html += "<span class=\"label\">" + theme.label + "</span>";
-      html += "</div></div>";
+      // 背面：蜡笔小新 SVG
+      html += '<div class="card-face card-back" style="background:linear-gradient(145deg,' + bgColor + ',' + bgColor + 'dd);">';
+      html += '<div class="card-back-inner">';
+      html += makeShinchanSVG(i);
+      html += '<span class="name-tag">' + face.name + '</span>';
+      html += '</div></div>';
 
-      // 正面：内容
-      html += "<div class=\"card-face card-front\">";
-      html += "<span class=\"seal\">✧ 御旨 ✧</span>";
-      html += "<span class=\"content\">" + safeContent + "</span>";
-      html += "</div></div></div>";
+      // 正面
+      html += '<div class="card-face card-front">';
+      html += '<span class="seal">✧ 御旨 ✧</span>';
+      html += '<span class="content">' + safeContent + '</span>';
+      html += '</div></div></div>';
     }
-    html += "</div>";
+    html += '</div>';
     cardArea.innerHTML = html;
   }
 
@@ -656,14 +553,14 @@
     var list = document.getElementById("editorList");
     var html = "";
     for (var i = 0; i < count; i++) {
-      var theme = cardThemes[i % cardThemes.length];
+      var face = shinchanFaces[i % shinchanFaces.length];
       var val = cards[i] || "";
       var div = document.createElement("div");
       div.textContent = val;
-      html += "<div class=\"card-editor\">";
-      html += "<div class=\"card-label\">" + theme.emoji + " 第 " + (i + 1) + " 号 · " + theme.label + "</div>";
-      html += "<input type=\"text\" id=\"edit-" + i + "\" value=\"" + div.innerHTML + "\" placeholder=\"输入内容…\" maxlength=\"50\">";
-      html += "</div>";
+      html += '<div class="card-editor">';
+      html += '<div class="card-label">🖍️ 第 ' + (i + 1) + ' 号 · ' + face.name + '</div>';
+      html += '<input type="text" id="edit-' + i + '" value="' + div.innerHTML + '" placeholder="输入内容…" maxlength="50">';
+      html += '</div>';
     }
     list.innerHTML = html;
   }
@@ -677,14 +574,11 @@
       var val = (input ? input.value : "").trim();
       newCards.push(val || ("牌子 " + (i + 1)));
     }
-
     cards = newCards;
     maxFlips = newMaxFlips;
-
     var arr = [];
     flippedSet.forEach(function(v) { if (v < cards.length) arr.push(v); });
     flippedSet = new Set(arr);
-
     saveData();
     document.getElementById("overlay").classList.add("hidden");
     render();
