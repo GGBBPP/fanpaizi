@@ -6,24 +6,24 @@
 <title>翻牌子 · 蜡笔小新</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--card-w:140px;--card-h:180px}
-body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fce4ec,#fff3e0,#e8f5e9,#e3f2fd);background-attachment:fixed;min-height:100dvh;color:#5d4037;overflow-x:hidden;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
-.bg-float{position:fixed;pointer-events:none;z-index:0;animation:floatAround 12s ease-in-out infinite;opacity:.5;font-size:1.6rem}
+:root{--cw:140px;--ch:180px}
+body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#fce4ec,#fff3e0,#e8f5e9,#e3f2fd);background-attachment:fixed;min-height:100dvh;color:#5d4037;overflow-x:hidden;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.bg-float{position:fixed;pointer-events:none;z-index:0;animation:fa 14s ease-in-out infinite;opacity:.45;font-size:1.6rem}
 .bg-float:nth-child(1){top:6%;left:4%;animation-delay:0s;font-size:2rem}
-.bg-float:nth-child(2){top:12%;right:7%;animation-delay:-3s;font-size:1.4rem}
-.bg-float:nth-child(3){top:55%;left:6%;animation-delay:-6s;font-size:1.8rem}
-.bg-float:nth-child(4){top:72%;right:4%;animation-delay:-9s;font-size:1.5rem}
-.bg-float:nth-child(5){top:38%;left:82%;animation-delay:-4s;font-size:1.3rem}
-.bg-float:nth-child(6){top:82%;left:35%;animation-delay:-7s;font-size:1.7rem}
+.bg-float:nth-child(2){top:12%;right:7%;animation-delay:-3.5s;font-size:1.4rem}
+.bg-float:nth-child(3){top:55%;left:6%;animation-delay:-7s;font-size:1.8rem}
+.bg-float:nth-child(4){top:72%;right:4%;animation-delay:-10.5s;font-size:1.5rem}
+.bg-float:nth-child(5){top:38%;left:82%;animation-delay:-5s;font-size:1.3rem}
+.bg-float:nth-child(6){top:82%;left:35%;animation-delay:-8s;font-size:1.7rem}
 .bg-float:nth-child(7){top:28%;left:12%;animation-delay:-2s;font-size:1.2rem}
-.bg-float:nth-child(8){top:48%;right:10%;animation-delay:-5s;font-size:1.6rem}
-@keyframes floatAround{0%,100%{transform:translate(0,0)rotate(0deg)scale(1)}25%{transform:translate(10px,-14px)rotate(5deg)scale(1.1)}50%{transform:translate(-5px,-24px)rotate(-3deg)scale(.95)}75%{transform:translate(-12px,-8px)rotate(4deg)scale(1.05)}}
-.header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(255,243,224,.95)60%,rgba(255,243,224,0)100%);backdrop-filter:blur(10px);padding:14px 14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.bg-float:nth-child(8){top:48%;right:10%;animation-delay:-6s;font-size:1.6rem}
+@keyframes fa{0%,100%{transform:translate(0,0)rotate(0deg)scale(1)}25%{transform:translate(8px,-12px)rotate(4deg)scale(1.08)}50%{transform:translate(-4px,-20px)rotate(-2deg)scale(.95)}75%{transform:translate(-10px,-6px)rotate(3deg)scale(1.05)}}
+.header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(255,243,224,.95)60%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:14px 14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
 .header h1{font-size:1.35rem;font-weight:800;color:#e84393}
 .header-actions{display:flex;gap:6px}
 .btn{border:2px solid #e84393;background:rgba(255,255,255,.7);color:#e84393;padding:7px 13px;border-radius:18px;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap}
 .btn:active{background:#fce4ec;transform:scale(.94)}
-.btn-primary{background:#e84393;color:#fff;border-color:#e84393}
+.btn-primary{background:#e84393;color:#fff}
 .main{position:relative;z-index:1;padding:0 10px 50px}
 .stats{text-align:center;margin-bottom:16px;font-size:.8rem;color:#e84393;background:rgba(255,255,255,.5);display:inline-block;padding:5px 15px;border-radius:16px;position:relative;left:50%;transform:translateX(-50%);font-weight:600}
 .stats span{color:#6c5ce7}
@@ -32,18 +32,17 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans S
 .empty-state{text-align:center;padding:70px 20px;color:#e84393;opacity:.5}
 .empty-state .icon{font-size:3.5rem;margin-bottom:10px}
 .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:700px;margin:0 auto}
-.card-scene{perspective:800px;width:var(--card-w);height:var(--card-h)}
+.card-scene{perspective:800px;width:var(--cw);height:var(--ch)}
 .card-scene.locked{opacity:.4;filter:grayscale(.5);pointer-events:none}
 .card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer}
 .card.flipped{transform:rotateY(180deg)}
 .card:not(.flipped):active{transform:scale(.94)}
 .card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .card-back{border:3px solid rgba(255,255,255,.7);box-shadow:0 5px 20px rgba(232,67,147,.15);background-color:#f0e0d0;background-size:cover;background-position:center top;background-repeat:no-repeat;position:relative}
-.card-back.loading .skeleton{display:flex}
-.card-back .skeleton{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:1;background:linear-gradient(135deg,#fce4ec,#fff3e0,#fce4ec);background-size:200%200%;animation:shimmer 1.8s ease-in-out infinite}
-.card-back.loaded .skeleton{display:none}
-.card-back .skeleton-emoji{font-size:2.5rem;animation:bounce 1s ease-in-out infinite}
-.card-back .skeleton-text{font-size:.6rem;color:#e84393;font-weight:600;margin-top:4px;opacity:.7}
+.card-back .placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;background:linear-gradient(135deg,#fce4ec,#fff3e0,#fce4ec);background-size:200%200%;animation:shimmer 1.8s ease-in-out infinite;transition:opacity .4s}
+.card-back.loaded .placeholder{opacity:0;pointer-events:none}
+.card-back .placeholder-icon{font-size:2.5rem;animation:bounce 1s ease-in-out infinite}
+.card-back .placeholder-text{font-size:.6rem;color:#e84393;font-weight:600;margin-top:4px;opacity:.7}
 @keyframes shimmer{0%{background-position:200%0}100%{background-position:-200%0}}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .card-back .num-tag{position:absolute;bottom:6px;right:8px;z-index:2;background:rgba(232,67,147,.85);color:#fff;font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:8px}
@@ -69,8 +68,8 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans S
 .settings-actions .btn{flex:1;text-align:center}
 .toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(232,67,147,.9);color:#fff;padding:13px 26px;border-radius:22px;font-size:.9rem;font-weight:700;z-index:999;pointer-events:none;transition:opacity .3s;text-align:center;white-space:nowrap;box-shadow:0 4px 18px rgba(232,67,147,.25)}
 .toast.hidden{opacity:0}
-@media(max-width:380px){:root{--card-w:110px;--card-h:145px}.card-grid{gap:8px}.header h1{font-size:1.15rem}}
-@media(min-width:500px){:root{--card-w:150px;--card-h:195px}.card-grid{gap:18px}}
+@media(max-width:380px){:root{--cw:108px;--ch:140px}.card-grid{gap:8px}.header h1{font-size:1.15rem}}
+@media(min-width:500px){:root{--cw:150px;--ch:195px}.card-grid{gap:18px}}
 </style>
 </head>
 <body>
@@ -87,70 +86,99 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans S
 <div class="toast hidden" id="toast"></div>
 
 <script>
-// ---- 690 张蜡笔小新手机壁纸，动态 URL 生成 ----
-var TOTAL = 690;
-function imgURL(i){var n=String(i+1);while(n.length<4)n='0'+n;return'images/mobile_'+n+'.jpg'}
+var T=690; // 图片总数
+function U(i){var n=String(i+1);while(n.length<4)n='0'+n;return'images/mobile_'+n+'.jpg'}
 
-var SKEY='fp_v9',cards=[],flipped=new Set(),maxF=2,imgIdx=[],loaded={},obs=null;
+var SK='fp_v10',cards=[],flipped=new Set(),maxF=2,imgIdx=[],imgDone={};
 var def=['今晚洗碗 🍽️','按摩 10 分钟 💆','承包明天早餐 🥐','夸夸对方三句话 💕','免唠叨券一张 🎫','做一杯手冲咖啡 ☕','周末决定权归你 📅','无条件道歉一次 🙇'];
 
 function shuf(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=b[i];b[i]=b[j];b[j]=t}return b}
-function pick(n,prev){var a=[];for(var i=0;i<TOTAL;i++)a.push(i);var s=shuf(a);if(prev&&prev.length&&n<=TOTAL-prev.length){var ps={},fr=[],ru=[];for(var p=0;p<prev.length;p++)ps[prev[p]]=1;for(var j=0;j<s.length;j++)ps[s[j]]?ru.push(s[j]):fr.push(s[j]);var pk=fr.slice(0,n);if(pk.length<n)pk=pk.concat(ru.slice(0,n-pk.length));return pk}return s.slice(0,n)}
+function pick(n,prev){var a=[];for(var i=0;i<T;i++)a.push(i);var s=shuf(a);if(prev&&prev.length&&n<=T-prev.length){var ps={},fr=[],ru=[];for(var p=0;p<prev.length;p++)ps[prev[p]]=1;for(var j=0;j<s.length;j++)ps[s[j]]?ru.push(s[j]):fr.push(s[j]);var pk=fr.slice(0,n);if(pk.length<n)pk=pk.concat(ru.slice(0,n-pk.length));return pk}return s.slice(0,n)}
 
-function loadData(){try{var r=localStorage.getItem(SKEY);if(r){var d=JSON.parse(r);cards=d.c||[];flipped=new Set(d.f||[]);maxF=d.m!=null?d.m:2;imgIdx=d.i||[];while(imgIdx.length<cards.length){var u={};for(var j=0;j<imgIdx.length;j++)u[imgIdx[j]]=1;var ok=0;for(var k=0;k<TOTAL;k++)if(!u[k]){imgIdx.push(k);ok=1;break}if(!ok)imgIdx.push(0)}return}}catch(e){}cards=def.slice();flipped=new Set();maxF=2;imgIdx=pick(cards.length,[])}
-function save(){localStorage.setItem(SKEY,JSON.stringify({c:cards,f:Array.from(flipped),m:maxF,i:imgIdx}))}
+function loadData(){
+  try{var r=localStorage.getItem(SK);if(r){var d=JSON.parse(r);cards=d.c||[];flipped=new Set(d.f||[]);maxF=d.m!=null?d.m:2;imgIdx=d.i||[];while(imgIdx.length<cards.length){var u={};for(var j=0;j<imgIdx.length;j++)u[imgIdx[j]]=1;var ok=0;for(var k=0;k<T;k++)if(!u[k]){imgIdx.push(k);ok=1;break}if(!ok)imgIdx.push(0)}return}}catch(e){}
+  cards=def.slice();flipped=new Set();maxF=2;imgIdx=pick(cards.length,[])
+}
+function save(){localStorage.setItem(SK,JSON.stringify({c:cards,f:Array.from(flipped),m:maxF,i:imgIdx}))}
 function locked(){return maxF!==99&&flipped.size>=maxF}
 
-function setupLazy(){
-  if(obs){obs.disconnect();obs=null}
-  var els=document.querySelectorAll('.card-back[data-src]');if(!els.length)return;
-  var first=Math.min(6,els.length);
-  for(var i=0;i<first;i++)loadOne(els[i]);
-  if('IntersectionObserver' in window){
-    obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){loadOne(x.target);obs.unobserve(x.target)}})},{rootMargin:'400px'});
-    for(var j=first;j<els.length;j++)obs.observe(els[j]);
-  }else{var rem=Array.prototype.slice.call(els,first),idx=0;function nxt(){if(idx>=rem.length)return;loadOne(rem[idx]);idx++;setTimeout(nxt,50)}setTimeout(nxt,200)}
-}
-
-function loadOne(el){
-  var src=el.getAttribute('data-src');if(!src||loaded[src])return;
-  el.classList.add('loading');
-  var img=new Image();
-  img.onload=function(){el.style.backgroundImage='url('+src+')';el.classList.remove('loading');el.classList.add('loaded');loaded[src]=1};
-  img.onerror=function(){el.classList.remove('loading');el.classList.add('loaded')};
-  img.src=src;
+// ===== 直接加载全部图片 =====
+function loadAllImages(){
+  var els=document.querySelectorAll('.card-back[data-src]');
+  for(var i=0;i<els.length;i++){
+    (function(el){
+      var src=el.getAttribute('data-src');
+      if(!src||imgDone[src])return;
+      var img=new Image();
+      img.onload=function(){
+        el.style.backgroundImage='url('+src+')';
+        el.classList.add('loaded');
+        imgDone[src]=1;
+      };
+      img.onerror=function(){
+        // 重试一次
+        var r=new Image();
+        r.onload=function(){el.style.backgroundImage='url('+src+')';el.classList.add('loaded');imgDone[src]=1};
+        r.onerror=function(){el.classList.add('loaded')};
+        setTimeout(function(){r.src=src},500);
+      };
+      img.src=src;
+    })(els[i]);
+  }
 }
 
 function render(){
   var ca=document.getElementById('cardArea'),st=document.getElementById('stats'),lb=document.getElementById('limitBanner');
   if(!cards.length){ca.innerHTML='<div class="empty-state"><div class="icon">🖍️</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>';st.innerHTML='';lb.innerHTML='';return}
   var fc=flipped.size,lk=locked(),ml=maxF===99?'不限':String(maxF);
-  st.innerHTML='已翻 <span>'+fc+'</span> / '+cards.length+' 块 · 图库 <span>'+TOTAL+'</span> 张（最多'+ml+'块）';
+  st.innerHTML='已翻 <span>'+fc+'</span> / '+cards.length+' 块 · 图库 <span>'+T+'</span> 张（最多'+ml+'块）';
   lb.innerHTML=lk?'<div class="limit-banner">🔒 已翻满 '+maxF+' 块，点击「↺ 重翻」重新来过</div>':'';
   var h='<div class="card-grid">';
   for(var i=0;i<cards.length;i++){
-    var fl=flipped.has(i),sl=lk&&!fl,idx=imgIdx[i]||0,url=imgURL(idx);
+    var fl=flipped.has(i),sl=lk&&!fl,idx=imgIdx[i]||0,url=U(idx);
     var d=document.createElement('div');d.textContent=cards[i];var sc=d.innerHTML;
+    var already=imgDone[url];
     h+='<div class="card-scene'+(sl?' locked':'')+'" onclick="'+(sl?'':'flip('+i+')')+'">';
     h+='<div class="card'+(fl?' flipped':'')+'" id="c-'+i+'">';
-    h+='<div class="card-face card-back'+(loaded[url]?' loaded':'')+'" data-src="'+url+'"'+(loaded[url]?' style="background-image:url(\''+url+'\')"':'')+'>';
-    h+='<div class="skeleton"><span class="skeleton-emoji">🖍️</span><span class="skeleton-text">加载中…</span></div>';
+    h+='<div class="card-face card-back'+(already?' loaded':'')+'" data-src="'+url+'"'+(already?' style="background-image:url(\''+url+'\')"':'')+'>';
+    if(!already)h+='<div class="placeholder"><span class="placeholder-icon">🖍️</span><span class="placeholder-text">加载中…</span></div>';
     h+='<span class="num-tag">#'+(idx+1)+'</span></div>';
     h+='<div class="card-face card-front"><span class="seal">✧ 御旨 ✧</span><span class="content">'+sc+'</span></div>';
     h+='</div></div>';
   }
-  h+='</div>';ca.innerHTML=h;setupLazy()
+  h+='</div>';ca.innerHTML=h;loadAllImages()
 }
 
 function flip(i){if(locked()){toast('⚠ 已翻满 '+maxF+' 块');return}var el=document.getElementById('c-'+i);if(!el||flipped.has(i))return;flipped.add(i);el.classList.add('flipped');save();render();if(navigator.vibrate)navigator.vibrate(10)}
-function resetAll(){if(!cards.length)return;flipped.clear();imgIdx=pick(cards.length,imgIdx);loaded={};save();render();toast('已刷新 🎴')}
+
+// ===== 重置：清翻牌 + 打乱内容顺序 + 换图 =====
+function resetAll(){
+  if(!cards.length)return;
+  flipped.clear();
+  cards=shuf(cards);            // 打乱牌子内容顺序
+  imgIdx=pick(cards.length,imgIdx); // 换一批新图片
+  imgDone={};                   // 清除图片缓存
+  save();render();
+  toast('已刷新，内容已打乱 🎴');
+}
+
+// ===== 每日 00:00 自动刷新 =====
+function scheduleMidnight(){
+  var n=new Date(),mid=new Date(n);
+  mid.setHours(24,0,0,0);
+  var ms=mid-n;
+  if(ms<60000)ms=60000; // 至少等1分钟
+  setTimeout(function(){location.reload()},ms);
+}
+
 function openSettings(){document.getElementById('overlay').classList.remove('hidden');document.getElementById('cardCount').value=cards.length||8;document.getElementById('maxFlips').value=String(maxF);updateCountLabel();renderEditors()}
 function closeSettings(e){if(e&&e.target!==document.getElementById('overlay'))return;document.getElementById('overlay').classList.add('hidden')}
 function updateCountLabel(){document.getElementById('countLabel').textContent=document.getElementById('cardCount').value+' 块';renderEditors()}
 function renderEditors(){var n=parseInt(document.getElementById('cardCount').value),l=document.getElementById('editorList'),h='';for(var i=0;i<n;i++){var v=cards[i]||'';var d=document.createElement('div');d.textContent=v;h+='<div class="card-editor"><div class="card-label">🖍️ 第 '+(i+1)+' 号</div><input id="e-'+i+'" value="'+d.innerHTML+'" placeholder="输入内容…" maxlength="50"></div>'}l.innerHTML=h}
 function saveSettings(){var n=parseInt(document.getElementById('cardCount').value),nm=parseInt(document.getElementById('maxFlips').value),nc=[];for(var i=0;i<n;i++){var inp=document.getElementById('e-'+i);nc.push((inp?inp.value:'').trim()||('牌子 '+(i+1)))}var ol=cards.length;cards=nc;maxF=nm;if(cards.length!==ol){var u={};for(var k=0;k<imgIdx.length;k++)u[imgIdx[k]]=1;var pa=[];for(var x in u)if(u[x])pa.push(parseInt(x));imgIdx=pick(cards.length,pa)}var a=[];flipped.forEach(function(v){if(v<cards.length)a.push(v)});flipped=new Set(a);save();document.getElementById('overlay').classList.add('hidden');render();toast('已保存 ✅')}
 var tt;function toast(m){var e=document.getElementById('toast');e.textContent=m;e.classList.remove('hidden');clearTimeout(tt);tt=setTimeout(function(){e.classList.add('hidden')},1500)}
-loadData();render();
+
+loadData();render();scheduleMidnight();
 </script>
 </body>
 </html>
