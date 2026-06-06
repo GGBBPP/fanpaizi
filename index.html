@@ -31,7 +31,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;b
 @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .empty-state{text-align:center;padding:70px 20px;color:#e84393;opacity:.5}
 .empty-state .icon{font-size:3.5rem;margin-bottom:10px}
-.card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:700px;margin:0 auto}
+.card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:750px;margin:0 auto}
 .card-scene{perspective:800px;width:var(--cw);height:var(--ch)}
 .card-scene.locked{opacity:.4;filter:grayscale(.5);pointer-events:none}
 .card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer}
@@ -74,7 +74,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;b
 <main class="main" id="m"><div class="stats" id="st"></div><div id="lb"></div><div id="ca"></div></main>
 
 <div class="overlay hidden" id="ov" onclick="cS(event)"><div class="settings-panel" onclick="event.stopPropagation()"><h2>⚙ 设置牌子</h2>
-<div class="form-group"><label>牌子数量</label><input type="range" min="2" max="20" value="8" id="cn" oninput="uL()"><div class="range-val" id="cl">8 块</div></div>
+<div class="form-group"><label>牌子数量</label><input type="range" min="2" max="20" value="16" id="cn" oninput="uL()"><div class="range-val" id="cl">16 块</div></div>
 <div class="form-group max-flips-setting"><label>最多可翻数量</label><select id="mf"><option value="1">1 块</option><option value="2" selected>2 块</option><option value="3">3 块</option><option value="5">5 块</option><option value="99">不限</option></select></div>
 <div id="el"></div><div class="settings-actions"><button class="btn" onclick="cS()">取消</button><button class="btn btn-primary" onclick="sS()">✅ 保存</button></div></div></div>
 <div class="toast hidden" id="to"></div>
@@ -82,8 +82,8 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;b
 <script>
 var T=690;
 function U(i){var n=String(i+1);while(n.length<4)n='0'+n;return'images/mobile_'+n+'.jpg'}
-var SK='fp_v11',cards=[],flipped=new Set(),maxF=2,imgIdx=[];
-var df=['今晚洗碗 🍽️','按摩 10 分钟 💆','承包明天早餐 🥐','夸夸对方三句话 💕','免唠叨券一张 🎫','做一杯手冲咖啡 ☕','周末决定权归你 📅','无条件道歉一次 🙇'];
+var SK='fp_v12',cards=[],flipped=new Set(),maxF=2,imgIdx=[];
+var df=['拼积木','练书法','弹吉他','弹尤克里里','弹古筝','弹卡林巴琴','画画','涂色','折纸','语言','学习考证','学习塔罗牌','看书','学习国学','玩游戏','休息'];
 
 function shuf(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=b[i];b[i]=b[j];b[j]=t}return b}
 function pick(n,prev){var a=[];for(var i=0;i<T;i++)a.push(i);var s=shuf(a);if(prev&&prev.length&&n<=T-prev.length){var ps={},fr=[],ru=[];for(var p=0;p<prev.length;p++)ps[prev[p]]=1;for(var j=0;j<s.length;j++)ps[s[j]]?ru.push(s[j]):fr.push(s[j]);var pk=fr.slice(0,n);if(pk.length<n)pk=pk.concat(ru.slice(0,n-pk.length));return pk}return s.slice(0,n)}
@@ -118,7 +118,7 @@ function rd(){
 function fp(i){if(lk()){tm('⚠ 已翻满 '+maxF+' 块');return}var el=document.getElementById('c-'+i);if(!el||flipped.has(i))return;flipped.add(i);el.classList.add('flipped');sv();rd();if(navigator.vibrate)navigator.vibrate(10)}
 function rst(){if(!cards.length)return;flipped.clear();cards=shuf(cards);imgIdx=pick(cards.length,imgIdx);sv();rd();tm('已刷新，内容已打乱 🎴')}
 function mid(){var n=new Date(),m=new Date(n);m.setHours(24,0,0,0);var ms=m-n;if(ms<6e4)ms=6e4;setTimeout(function(){location.reload()},ms)}
-function oS(){document.getElementById('ov').classList.remove('hidden');document.getElementById('cn').value=cards.length||8;document.getElementById('mf').value=String(maxF);uL();rE()}
+function oS(){document.getElementById('ov').classList.remove('hidden');document.getElementById('cn').value=cards.length||16;document.getElementById('mf').value=String(maxF);uL();rE()}
 function cS(e){if(e&&e.target!==document.getElementById('ov'))return;document.getElementById('ov').classList.add('hidden')}
 function uL(){document.getElementById('cl').textContent=document.getElementById('cn').value+' 块';rE()}
 function rE(){var n=parseInt(document.getElementById('cn').value),l=document.getElementById('el'),h='';for(var i=0;i<n;i++){var v=cards[i]||'';var d=document.createElement('div');d.textContent=v;h+='<div class="card-editor"><div class="card-label">🖍️ 第 '+(i+1)+' 号</div><input id="e-'+i+'" value="'+d.innerHTML+'" placeholder="输入内容…" maxlength="50"></div>'}l.innerHTML=h}
