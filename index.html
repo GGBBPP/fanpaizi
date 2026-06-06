@@ -14,10 +14,7 @@
     overflow-x:hidden;-webkit-tap-highlight-color:transparent;
     user-select:none;-webkit-user-select:none;
   }
-  .bg-float{
-    position:fixed;pointer-events:none;z-index:0;
-    animation:floatAround 12s ease-in-out infinite;opacity:.5;font-size:1.6rem;
-  }
+  .bg-float{position:fixed;pointer-events:none;z-index:0;animation:floatAround 12s ease-in-out infinite;opacity:.5;font-size:1.6rem}
   .bg-float:nth-child(1){top:6%;left:4%;animation-delay:0s;font-size:2rem}
   .bg-float:nth-child(2){top:12%;right:7%;animation-delay:-3s;font-size:1.4rem}
   .bg-float:nth-child(3){top:55%;left:6%;animation-delay:-6s;font-size:1.8rem}
@@ -26,121 +23,42 @@
   .bg-float:nth-child(6){top:82%;left:35%;animation-delay:-7s;font-size:1.7rem}
   .bg-float:nth-child(7){top:28%;left:12%;animation-delay:-2s;font-size:1.2rem}
   .bg-float:nth-child(8){top:48%;right:10%;animation-delay:-5s;font-size:1.6rem}
-  @keyframes floatAround{
-    0%,100%{transform:translate(0,0) rotate(0deg) scale(1)}
-    25%{transform:translate(10px,-14px) rotate(5deg) scale(1.1)}
-    50%{transform:translate(-5px,-24px) rotate(-3deg) scale(.95)}
-    75%{transform:translate(-12px,-8px) rotate(4deg) scale(1.05)}
-  }
-  .header{
-    position:sticky;top:0;z-index:100;
-    background:linear-gradient(180deg,rgba(255,243,224,.95) 60%,rgba(255,243,224,0) 100%);
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    padding:14px 14px 22px;display:flex;align-items:center;justify-content:space-between;
-    flex-wrap:wrap;gap:6px;
-  }
-  .header h1{font-size:1.35rem;font-weight:800;color:#e84393;text-shadow:2px 2px 0 rgba(255,107,138,.12)}
+  @keyframes floatAround{0%,100%{transform:translate(0,0) rotate(0deg) scale(1)}25%{transform:translate(10px,-14px) rotate(5deg) scale(1.1)}50%{transform:translate(-5px,-24px) rotate(-3deg) scale(.95)}75%{transform:translate(-12px,-8px) rotate(4deg) scale(1.05)}}
+  .header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(255,243,224,.95) 60%,rgba(255,243,224,0) 100%);backdrop-filter:blur(10px);padding:14px 14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  .header h1{font-size:1.35rem;font-weight:800;color:#e84393}
   .header-actions{display:flex;gap:6px}
-  .btn{
-    border:2px solid #e84393;background:rgba(255,255,255,.7);color:#e84393;
-    padding:7px 13px;border-radius:18px;font-size:.82rem;font-weight:700;
-    cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;
-  }
+  .btn{border:2px solid #e84393;background:rgba(255,255,255,.7);color:#e84393;padding:7px 13px;border-radius:18px;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap}
   .btn:active{background:#fce4ec;transform:scale(.94)}
   .btn-primary{background:#e84393;color:#fff;border-color:#e84393}
-  .btn-primary:active{background:#d63384}
   .main{position:relative;z-index:1;padding:0 10px 50px}
-  .stats{
-    text-align:center;margin-bottom:16px;font-size:.8rem;color:#e84393;
-    background:rgba(255,255,255,.5);display:inline-block;padding:5px 15px;
-    border-radius:16px;position:relative;left:50%;transform:translateX(-50%);font-weight:600;
-  }
+  .stats{text-align:center;margin-bottom:16px;font-size:.8rem;color:#e84393;background:rgba(255,255,255,.5);display:inline-block;padding:5px 15px;border-radius:16px;position:relative;left:50%;transform:translateX(-50%);font-weight:600}
   .stats span{color:#6c5ce7}
-  .limit-banner{
-    text-align:center;background:rgba(255,107,138,.1);border:2px dashed #ff6b8a;
-    border-radius:14px;padding:9px 14px;margin-bottom:16px;max-width:400px;
-    margin-left:auto;margin-right:auto;font-size:.82rem;color:#e84393;
-    animation:fadeIn .4s ease;font-weight:600;
-  }
+  .limit-banner{text-align:center;background:rgba(255,107,138,.1);border:2px dashed #ff6b8a;border-radius:14px;padding:9px 14px;margin-bottom:16px;max-width:400px;margin-left:auto;margin-right:auto;font-size:.82rem;color:#e84393;animation:fadeIn .4s ease;font-weight:600}
   @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
   .empty-state{text-align:center;padding:70px 20px;color:#e84393;opacity:.5}
   .empty-state .icon{font-size:3.5rem;margin-bottom:10px}
-  .empty-state p{font-size:.95rem;line-height:1.8}
   .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:700px;margin:0 auto}
   .card-scene{perspective:800px;width:var(--card-w);height:var(--card-h)}
   .card-scene.locked{opacity:.4;filter:grayscale(.5);pointer-events:none}
-  .card{
-    width:100%;height:100%;position:relative;
-    transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer;
-  }
+  .card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer}
   .card.flipped{transform:rotateY(180deg)}
   .card:not(.flipped):active{transform:scale(.94)}
-  .card-face{
-    position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-    border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;
-  }
-
-  /* 背面 - 懒加载占位 + 真实图片 */
-  .card-back{
-    border:3px solid rgba(255,255,255,.7);box-shadow:0 5px 20px rgba(232,67,147,.15);
-    background-color:#f0e0d0;background-size:cover;background-position:center top;background-repeat:no-repeat;
-    position:relative;
-  }
+  .card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .card-back{border:3px solid rgba(255,255,255,.7);box-shadow:0 5px 20px rgba(232,67,147,.15);background-color:#f0e0d0;background-size:cover;background-position:center top;background-repeat:no-repeat;position:relative}
   .card-back.loaded{transition:opacity .4s ease}
-  /* 占位骨架 */
-  .card-back .skeleton{
-    position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;z-index:1;
-    background:linear-gradient(135deg,#fce4ec,#fff3e0,#fce4ec);
-    background-size:200% 200%;animation:shimmer 1.8s ease-in-out infinite;
-    transition:opacity .35s ease;
-  }
+  .card-back .skeleton{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;background:linear-gradient(135deg,#fce4ec,#fff3e0,#fce4ec);background-size:200% 200%;animation:shimmer 1.8s ease-in-out infinite;transition:opacity .35s ease}
   .card-back.loaded .skeleton{opacity:0;pointer-events:none}
   .card-back .skeleton-emoji{font-size:2.5rem;animation:bounce 1s ease-in-out infinite}
-  .card-back .skeleton-text{
-    font-size:.6rem;color:#e84393;font-weight:600;margin-top:4px;opacity:.7;
-  }
-  @keyframes shimmer{
-    0%{background-position:200% 0}100%{background-position:-200% 0}
-  }
-  @keyframes bounce{
-    0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}
-  }
-  .card-back .num-tag{
-    position:absolute;bottom:6px;right:8px;z-index:2;
-    background:rgba(232,67,147,.85);color:#fff;font-size:.6rem;
-    font-weight:700;padding:2px 7px;border-radius:8px;
-  }
-
-  /* 正面 */
-  .card-front{
-    background:linear-gradient(145deg,#fffdf7 0%,#fff8e7 100%);
-    border:3px solid #ff6b8a;transform:rotateY(180deg);
-    color:#5d4037;padding:14px 10px;flex-direction:column;text-align:center;
-    gap:6px;box-shadow:0 5px 20px rgba(232,67,147,.18);
-  }
-  .card-front .seal{
-    display:inline-block;border:2px solid #e84393;color:#e84393;
-    padding:2px 10px;border-radius:10px;font-size:.68rem;
-    font-weight:700;letter-spacing:.06em;transform:rotate(-2deg);
-  }
-  .card-front .content{
-    font-size:.9rem;font-weight:600;line-height:1.45;word-break:break-all;
-    flex:1;display:flex;align-items:center;color:#4a2c2a;
-  }
-
-  /* 设置面板 */
-  .overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;
-    display:flex;align-items:flex-end;justify-content:center;transition:opacity .3s;
-  }
+  .card-back .skeleton-text{font-size:.6rem;color:#e84393;font-weight:600;margin-top:4px;opacity:.7}
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .card-back .num-tag{position:absolute;bottom:6px;right:8px;z-index:2;background:rgba(232,67,147,.85);color:#fff;font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:8px}
+  .card-front{background:linear-gradient(145deg,#fffdf7 0%,#fff8e7 100%);border:3px solid #ff6b8a;transform:rotateY(180deg);color:#5d4037;padding:14px 10px;flex-direction:column;text-align:center;gap:6px;box-shadow:0 5px 20px rgba(232,67,147,.18)}
+  .card-front .seal{display:inline-block;border:2px solid #e84393;color:#e84393;padding:2px 10px;border-radius:10px;font-size:.68rem;font-weight:700;letter-spacing:.06em;transform:rotate(-2deg)}
+  .card-front .content{font-size:.9rem;font-weight:600;line-height:1.45;word-break:break-all;flex:1;display:flex;align-items:center;color:#4a2c2a}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:flex-end;justify-content:center;transition:opacity .3s}
   .overlay.hidden{opacity:0;pointer-events:none}
-  .settings-panel{
-    background:#fffdf7;border-radius:22px 22px 0 0;width:100%;
-    max-width:500px;max-height:85vh;max-height:85dvh;
-    overflow-y:auto;padding:26px 18px 34px;
-    animation:slideUp .35s ease;box-shadow:0 -4px 28px rgba(0,0,0,.08);
-  }
+  .settings-panel{background:#fffdf7;border-radius:22px 22px 0 0;width:100%;max-width:500px;max-height:85vh;max-height:85dvh;overflow-y:auto;padding:26px 18px 34px;animation:slideUp .35s ease;box-shadow:0 -4px 28px rgba(0,0,0,.08)}
   @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
   .settings-panel h2{font-size:1.15rem;color:#e84393;margin-bottom:18px;text-align:center;font-weight:800}
   .form-group{margin-bottom:12px}
@@ -148,40 +66,17 @@
   .form-group input[type=range]{width:100%;accent-color:#e84393;height:5px}
   .form-group .range-val{text-align:center;color:#6c5ce7;font-size:1.05rem;font-weight:700}
   .max-flips-setting{margin-top:12px;padding-top:12px;border-top:2px dashed #fce4ec}
-  .max-flips-setting select{
-    width:100%;padding:9px 12px;border:2px solid #fce4ec;border-radius:11px;
-    background:#fff;color:#5d4037;font-size:.85rem;font-family:inherit;
-    outline:none;cursor:pointer;font-weight:600;appearance:none;-webkit-appearance:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 stroke=%27%23e84393%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 12px center;
-  }
+  .max-flips-setting select{width:100%;padding:9px 12px;border:2px solid #fce4ec;border-radius:11px;background:#fff;color:#5d4037;font-size:.85rem;font-family:inherit;outline:none;cursor:pointer;font-weight:600;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 stroke=%27%23e84393%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
   .card-editor{border:2px solid #fce4ec;border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fffbfc}
   .card-editor .card-label{font-size:.78rem;color:#e84393;margin-bottom:5px;font-weight:700}
-  .card-editor input{
-    width:100%;padding:9px 12px;border:2px solid #fce4ec;border-radius:10px;
-    background:#fff;color:#5d4037;font-size:.85rem;font-family:inherit;outline:none;font-weight:500;
-    transition:border-color .2s;
-  }
+  .card-editor input{width:100%;padding:9px 12px;border:2px solid #fce4ec;border-radius:10px;background:#fff;color:#5d4037;font-size:.85rem;font-family:inherit;outline:none;font-weight:500;transition:border-color .2s}
   .card-editor input:focus{border-color:#ff6b8a}
   .settings-actions{display:flex;gap:8px;margin-top:18px}
   .settings-actions .btn{flex:1;text-align:center}
-  .toast{
-    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-    background:rgba(232,67,147,.9);color:#fff;
-    padding:13px 26px;border-radius:22px;font-size:.9rem;font-weight:700;
-    z-index:999;pointer-events:none;transition:opacity .3s;
-    text-align:center;white-space:nowrap;box-shadow:0 4px 18px rgba(232,67,147,.25);
-  }
+  .toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(232,67,147,.9);color:#fff;padding:13px 26px;border-radius:22px;font-size:.9rem;font-weight:700;z-index:999;pointer-events:none;transition:opacity .3s;text-align:center;white-space:nowrap;box-shadow:0 4px 18px rgba(232,67,147,.25)}
   .toast.hidden{opacity:0}
-  @media(max-width:380px){
-    :root{--card-w:110px;--card-h:145px}
-    .card-grid{gap:8px}
-    .header h1{font-size:1.15rem}
-  }
-  @media(min-width:500px){
-    :root{--card-w:150px;--card-h:195px}
-    .card-grid{gap:18px}
-  }
+  @media(max-width:380px){:root{--card-w:110px;--card-h:145px}.card-grid{gap:8px}.header h1{font-size:1.15rem}}
+  @media(min-width:500px){:root{--card-w:150px;--card-h:195px}.card-grid{gap:18px}}
 </style>
 </head>
 <body>
@@ -229,181 +124,708 @@
 <div class="toast hidden" id="toast"></div>
 
 <script>
+// 690 张蜡笔小新手机壁纸（GitHub 本地托管，秒加载）
 var ALL_IMAGES = [
-  "https://safebooru.org/samples/826/sample_75fec3f2a9515e13496359a88044cd4e30308601.jpg",
-    "https://safebooru.org/samples/826/sample_690513a6a002296bc9cb3f9116d1c4efca8bd104.jpg",
-    "https://safebooru.org/samples/826/sample_53e7fd717098a071fc7e280b1c24e8c00a9919ba.jpg",
-    "https://safebooru.org/samples/826/sample_2ae00c2465d2a25112d22beb179cad26f56054c0.jpg",
-    "https://safebooru.org/samples/290/sample_96e04d0326c128ae7ba731c45c82ef601a6abc9c.jpg",
-    "https://safebooru.org/images/21/a0b70065ea514edef5eff97b12fb63b1be4d1c45.png",
-    "https://safebooru.org/samples/1044/sample_7cf9d4baf1f2e91981a91fc3f267ffd60f49236a.jpg",
-    "https://safebooru.org/samples/3857/sample_e458fd6727e1fb6ad790ea9c0055dfd7f6573f98.jpg",
-    "https://safebooru.org/samples/271/sample_3bd16cbf185786a2053b5d2735a02435dc8e21d3.jpg",
-    "https://safebooru.org/samples/780/sample_091d75775705cbd658154d431fde2b44b0814299.jpg",
-    "https://safebooru.org/samples/1289/sample_f984026b6ef1a49f567d0d47d3dc57e85a4dadee.jpg",
-    "https://safebooru.org/images/3332/f67443ace5fb423be65b173b4aa32f826d364dba.png",
-    "https://safebooru.org/samples/2563/sample_e7238bba0009305a08957a4a52b3e3ed3d7b7d92.jpg",
-    "https://safebooru.org/images/771/6510731587b5f78f98bceddb10d94d86d0502be7.jpg",
-    "https://safebooru.org/samples/2818/sample_b67f4e64241ba94e31c41e8e8c82e10047aaf953.jpg",
-    "https://safebooru.org/samples/514/sample_45ed0c5f099bcaac6a8774ef2fe3780752af108e.jpg",
-    "https://safebooru.org/images/4596/d17e4d0032a94c2e2869b0a17d2dc8f4df835bad.jpg",
-    "https://safebooru.org/images/4596/a74391c178cd454f9533620d5bb79154be07a632.jpg",
-    "https://safebooru.org/samples/4288/sample_f370f379470790d02d6249f2fee67acecb4c5a5f.jpg",
-    "https://safebooru.org/samples/4251/sample_9c41f32cd1bc25cb77dcf920db46d363f7f3392e.jpg",
-    "https://safebooru.org/samples/4196/sample_b7c76117d631334672de97fb9b472129ec3b6dce.jpg",
-    "https://safebooru.org/images/4196/374d86889e51b35587acac880457f1de172a3662.jpg",
-    "https://safebooru.org/samples/3973/sample_e82c4ec7314228f7de27c03806d3ebf262266c4c.jpg",
-    "https://safebooru.org/samples/3957/sample_ad2a854715fc8744ec01a98a110de56db2d2db7c.jpg",
-    "https://safebooru.org/samples/3585/sample_03c0d9b5eefd7feec51f637a800971d141ec37f0.jpg",
-    "https://safebooru.org/images/2119/aab6e626fb22e75ed04b513177f6b59c52e8ab43.png",
-    "https://safebooru.org/samples/3546/sample_1b688104e0416d35a843bccef941df4593bb8996.jpg",
-    "https://safebooru.org/samples/2984/sample_722224093326d3ddbb04f5382afbacdc7168b560.jpg",
-    "https://safebooru.org/images/2939/011609a7a56d013a889f91291d82a361abf78c65.jpg",
-    "https://safebooru.org/images/2869/44d8c8166736b88a9a2705ad06b5d265c2416941.jpg",
-    "https://safebooru.org/samples/2640/sample_f0629e3abc32272f7cba0a5fd4bf40fc50da461a.jpg",
-    "https://safebooru.org/images/2744/1159b666a8fd69b17f010e799dd7cd5b606e37c7.png",
-    "https://safebooru.org/samples/2726/sample_92a5e1c53e9b0791d167456b476a56d48da6bb18.jpg",
-    "https://safebooru.org/samples/2650/sample_105a51464eccdf1b6efce54a962f26853d280051.jpg",
-    "https://safebooru.org/images/2640/cd179dc0f36b9405398847a780451a2454c5baa9.jpg",
-    "https://safebooru.org/samples/2462/sample_fa0e16bd47c9ffacead3defe2d458ecfa3e037a9.jpg",
-    "https://safebooru.org/samples/2462/sample_896f24e7fe0b4d71898429b0db29d884be11ccfa.jpg",
-    "https://safebooru.org/samples/2363/sample_5747f0181729ad32832acc3ad177c47f1b886670.jpg",
-    "https://safebooru.org/samples/2329/sample_6dd89e9ad3d69f35824521f983d34fca5954a3b5.jpg",
-    "https://safebooru.org/samples/2329/sample_eb9ec6878cd4f83b99755317b3d7908e1cfc9cda.jpg",
-    "https://safebooru.org/samples/2329/sample_48c0c65a8c989a5007acc2aeacacb0f0bb52dc94.jpg",
-    "https://safebooru.org/samples/2329/sample_544713635f8ea9a0602a560fc694925b4753bc1d.jpg",
-    "https://safebooru.org/samples/2329/sample_376e6d0aa0db0d6b25662c11d90867b5d07b6b3a.jpg",
-    "https://safebooru.org/samples/2329/sample_00744da9da337a9c8588f918453a5ba52d43c947.jpg",
-    "https://safebooru.org/samples/2329/sample_99f251f66c1d9b3a3c8acf9c50f8d55c264b5bcf.jpg",
-    "https://safebooru.org/images/2324/a0795ba0fb5e6a22e21aefe073d409641891ed36.jpg",
-    "https://safebooru.org/images/2320/19daa6b5f35a44048f789a2cd18b982b91be0574.jpg",
-    "https://safebooru.org/samples/2320/sample_23b096be4e8fb5fc35f2b5d32dc8c5648dbf5155.jpg",
-    "https://safebooru.org/samples/2320/sample_64c0240196f526d5ec30622125fa1d4411cde4ee.jpg",
-    "https://safebooru.org/samples/2320/sample_88084b1c3da409de2e274a7fe723be3ef8f8e410.jpg",
-    "https://safebooru.org/samples/2321/sample_3a4b126b69e8cbcee67cbe82ac70a5a74f3c13d3.jpg",
-    "https://safebooru.org/samples/2321/sample_8339d8fa36b938f613e6a5206437217aaa6fe353.jpg",
-    "https://safebooru.org/images/2321/dc0c9d521f73dac9c5fe0fcedb294ab2f7392380.jpg",
-    "https://safebooru.org/samples/2174/sample_eebeb4bcea3088174d9b084df9285cc4adcc0994.jpg",
-    "https://safebooru.org/samples/2254/sample_2488a7ab866b00dba5aae92f35101e43720ee985.jpg",
-    "https://safebooru.org/images/2306/5f95219d0b105ede862e45d742403dbeed8dfea6.jpg",
-    "https://safebooru.org/images/2297/5aab9826bba08c9022ef7c33a26c8ad8c87656a9.jpg",
-    "https://safebooru.org/samples/2235/sample_b20877498b3e5a7fd39c72ce6bb2b720f90ecfae.jpg",
-    "https://safebooru.org/samples/2142/sample_4730addd031c61321f383dcc5fbaf32fa24c5c61.jpg",
-    "https://safebooru.org/images/1847/2fc279f018f4e75bd5c5756ed389cf45cba26b0e.jpg",
-    "https://safebooru.org/samples/1847/sample_6553695aad52a57b75becbe8eb79f43cbce8b90f.jpg",
-    "https://safebooru.org/images/1768/8599af8d587e638589ca051e7c279eb679ef314e.jpg",
-    "https://safebooru.org/images/2009/5b6cd23ef383172cdeebb4a98acc98ea61a83c92.gif",
-    "https://safebooru.org/images/1997/2cbc373370e683633951ada247462763a1244b49.jpg",
-    "https://safebooru.org/images/1981/67e02868926d727851b2ef290d9ba78fa36b35cc.jpg",
-    "https://safebooru.org/images/1981/b379ca18d4032c99df63aed48bb28bbedfcbbc8a.jpg",
-    "https://safebooru.org/images/1981/5543b96a54a17e5fb6b30cc91bb19ed1f5268332.jpg",
-    "https://safebooru.org/images/1977/ac47f3108142c7e0082ab80f6af262e953ffaa21.jpg",
-    "https://safebooru.org/images/1967/a5d055155c6b0a9d516f3bb78ea8b72026dbef11.jpg",
-    "https://safebooru.org/images/1929/590769051370eb2c5d7233d3e4b3d3803fef4885.jpg",
-    "https://safebooru.org/images/1917/4ac4b35b61fab38bda52af353f0d6af81a4f0c45.jpg",
-    "https://safebooru.org/images/1917/98e8439731562020e4438888f17d1469313bc0cf.jpg",
-    "https://safebooru.org/images/1907/ad6fac32942c4cc82f8589e549d534485c0e8b30.jpg",
-    "https://safebooru.org/images/1566/023246e151a0e667e4e3135a4f5b85b1530c97ef.png",
-    "https://safebooru.org/images/1565/bdd337a2f0bc62dec749acc38d68abd83a66e77e.png",
-    "https://safebooru.org/images/1418/f6002988cc5ae6e480344acbdae89d8bed9ebd13.jpg",
-    "https://safebooru.org/images/974/80e018c30aebf10145bb99e15f26e7c8176233e5.jpg",
-    "https://safebooru.org/samples/837/sample_f78a3ed5c078526555302a73187848ebd4e9c812.jpg",
-    "https://safebooru.org/samples/618/sample_aac540d2fd688b1d724b099244184b7c046aff3c.jpg",
-    "https://safebooru.org/samples/618/sample_36aced87b82d9663c73bd2db8b5d40730f70df1e.jpg",
-    "https://safebooru.org/images/618/3f2186d36129da266462432910c733ec379b53e3.jpg",
-    "https://safebooru.org/images/618/c9f585b0c7cdd658cd2364a7c174c74a7fab0b25.jpg",
-    "https://safebooru.org/images/454/d05b7fd8385093d592cc88c98beac878f1f26865.jpg",
-    "https://safebooru.org/images/302/13cf68913025987c79e9e564e71aa673a1fd0ac4.jpg",
-    "https://safebooru.org/images/286/9d077f1204d7cd8748d0cf0b5164bc4105a2a9a2.jpg",
-    "https://safebooru.org/images/278/eb8c4b077df79bafd83693239e07edd8bcaa0ca5.jpg",
-    "https://safebooru.org/images/275/ec80a2706322642fe35e181ff859df683e5a8039.jpg",
-    "https://safebooru.org/images/274/b2e5e39346f720bfeee8f7d81d1711d468f34c11.jpg",
-    "https://safebooru.org/images/270/d9d8fe576169f80b2128eccd6e92be1c6a44c90e.jpg",
-    "https://safebooru.org/images/183/3f2c6db9a448696b4da26d701ceaa1064fdf69ce.jpg",
-    "https://safebooru.org/images/181/b5f0ff8fc4150a41e0ce40a00226f395091b5d05.png",
-    "https://safebooru.org/images/174/4a00e9d099ac6b725c07ad568888ee1227ea7865.jpg",
-    "https://safebooru.org/images/3879/b93ec8ab352ffe2e91b1ce3257a6e3c9a34f7d8d.jpg",
-    "https://safebooru.org/samples/4617/sample_147f9672fade00405f5f260557558df2358c16ca.jpg",
-    "https://safebooru.org/samples/4531/sample_197c9664479f408192f43c7ac7decf21f922ee62.jpg",
-    "https://safebooru.org/samples/4112/sample_8a45176a3c65dbad2ec2398e9ef77f281e9b98c9.jpg",
-    "https://safebooru.org/samples/3906/sample_9af7a037e1f598e7d1f5dcd1f2921d9ce3dcfeeb.jpg",
-    "https://safebooru.org/samples/2938/sample_540a38ab9ce976526dbf4d08dd6486c8183ba1cc.jpg",
-    "https://safebooru.org/images/2917/eb24277848f9aa4c7202a3a0c74d514fcae0b951.jpg",
-    "https://safebooru.org/images/2763/8fe5b8e5dc66a402f4fdf17b22f6c8a0c4d6ddfe.jpg",
-    "https://safebooru.org/samples/2643/sample_d6e704e4a46a69f1a94bbb69545bf98ce07aa82a.jpg",
-    "https://safebooru.org/images/2447/8408a8ec4a91bf3114410761b64c9cff3c0fc479.jpg",
-    "https://safebooru.org/images/1906/2a7aee076b59d343e460fa973976aa694a4231be.png",
-    "https://safebooru.org/images/1768/fca0afcf628b4505dd908d15625399c317da9ff0.jpg",
-    "https://safebooru.org/images/1768/48fe6510a144ce06114b8ed005ba91282f9fb84d.jpg",
-    "https://safebooru.org/images/1768/9dd8fc3364d792b4eea8fe608367d53f8fc54331.jpg",
-    "https://safebooru.org/images/1767/a85fa7afefaae242ef8e914b14826cd437579285.jpg",
-    "https://safebooru.org/images/1767/fcec076f08bcf0741d77ba96faf4469d7cb50fdd.png",
-    "https://safebooru.org/images/1766/fd4c7ff67aef41a66f431c10d83598226459cdfe.jpg",
-    "https://safebooru.org/images/1766/9fd217e4f7f87ec6c355f4482096a7e645816c17.png",
-    "https://safebooru.org/samples/1619/sample_3d0d1fd6788b73144a040fd1ab9144982356d11a.jpg",
-    "https://safebooru.org/images/1619/a8a4a62b304af7368090a2fb91b79cebcbbe1660.jpg",
-    "https://safebooru.org/samples/1619/sample_cf04477178a40eb6bcb72b577f192795c9c72fe0.jpg",
-    "https://safebooru.org/samples/1615/sample_bd2763f8265261bdea0b5ab940870429f76f905b.jpg",
-    "https://safebooru.org/samples/1615/sample_34c8b4406761eb57384c33d3f0efda9dea8c18b9.jpg",
-    "https://safebooru.org/samples/1615/sample_2e4da6666da44fdc7bd6456ba8f6edef19529143.jpg",
-    "https://safebooru.org/images/1082/63086ed59657245400439d9fa766598ef917b17e.png",
-    "https://safebooru.org/images/903/ffb9038604f86a94a23d3b467aa93aa21149218b.jpg",
-    "https://safebooru.org/images/622/2875077a4835e267fbbb2f8469d2f8df230d0a35.jpg",
-    "https://safebooru.org/images/622/2d6d79fcdb6b0b6bf9a261a9ed0f8ec7e9168ac1.jpg",
-    "https://safebooru.org/images/622/8a7b6ada247928ed0c5eabc38f98be96a8d23259.jpg",
-    "https://safebooru.org/images/622/c63e2eb1287938bee903f0bb18d39692ee791d4b.jpg",
-    "https://safebooru.org/images/622/02bd0727844fec910a82339fa2df53226ae7e654.jpg",
-    "https://safebooru.org/samples/259/sample_e7d38321cfaeb542ba354509d7210d50d5289b71.jpg",
-    "https://safebooru.org/images/251/411d141bec9a55795a7bd51b4e181505b499bf4e.png",
-    "https://safebooru.org/images/209/056cb5f152923d5426aada075560499f5ac4cca1.jpg",
-    "https://safebooru.org/images/208/1afe0df1415984e74d461cae67ee8a33ae822726.png",
-    "https://safebooru.org/samples/131/sample_657084326b535f12f2ccc79046bf60ce0cd3a968.jpg",
-    "https://safebooru.org/images/131/726e1cf111d7082e6ccfb0e3b2657fae6a0de4ef.jpg",
-    "https://safebooru.org/images/128/b595d6389ad3bb34aceca6b6ddbcbc6e992590a5.jpg",
-    "https://safebooru.org/samples/4616/sample_73a692eb3e22318ba223d7afca992495ab4b661f.jpg",
-    "https://safebooru.org/images/3681/b8986c32b406444dc698ef0b749c843b39b399d1.jpg",
-    "https://safebooru.org/samples/3681/sample_18bb35f64d1822e73141000027c8978c39a181de.jpg",
-    "https://safebooru.org/images/3389/a54cd38b8f7b217b2475778e4b6be7e065ef6376.jpg",
-    "https://safebooru.org/samples/3389/sample_99b0d460d5ba04f6088019ec55e94ae3597f052a.jpg",
-    "https://safebooru.org/images/2235/e933115454da05c28105ea5e392737aebc2e835b.jpg",
-    "https://safebooru.org/samples/1619/sample_698f05ee22cc7c11ea2525519a7729a8dd440ad3.jpg",
-    "https://safebooru.org/samples/1619/sample_976ebdd74f20df4cc332834a18bc752743df02cb.jpg",
-    "https://safebooru.org/samples/1619/sample_4ac54995cc84f63726bf7fd6bfe114d61ef51546.jpg",
-    "https://safebooru.org/samples/1615/sample_c35b5056dc8f7ff44db81c02b30fded8d805b6f1.jpg",
-    "https://safebooru.org/samples/1176/sample_51e1d12db3e38c9447704a9e706f3bcd4aca8c2d.jpg",
-    "https://safebooru.org/images/1053/4adaa2cb017030cf5b1f17fb59b2f2b05172a52d.jpg",
-    "https://safebooru.org/images/1053/b76151ea2175e9b62601a1fd49a2fd193054ac86.jpg",
-    "https://safebooru.org/images/622/20906cd23d4520feda88a74bf3979325fe3a276b.png",
-    "https://safebooru.org/images/159/3c6794b27052343a97a9e749819097eafcd94baf.jpg",
-    "https://safebooru.org/samples/4366/sample_af1a90c274a0a9e0b1fb3039ec18de0189e8dd1a.jpg",
-    "https://safebooru.org/images/1907/993f8e4717afb10b56f0c3e60af82f6de2256cc4.png",
-    "https://safebooru.org/images/1791/028c0fc0fd40543f0b5257495f6f3eb6ecf9179e.gif",
-    "https://safebooru.org/images/1768/d826750520f43e9f62d98ea9a70bb707a4dc0063.jpg",
-    "https://safebooru.org/images/1768/bc10b13e905866b447964d7f380d242ed51f404e.jpg",
-    "https://safebooru.org/images/1768/9aff4d89845641bfd8ad32f8392dbf447316da1f.jpg",
-    "https://safebooru.org/images/1768/8c87ddc5db951233948f2409bcc002cca1c82ea4.jpg",
-    "https://safebooru.org/samples/1767/sample_6559e18ad1244fd11f743f7c1ba95018e235ab30.jpg",
-    "https://safebooru.org/images/1766/ec94f467b1361232baaebdaaa00ae0e39112eb2c.png",
-    "https://safebooru.org/images/1648/2bcbec8aa4a0aa7b2dc13d9fe5292317ba5587b1.jpg",
-    "https://safebooru.org/samples/1648/sample_8348ef9240b61bf71ae0b5694ea48573bca2d55d.jpg",
-    "https://safebooru.org/images/1640/d48d5a997286ffb223293c155503c25684855648.jpg",
-    "https://safebooru.org/images/939/5725c30a8c9d152167db191df97dec374cd6b91d.jpg",
-    "https://safebooru.org/images/622/4a75616b1c19c3f0044f7798def5699ae874e76e.jpg",
-    "https://safebooru.org/images/622/a9894f1da279aef459b08882962475778a019538.jpg",
-    "https://safebooru.org/images/622/6dc0d2173239f639f38102956b3f984d63ab3c10.jpg",
-    "https://safebooru.org/images/622/00f47ab8225bb92891aa53bcabc27f2d4e591232.jpg",
-    "https://safebooru.org/images/622/7f54223400354006a27ec1831a824fc646456869.jpg",
-    "https://safebooru.org/images/212/d9c9234c3044634e85a7789abf95c7ccff7956b4.jpg"
+  "https://ggbbpp.github.io/fanpaizi/images/mobile_0001.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0002.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0003.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0004.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0005.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0006.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0007.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0008.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0009.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0010.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0011.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0012.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0013.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0014.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0015.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0016.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0017.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0018.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0019.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0020.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0021.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0022.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0023.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0024.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0025.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0026.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0027.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0028.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0029.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0030.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0031.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0032.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0033.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0034.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0035.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0036.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0037.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0038.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0039.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0040.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0041.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0042.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0043.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0044.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0045.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0046.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0047.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0048.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0049.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0050.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0051.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0052.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0053.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0054.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0055.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0056.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0057.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0058.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0059.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0060.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0061.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0062.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0063.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0064.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0065.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0066.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0067.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0068.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0069.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0070.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0071.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0072.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0073.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0074.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0075.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0076.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0077.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0078.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0079.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0080.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0081.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0082.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0083.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0084.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0085.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0086.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0087.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0088.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0089.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0090.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0091.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0092.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0093.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0094.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0095.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0096.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0097.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0098.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0099.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0100.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0101.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0102.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0103.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0104.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0105.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0106.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0107.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0108.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0109.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0110.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0111.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0112.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0113.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0114.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0115.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0116.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0117.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0118.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0119.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0120.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0121.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0122.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0123.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0124.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0125.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0126.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0127.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0128.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0129.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0130.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0131.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0132.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0133.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0134.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0135.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0136.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0137.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0138.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0139.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0140.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0141.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0142.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0143.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0144.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0145.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0146.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0147.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0148.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0149.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0150.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0151.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0152.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0153.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0154.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0155.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0156.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0157.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0158.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0159.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0160.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0161.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0162.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0163.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0164.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0165.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0166.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0167.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0168.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0169.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0170.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0171.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0172.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0173.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0174.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0175.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0176.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0177.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0178.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0179.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0180.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0181.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0182.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0183.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0184.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0185.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0186.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0187.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0188.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0189.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0190.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0191.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0192.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0193.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0194.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0195.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0196.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0197.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0198.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0199.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0200.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0201.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0202.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0203.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0204.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0205.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0206.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0207.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0208.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0209.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0210.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0211.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0212.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0213.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0214.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0215.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0216.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0217.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0218.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0219.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0220.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0221.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0222.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0223.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0224.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0225.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0226.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0227.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0228.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0229.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0230.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0231.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0232.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0233.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0234.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0235.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0236.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0237.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0238.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0239.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0240.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0241.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0242.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0243.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0244.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0245.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0246.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0247.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0248.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0249.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0250.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0251.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0252.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0253.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0254.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0255.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0256.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0257.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0258.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0259.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0260.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0261.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0262.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0263.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0264.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0265.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0266.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0267.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0268.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0269.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0270.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0271.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0272.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0273.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0274.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0275.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0276.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0277.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0278.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0279.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0280.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0281.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0282.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0283.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0284.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0285.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0286.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0287.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0288.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0289.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0290.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0291.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0292.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0293.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0294.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0295.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0296.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0297.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0298.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0299.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0300.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0301.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0302.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0303.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0304.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0305.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0306.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0307.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0308.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0309.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0310.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0311.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0312.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0313.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0314.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0315.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0316.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0317.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0318.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0319.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0320.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0321.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0322.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0323.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0324.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0325.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0326.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0327.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0328.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0329.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0330.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0331.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0332.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0333.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0334.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0335.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0336.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0337.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0338.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0339.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0340.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0341.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0342.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0343.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0344.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0345.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0346.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0347.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0348.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0349.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0350.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0351.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0352.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0353.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0354.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0355.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0356.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0357.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0358.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0359.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0360.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0361.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0362.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0363.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0364.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0365.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0366.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0367.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0368.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0369.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0370.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0371.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0372.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0373.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0374.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0375.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0376.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0377.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0378.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0379.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0380.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0381.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0382.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0383.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0384.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0385.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0386.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0387.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0388.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0389.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0390.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0391.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0392.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0393.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0394.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0395.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0396.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0397.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0398.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0399.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0400.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0401.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0402.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0403.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0404.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0405.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0406.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0407.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0408.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0409.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0410.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0411.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0412.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0413.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0414.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0415.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0416.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0417.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0418.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0419.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0420.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0421.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0422.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0423.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0424.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0425.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0426.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0427.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0428.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0429.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0430.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0431.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0432.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0433.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0434.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0435.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0436.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0437.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0438.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0439.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0440.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0441.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0442.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0443.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0444.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0445.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0446.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0447.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0448.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0449.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0450.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0451.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0452.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0453.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0454.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0455.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0456.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0457.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0458.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0459.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0460.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0461.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0462.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0463.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0464.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0465.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0466.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0467.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0468.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0469.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0470.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0471.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0472.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0473.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0474.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0475.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0476.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0477.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0478.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0479.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0480.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0481.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0482.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0483.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0484.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0485.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0486.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0487.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0488.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0489.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0490.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0491.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0492.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0493.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0494.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0495.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0496.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0497.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0498.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0499.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0500.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0501.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0502.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0503.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0504.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0505.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0506.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0507.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0508.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0509.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0510.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0511.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0512.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0513.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0514.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0515.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0516.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0517.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0518.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0519.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0520.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0521.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0522.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0523.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0524.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0525.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0526.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0527.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0528.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0529.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0530.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0531.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0532.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0533.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0534.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0535.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0536.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0537.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0538.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0539.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0540.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0541.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0542.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0543.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0544.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0545.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0546.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0547.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0548.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0549.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0550.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0551.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0552.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0553.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0554.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0555.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0556.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0557.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0558.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0559.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0560.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0561.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0562.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0563.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0564.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0565.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0566.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0567.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0568.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0569.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0570.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0571.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0572.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0573.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0574.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0575.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0576.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0577.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0578.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0579.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0580.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0581.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0582.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0583.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0584.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0585.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0586.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0587.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0588.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0589.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0590.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0591.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0592.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0593.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0594.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0595.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0596.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0597.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0598.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0599.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0600.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0601.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0602.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0603.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0604.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0605.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0606.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0607.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0608.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0609.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0610.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0611.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0612.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0613.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0614.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0615.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0616.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0617.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0618.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0619.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0620.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0621.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0622.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0623.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0624.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0625.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0626.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0627.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0628.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0629.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0630.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0631.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0632.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0633.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0634.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0635.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0636.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0637.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0638.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0639.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0640.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0641.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0642.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0643.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0644.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0645.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0646.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0647.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0648.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0649.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0650.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0651.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0652.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0653.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0654.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0655.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0656.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0657.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0658.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0659.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0660.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0661.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0662.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0663.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0664.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0665.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0666.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0667.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0668.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0669.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0670.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0671.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0672.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0673.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0674.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0675.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0676.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0677.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0678.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0679.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0680.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0681.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0682.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0683.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0684.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0685.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0686.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0687.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0688.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0689.jpg",
+    "https://ggbbpp.github.io/fanpaizi/images/mobile_0690.jpg"
 ];
 var TOTAL_IMAGES = ALL_IMAGES.length;
 
-var STORAGE_KEY = "fanpaizi_v7_data";
+var STORAGE_KEY = "fanpaizi_v8_data";
 var cards = [];
 var flippedSet = new Set();
 var maxFlips = 2;
 var currentImageIndexes = [];
-var loadedImages = {};   // 已加载过的图片缓存
-var observer = null;      // IntersectionObserver 实例
+var loadedImages = {};
+var observer = null;
 
 var defaultCards = [
   "今晚洗碗 🍽️","按摩 10 分钟 💆","承包明天早餐 🥐","夸夸对方三句话 💕",
@@ -464,109 +886,59 @@ function saveData(){
 
 function isLocked(){return maxFlips!==99&&flippedSet.size>=maxFlips}
 
-/* ===== 懒加载图片 ===== */
 function setupLazyLoader(){
-  // 销毁旧的 observer
   if(observer){observer.disconnect();observer=null}
-  
-  var backEls = document.querySelectorAll('.card-back[data-src]');
+  var backEls=document.querySelectorAll('.card-back[data-src]');
   if(backEls.length===0)return;
-  
-  // 优先加载前 4 张（首屏可见）
-  var firstBatch = Math.min(4, backEls.length);
-  for(var i=0;i<firstBatch;i++){
-    loadCardImage(backEls[i]);
-  }
-  
-  // 其余的用 IntersectionObserver
+  var firstBatch=Math.min(6,backEls.length);
+  for(var i=0;i<firstBatch;i++)loadCardImage(backEls[i]);
   if('IntersectionObserver' in window){
-    observer = new IntersectionObserver(function(entries){
+    observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          loadCardImage(entry.target);
-          observer.unobserve(entry.target);
-        }
+        if(entry.isIntersecting){loadCardImage(entry.target);observer.unobserve(entry.target)}
       });
-    },{rootMargin:'300px'});
-    
-    for(var j=firstBatch;j<backEls.length;j++){
-      observer.observe(backEls[j]);
-    }
-  } else {
-    // 降级方案：延迟批量加载
-    var remaining = Array.prototype.slice.call(backEls, firstBatch);
-    var idx = 0;
-    function loadNext(){
-      if(idx>=remaining.length)return;
-      loadCardImage(remaining[idx]);idx++;
-      setTimeout(loadNext,80);
-    }
-    setTimeout(loadNext,300);
+    },{rootMargin:'400px'});
+    for(var j=firstBatch;j<backEls.length;j++)observer.observe(backEls[j]);
+  }else{
+    var remaining=Array.prototype.slice.call(backEls,firstBatch),idx=0;
+    function loadNext(){if(idx>=remaining.length)return;loadCardImage(remaining[idx]);idx++;setTimeout(loadNext,60)}
+    setTimeout(loadNext,200);
   }
 }
 
 function loadCardImage(el){
-  var src = el.getAttribute('data-src');
+  var src=el.getAttribute('data-src');
   if(!src||loadedImages[src])return;
-  
-  var img = new Image();
-  img.onload = function(){
-    el.style.backgroundImage = 'url(' + src + ')';
-    el.classList.add('loaded');
-    loadedImages[src]=true;
-  };
-  img.onerror = function(){
-    // 加载失败保持骨架
-    el.classList.add('loaded');
-  };
-  img.src = src;
+  var img=new Image();
+  img.onload=function(){el.style.backgroundImage='url('+src+')';el.classList.add('loaded');loadedImages[src]=true};
+  img.onerror=function(){el.classList.add('loaded')};
+  img.src=src;
 }
 
-/* ===== 渲染 ===== */
 function render(){
-  var cardArea=document.getElementById("cardArea");
-  var stats=document.getElementById("stats");
-  var limitBanner=document.getElementById("limitBanner");
-  
+  var cardArea=document.getElementById("cardArea"),stats=document.getElementById("stats"),limitBanner=document.getElementById("limitBanner");
   if(cards.length===0){
     cardArea.innerHTML='<div class="empty-state"><div class="icon">🖍️</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>';
     stats.innerHTML="";limitBanner.innerHTML="";return;
   }
-  
-  var flippedCount=flippedSet.size;
-  var locked=isLocked();
-  var maxLabel=maxFlips===99?"不限":String(maxFlips);
+  var flippedCount=flippedSet.size,locked=isLocked(),maxLabel=maxFlips===99?"不限":String(maxFlips);
   stats.innerHTML='已翻 <span>'+flippedCount+'</span> / '+cards.length+' 块 · 图库 <span>'+TOTAL_IMAGES+'</span> 张 （最多'+maxLabel+'块）';
-  
-  if(locked){
-    limitBanner.innerHTML='<div class="limit-banner">🔒 已翻满 '+maxFlips+' 块，其余牌子已锁定 · 点击「↺ 重翻」可重新来过</div>';
-  }else{limitBanner.innerHTML="";}
-  
+  if(locked)limitBanner.innerHTML='<div class="limit-banner">🔒 已翻满 '+maxFlips+' 块，其余牌子已锁定 · 点击「↺ 重翻」可重新来过</div>';
+  else limitBanner.innerHTML="";
   var html='<div class="card-grid">';
   for(var i=0;i<cards.length;i++){
-    var isFlipped=flippedSet.has(i);
-    var sceneLocked=locked&&!isFlipped;
-    var imgIdx=currentImageIndexes[i]||0;
-    var imgUrl=ALL_IMAGES[imgIdx];
+    var isFlipped=flippedSet.has(i),sceneLocked=locked&&!isFlipped;
+    var imgIdx=currentImageIndexes[i]||0,imgUrl=ALL_IMAGES[imgIdx];
     var div=document.createElement("div");div.textContent=cards[i];var safeContent=div.innerHTML;
-    
     html+='<div class="card-scene'+(sceneLocked?" locked":"")+'" onclick="'+(sceneLocked?"":"flipCard("+i+")")+'">';
     html+='<div class="card'+(isFlipped?" flipped":"")+'" id="card-'+i+'">';
-    // 背面：用 data-src 延迟加载，初始显示骨架
     html+='<div class="card-face card-back'+(loadedImages[imgUrl]?" loaded":"")+'" data-src="'+imgUrl+'"'+(loadedImages[imgUrl]?' style="background-image:url(\''+imgUrl+'\')"':'')+'>';
     html+='<div class="skeleton"><span class="skeleton-emoji">🖍️</span><span class="skeleton-text">小新加载中…</span></div>';
-    html+='<span class="num-tag">第'+(i+1)+'号</span>';
-    html+='</div>';
-    // 正面
-    html+='<div class="card-face card-front">';
-    html+='<span class="seal">✧ 御旨 ✧</span>';
-    html+='<span class="content">'+safeContent+'</span>';
-    html+='</div></div></div>';
+    html+='<span class="num-tag">第'+(i+1)+'号</span></div>';
+    html+='<div class="card-face card-front"><span class="seal">✧ 御旨 ✧</span><span class="content">'+safeContent+'</span></div>';
+    html+='</div></div>';
   }
-  html+='</div>';
-  cardArea.innerHTML=html;
-  
-  // 设置懒加载
+  html+='</div>';cardArea.innerHTML=html;
   setupLazyLoader();
 }
 
@@ -574,18 +946,14 @@ function flipCard(index){
   if(isLocked()){showToast("⚠ 已翻满 "+maxFlips+" 块，不能再翻了");return}
   var el=document.getElementById("card-"+index);
   if(!el||flippedSet.has(index))return;
-  flippedSet.add(index);el.classList.add("flipped");
-  saveData();render();
+  flippedSet.add(index);el.classList.add("flipped");saveData();render();
   if(navigator.vibrate)navigator.vibrate(10);
 }
 
 function resetAll(){
-  if(cards.length===0)return;
-  flippedSet.clear();
+  if(cards.length===0)return;flippedSet.clear();
   currentImageIndexes=pickRandomImages(cards.length,currentImageIndexes);
-  // 重置时清除图片缓存，确保新图片也能懒加载
-  loadedImages={};
-  saveData();render();
+  loadedImages={};saveData();render();
   showToast("已重置，图片已刷新 🎴");
 }
 
@@ -595,17 +963,10 @@ function openSettings(){
   document.getElementById("maxFlips").value=String(maxFlips);
   updateCountLabel();renderEditors();
 }
-function closeSettings(e){
-  if(e&&e.target!==document.getElementById("overlay"))return;
-  document.getElementById("overlay").classList.add("hidden");
-}
-function updateCountLabel(){
-  var v=document.getElementById("cardCount").value;
-  document.getElementById("countLabel").textContent=v+" 块";renderEditors();
-}
+function closeSettings(e){if(e&&e.target!==document.getElementById("overlay"))return;document.getElementById("overlay").classList.add("hidden")}
+function updateCountLabel(){document.getElementById("countLabel").textContent=document.getElementById("cardCount").value+" 块";renderEditors()}
 function renderEditors(){
-  var count=parseInt(document.getElementById("cardCount").value);
-  var list=document.getElementById("editorList"),html="";
+  var count=parseInt(document.getElementById("cardCount").value),list=document.getElementById("editorList"),html="";
   for(var i=0;i<count;i++){
     var val=cards[i]||"";
     var div=document.createElement("div");div.textContent=val;
@@ -615,33 +976,20 @@ function renderEditors(){
   list.innerHTML=html;
 }
 function saveSettings(){
-  var count=parseInt(document.getElementById("cardCount").value);
-  var newMaxFlips=parseInt(document.getElementById("maxFlips").value);
-  var newCards=[];
-  for(var i=0;i<count;i++){
-    var input=document.getElementById("edit-"+i);
-    var val=(input?input.value:"").trim();
-    newCards.push(val||("牌子 "+(i+1)));
-  }
+  var count=parseInt(document.getElementById("cardCount").value),newMaxFlips=parseInt(document.getElementById("maxFlips").value),newCards=[];
+  for(var i=0;i<count;i++){var input=document.getElementById("edit-"+i);var val=(input?input.value:"").trim();newCards.push(val||("牌子 "+(i+1)))}
   var oldLen=cards.length;cards=newCards;maxFlips=newMaxFlips;
   if(cards.length!==oldLen){
-    var used={};
-    for(var u=0;u<currentImageIndexes.length;u++)used[currentImageIndexes[u]]=true;
-    var prevArr=[];for(var k in used){if(used[k])prevArr.push(parseInt(k));}
+    var used={};for(var u=0;u<currentImageIndexes.length;u++)used[currentImageIndexes[u]]=true;
+    var prevArr=[];for(var k in used){if(used[k])prevArr.push(parseInt(k))}
     currentImageIndexes=pickRandomImages(cards.length,prevArr);
   }
-  var arr=[];flippedSet.forEach(function(v){if(v<cards.length)arr.push(v)});
-  flippedSet=new Set(arr);
+  var arr=[];flippedSet.forEach(function(v){if(v<cards.length)arr.push(v)});flippedSet=new Set(arr);
   saveData();document.getElementById("overlay").classList.add("hidden");render();
   showToast("设置已保存 ✅");
 }
-
 var toastTimer;
-function showToast(msg){
-  var el=document.getElementById("toast");el.textContent=msg;el.classList.remove("hidden");
-  clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.add("hidden")},1800);
-}
-
+function showToast(msg){var el=document.getElementById("toast");el.textContent=msg;el.classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.add("hidden")},1800)}
 loadData();render();
 </script>
 </body>
