@@ -5,242 +5,232 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>翻牌子 · 蜡笔小新</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --card-w: 140px;
-    --card-h: 180px;
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--card-w:140px;--card-h:180px}
+  body{
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+    background:linear-gradient(135deg,#fce4ec 0%,#fff3e0 30%,#e8f5e9 60%,#e3f2fd 100%);
+    background-attachment:fixed;min-height:100vh;min-height:100dvh;color:#5d4037;
+    overflow-x:hidden;-webkit-tap-highlight-color:transparent;
+    user-select:none;-webkit-user-select:none;
+  }
+  .bg-float{
+    position:fixed;pointer-events:none;z-index:0;
+    animation:floatAround 12s ease-in-out infinite;opacity:.5;font-size:1.6rem;
+  }
+  .bg-float:nth-child(1){top:6%;left:4%;animation-delay:0s;font-size:2rem}
+  .bg-float:nth-child(2){top:12%;right:7%;animation-delay:-3s;font-size:1.4rem}
+  .bg-float:nth-child(3){top:55%;left:6%;animation-delay:-6s;font-size:1.8rem}
+  .bg-float:nth-child(4){top:72%;right:4%;animation-delay:-9s;font-size:1.5rem}
+  .bg-float:nth-child(5){top:38%;left:82%;animation-delay:-4s;font-size:1.3rem}
+  .bg-float:nth-child(6){top:82%;left:35%;animation-delay:-7s;font-size:1.7rem}
+  .bg-float:nth-child(7){top:28%;left:12%;animation-delay:-2s;font-size:1.2rem}
+  .bg-float:nth-child(8){top:48%;right:10%;animation-delay:-5s;font-size:1.6rem}
+  @keyframes floatAround{
+    0%,100%{transform:translate(0,0) rotate(0deg) scale(1)}
+    25%{transform:translate(10px,-14px) rotate(5deg) scale(1.1)}
+    50%{transform:translate(-5px,-24px) rotate(-3deg) scale(.95)}
+    75%{transform:translate(-12px,-8px) rotate(4deg) scale(1.05)}
+  }
+  .header{
+    position:sticky;top:0;z-index:100;
+    background:linear-gradient(180deg,rgba(255,243,224,.95) 60%,rgba(255,243,224,0) 100%);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    padding:14px 14px 22px;display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:6px;
+  }
+  .header h1{font-size:1.35rem;font-weight:800;color:#e84393;text-shadow:2px 2px 0 rgba(255,107,138,.12)}
+  .header-actions{display:flex;gap:6px}
+  .btn{
+    border:2px solid #e84393;background:rgba(255,255,255,.7);color:#e84393;
+    padding:7px 13px;border-radius:18px;font-size:.82rem;font-weight:700;
+    cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;
+  }
+  .btn:active{background:#fce4ec;transform:scale(.94)}
+  .btn-primary{background:#e84393;color:#fff;border-color:#e84393}
+  .btn-primary:active{background:#d63384}
+  .main{position:relative;z-index:1;padding:0 10px 50px}
+  .stats{
+    text-align:center;margin-bottom:16px;font-size:.8rem;color:#e84393;
+    background:rgba(255,255,255,.5);display:inline-block;padding:5px 15px;
+    border-radius:16px;position:relative;left:50%;transform:translateX(-50%);font-weight:600;
+  }
+  .stats span{color:#6c5ce7}
+  .limit-banner{
+    text-align:center;background:rgba(255,107,138,.1);border:2px dashed #ff6b8a;
+    border-radius:14px;padding:9px 14px;margin-bottom:16px;max-width:400px;
+    margin-left:auto;margin-right:auto;font-size:.82rem;color:#e84393;
+    animation:fadeIn .4s ease;font-weight:600;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  .empty-state{text-align:center;padding:70px 20px;color:#e84393;opacity:.5}
+  .empty-state .icon{font-size:3.5rem;margin-bottom:10px}
+  .empty-state p{font-size:.95rem;line-height:1.8}
+  .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:700px;margin:0 auto}
+  .card-scene{perspective:800px;width:var(--card-w);height:var(--card-h)}
+  .card-scene.locked{opacity:.4;filter:grayscale(.5);pointer-events:none}
+  .card{
+    width:100%;height:100%;position:relative;
+    transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer;
+  }
+  .card.flipped{transform:rotateY(180deg)}
+  .card:not(.flipped):active{transform:scale(.94)}
+  .card-face{
+    position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;
   }
 
-  body {
-    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-    background: linear-gradient(135deg, #fce4ec 0%, #fff3e0 30%, #e8f5e9 60%, #e3f2fd 100%);
-    background-attachment: fixed;
-    min-height: 100vh;
-    min-height: 100dvh;
-    color: #5d4037;
-    overflow-x: hidden;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    -webkit-user-select: none;
+  /* 背面 - 懒加载占位 + 真实图片 */
+  .card-back{
+    border:3px solid rgba(255,255,255,.7);box-shadow:0 5px 20px rgba(232,67,147,.15);
+    background-color:#f0e0d0;background-size:cover;background-position:center top;background-repeat:no-repeat;
+    position:relative;
+  }
+  .card-back.loaded{transition:opacity .4s ease}
+  /* 占位骨架 */
+  .card-back .skeleton{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;z-index:1;
+    background:linear-gradient(135deg,#fce4ec,#fff3e0,#fce4ec);
+    background-size:200% 200%;animation:shimmer 1.8s ease-in-out infinite;
+    transition:opacity .35s ease;
+  }
+  .card-back.loaded .skeleton{opacity:0;pointer-events:none}
+  .card-back .skeleton-emoji{font-size:2.5rem;animation:bounce 1s ease-in-out infinite}
+  .card-back .skeleton-text{
+    font-size:.6rem;color:#e84393;font-weight:600;margin-top:4px;opacity:.7;
+  }
+  @keyframes shimmer{
+    0%{background-position:200% 0}100%{background-position:-200% 0}
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}
+  }
+  .card-back .num-tag{
+    position:absolute;bottom:6px;right:8px;z-index:2;
+    background:rgba(232,67,147,.85);color:#fff;font-size:.6rem;
+    font-weight:700;padding:2px 7px;border-radius:8px;
   }
 
-  .bg-float {
-    position: fixed; pointer-events: none; z-index: 0;
-    animation: floatAround 12s ease-in-out infinite; opacity: 0.5; font-size: 1.6rem;
+  /* 正面 */
+  .card-front{
+    background:linear-gradient(145deg,#fffdf7 0%,#fff8e7 100%);
+    border:3px solid #ff6b8a;transform:rotateY(180deg);
+    color:#5d4037;padding:14px 10px;flex-direction:column;text-align:center;
+    gap:6px;box-shadow:0 5px 20px rgba(232,67,147,.18);
   }
-  .bg-float:nth-child(1) { top: 6%; left: 4%; animation-delay: 0s; font-size: 2rem; }
-  .bg-float:nth-child(2) { top: 12%; right: 7%; animation-delay: -3s; font-size: 1.4rem; }
-  .bg-float:nth-child(3) { top: 55%; left: 6%; animation-delay: -6s; font-size: 1.8rem; }
-  .bg-float:nth-child(4) { top: 72%; right: 4%; animation-delay: -9s; font-size: 1.5rem; }
-  .bg-float:nth-child(5) { top: 38%; left: 82%; animation-delay: -4s; font-size: 1.3rem; }
-  .bg-float:nth-child(6) { top: 82%; left: 35%; animation-delay: -7s; font-size: 1.7rem; }
-  .bg-float:nth-child(7) { top: 28%; left: 12%; animation-delay: -2s; font-size: 1.2rem; }
-  .bg-float:nth-child(8) { top: 48%; right: 10%; animation-delay: -5s; font-size: 1.6rem; }
-
-  @keyframes floatAround {
-    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-    25% { transform: translate(10px, -14px) rotate(5deg) scale(1.1); }
-    50% { transform: translate(-5px, -24px) rotate(-3deg) scale(0.95); }
-    75% { transform: translate(-12px, -8px) rotate(4deg) scale(1.05); }
+  .card-front .seal{
+    display:inline-block;border:2px solid #e84393;color:#e84393;
+    padding:2px 10px;border-radius:10px;font-size:.68rem;
+    font-weight:700;letter-spacing:.06em;transform:rotate(-2deg);
+  }
+  .card-front .content{
+    font-size:.9rem;font-weight:600;line-height:1.45;word-break:break-all;
+    flex:1;display:flex;align-items:center;color:#4a2c2a;
   }
 
-  .header {
-    position: sticky; top: 0; z-index: 100;
-    background: linear-gradient(180deg, rgba(255,243,224,0.95) 60%, rgba(255,243,224,0) 100%);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 14px 14px 22px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 6px;
+  /* 设置面板 */
+  .overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;
+    display:flex;align-items:flex-end;justify-content:center;transition:opacity .3s;
   }
-  .header h1 { font-size: 1.35rem; font-weight: 800; color: #e84393; text-shadow: 2px 2px 0 rgba(255,107,138,0.12); }
-  .header-actions { display: flex; gap: 6px; }
-
-  .btn {
-    border: 2px solid #e84393; background: rgba(255,255,255,0.7); color: #e84393;
-    padding: 7px 13px; border-radius: 18px; font-size: 0.82rem; font-weight: 700;
-    cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;
+  .overlay.hidden{opacity:0;pointer-events:none}
+  .settings-panel{
+    background:#fffdf7;border-radius:22px 22px 0 0;width:100%;
+    max-width:500px;max-height:85vh;max-height:85dvh;
+    overflow-y:auto;padding:26px 18px 34px;
+    animation:slideUp .35s ease;box-shadow:0 -4px 28px rgba(0,0,0,.08);
   }
-  .btn:active { background: #fce4ec; transform: scale(0.94); }
-  .btn-primary { background: #e84393; color: #fff; border-color: #e84393; }
-  .btn-primary:active { background: #d63384; }
-
-  .main { position: relative; z-index: 1; padding: 0 10px 50px; }
-
-  .stats {
-    text-align: center; margin-bottom: 16px; font-size: 0.8rem; color: #e84393;
-    background: rgba(255,255,255,0.5); display: inline-block; padding: 5px 15px;
-    border-radius: 16px; position: relative; left: 50%; transform: translateX(-50%); font-weight: 600;
+  @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+  .settings-panel h2{font-size:1.15rem;color:#e84393;margin-bottom:18px;text-align:center;font-weight:800}
+  .form-group{margin-bottom:12px}
+  .form-group label{display:block;font-size:.82rem;color:#e84393;margin-bottom:5px;font-weight:700}
+  .form-group input[type=range]{width:100%;accent-color:#e84393;height:5px}
+  .form-group .range-val{text-align:center;color:#6c5ce7;font-size:1.05rem;font-weight:700}
+  .max-flips-setting{margin-top:12px;padding-top:12px;border-top:2px dashed #fce4ec}
+  .max-flips-setting select{
+    width:100%;padding:9px 12px;border:2px solid #fce4ec;border-radius:11px;
+    background:#fff;color:#5d4037;font-size:.85rem;font-family:inherit;
+    outline:none;cursor:pointer;font-weight:600;appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 stroke=%27%23e84393%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 12px center;
   }
-  .stats span { color: #6c5ce7; }
-
-  .limit-banner {
-    text-align: center; background: rgba(255,107,138,0.1); border: 2px dashed #ff6b8a;
-    border-radius: 14px; padding: 9px 14px; margin-bottom: 16px; max-width: 400px;
-    margin-left: auto; margin-right: auto; font-size: 0.82rem; color: #e84393;
-    animation: fadeIn 0.4s ease; font-weight: 600;
+  .card-editor{border:2px solid #fce4ec;border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fffbfc}
+  .card-editor .card-label{font-size:.78rem;color:#e84393;margin-bottom:5px;font-weight:700}
+  .card-editor input{
+    width:100%;padding:9px 12px;border:2px solid #fce4ec;border-radius:10px;
+    background:#fff;color:#5d4037;font-size:.85rem;font-family:inherit;outline:none;font-weight:500;
+    transition:border-color .2s;
   }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
-
-  .empty-state { text-align: center; padding: 70px 20px; color: #e84393; opacity: 0.5; }
-  .empty-state .icon { font-size: 3.5rem; margin-bottom: 10px; }
-  .empty-state p { font-size: 0.95rem; line-height: 1.8; }
-
-  .card-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; max-width: 700px; margin: 0 auto; }
-
-  .card-scene { perspective: 800px; width: var(--card-w); height: var(--card-h); }
-  .card-scene.locked { opacity: 0.4; filter: grayscale(0.5); pointer-events: none; }
-
-  .card {
-    width: 100%; height: 100%; position: relative;
-    transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;
+  .card-editor input:focus{border-color:#ff6b8a}
+  .settings-actions{display:flex;gap:8px;margin-top:18px}
+  .settings-actions .btn{flex:1;text-align:center}
+  .toast{
+    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    background:rgba(232,67,147,.9);color:#fff;
+    padding:13px 26px;border-radius:22px;font-size:.9rem;font-weight:700;
+    z-index:999;pointer-events:none;transition:opacity .3s;
+    text-align:center;white-space:nowrap;box-shadow:0 4px 18px rgba(232,67,147,.25);
   }
-  .card.flipped { transform: rotateY(180deg); }
-  .card:not(.flipped):active { transform: scale(0.94); }
-
-  .card-face {
-    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    border-radius: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  .toast.hidden{opacity:0}
+  @media(max-width:380px){
+    :root{--card-w:110px;--card-h:145px}
+    .card-grid{gap:8px}
+    .header h1{font-size:1.15rem}
   }
-
-  .card-back {
-    border: 3px solid rgba(255,255,255,0.7); box-shadow: 0 5px 20px rgba(232,67,147,0.15);
-    background-color: #f0e0d0; background-size: cover; background-position: center top; background-repeat: no-repeat;
-  }
-  .card-back .num-tag {
-    position: absolute; bottom: 6px; right: 8px;
-    background: rgba(232,67,147,0.85); color: #fff; font-size: 0.6rem;
-    font-weight: 700; padding: 2px 7px; border-radius: 8px; z-index: 2;
-  }
-
-  .card-front {
-    background: linear-gradient(145deg, #fffdf7 0%, #fff8e7 100%);
-    border: 3px solid #ff6b8a; transform: rotateY(180deg);
-    color: #5d4037; padding: 14px 10px; flex-direction: column; text-align: center;
-    gap: 6px; box-shadow: 0 5px 20px rgba(232,67,147,0.18);
-  }
-  .card-front .seal {
-    display: inline-block; border: 2px solid #e84393; color: #e84393;
-    padding: 2px 10px; border-radius: 10px; font-size: 0.68rem;
-    font-weight: 700; letter-spacing: 0.06em; transform: rotate(-2deg);
-  }
-  .card-front .content {
-    font-size: 0.9rem; font-weight: 600; line-height: 1.45; word-break: break-all;
-    flex: 1; display: flex; align-items: center; color: #4a2c2a;
-  }
-
-  .overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200;
-    display: flex; align-items: flex-end; justify-content: center; transition: opacity 0.3s;
-  }
-  .overlay.hidden { opacity: 0; pointer-events: none; }
-
-  .settings-panel {
-    background: #fffdf7; border-radius: 22px 22px 0 0; width: 100%;
-    max-width: 500px; max-height: 85vh; max-height: 85dvh;
-    overflow-y: auto; padding: 26px 18px 34px;
-    animation: slideUp 0.35s ease; box-shadow: 0 -4px 28px rgba(0,0,0,0.08);
-  }
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-
-  .settings-panel h2 { font-size: 1.15rem; color: #e84393; margin-bottom: 18px; text-align: center; font-weight: 800; }
-  .form-group { margin-bottom: 12px; }
-  .form-group label { display: block; font-size: 0.82rem; color: #e84393; margin-bottom: 5px; font-weight: 700; }
-  .form-group input[type="range"] { width: 100%; accent-color: #e84393; height: 5px; }
-  .form-group .range-val { text-align: center; color: #6c5ce7; font-size: 1.05rem; font-weight: 700; }
-
-  .max-flips-setting { margin-top: 12px; padding-top: 12px; border-top: 2px dashed #fce4ec; }
-  .max-flips-setting select {
-    width: 100%; padding: 9px 12px; border: 2px solid #fce4ec; border-radius: 11px;
-    background: #fff; color: #5d4037; font-size: 0.85rem; font-family: inherit;
-    outline: none; cursor: pointer; font-weight: 600;
-    appearance: none; -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 stroke=%27%23e84393%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 12px center;
-  }
-
-  .card-editor { border: 2px solid #fce4ec; border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; background: #fffbfc; }
-  .card-editor .card-label { font-size: 0.78rem; color: #e84393; margin-bottom: 5px; font-weight: 700; }
-  .card-editor input {
-    width: 100%; padding: 9px 12px; border: 2px solid #fce4ec; border-radius: 10px;
-    background: #fff; color: #5d4037; font-size: 0.85rem; font-family: inherit; outline: none; font-weight: 500;
-    transition: border-color 0.2s;
-  }
-  .card-editor input:focus { border-color: #ff6b8a; }
-
-  .settings-actions { display: flex; gap: 8px; margin-top: 18px; }
-  .settings-actions .btn { flex: 1; text-align: center; }
-
-  .toast {
-    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: rgba(232,67,147,0.9); color: #fff;
-    padding: 13px 26px; border-radius: 22px; font-size: 0.9rem; font-weight: 700;
-    z-index: 999; pointer-events: none; transition: opacity 0.3s;
-    text-align: center; white-space: nowrap; box-shadow: 0 4px 18px rgba(232,67,147,0.25);
-  }
-  .toast.hidden { opacity: 0; }
-
-  @media (max-width: 380px) {
-    :root { --card-w: 110px; --card-h: 145px; }
-    .card-grid { gap: 8px; }
-    .header h1 { font-size: 1.15rem; }
-  }
-  @media (min-width: 500px) {
-    :root { --card-w: 150px; --card-h: 195px; }
-    .card-grid { gap: 18px; }
+  @media(min-width:500px){
+    :root{--card-w:150px;--card-h:195px}
+    .card-grid{gap:18px}
   }
 </style>
 </head>
 <body>
-  <div class="bg-float">🌸</div><div class="bg-float">⭐</div><div class="bg-float">💕</div><div class="bg-float">🍡</div>
-  <div class="bg-float">🎀</div><div class="bg-float">🌟</div><div class="bg-float">🫧</div><div class="bg-float">💫</div>
+<div class="bg-float">🌸</div><div class="bg-float">⭐</div><div class="bg-float">💕</div><div class="bg-float">🍡</div>
+<div class="bg-float">🎀</div><div class="bg-float">🌟</div><div class="bg-float">🫧</div><div class="bg-float">💫</div>
 
-  <header class="header">
-    <h1>🍡 翻牌子 · 蜡笔小新</h1>
-    <div class="header-actions">
-      <button class="btn" onclick="openSettings()">⚙ 设置</button>
-      <button class="btn" onclick="resetAll()">↺ 重翻</button>
+<header class="header">
+  <h1>🍡 翻牌子 · 蜡笔小新</h1>
+  <div class="header-actions">
+    <button class="btn" onclick="openSettings()">⚙ 设置</button>
+    <button class="btn" onclick="resetAll()">↺ 重翻</button>
+  </div>
+</header>
+
+<main class="main" id="main">
+  <div class="stats" id="stats"></div>
+  <div id="limitBanner"></div>
+  <div id="cardArea"></div>
+</main>
+
+<div class="overlay hidden" id="overlay" onclick="closeSettings(event)">
+  <div class="settings-panel" onclick="event.stopPropagation()">
+    <h2>⚙ 设置牌子</h2>
+    <div class="form-group">
+      <label>牌子数量</label>
+      <input type="range" min="2" max="20" value="8" id="cardCount" oninput="updateCountLabel()">
+      <div class="range-val" id="countLabel">8 块</div>
     </div>
-  </header>
-
-  <main class="main" id="main">
-    <div class="stats" id="stats"></div>
-    <div id="limitBanner"></div>
-    <div id="cardArea"></div>
-  </main>
-
-  <div class="overlay hidden" id="overlay" onclick="closeSettings(event)">
-    <div class="settings-panel" onclick="event.stopPropagation()">
-      <h2>⚙ 设置牌子</h2>
-      <div class="form-group">
-        <label>牌子数量</label>
-        <input type="range" min="2" max="20" value="8" id="cardCount" oninput="updateCountLabel()">
-        <div class="range-val" id="countLabel">8 块</div>
-      </div>
-      <div class="form-group max-flips-setting">
-        <label>最多可翻数量</label>
-        <select id="maxFlips">
-          <option value="1">1 块</option>
-          <option value="2" selected>2 块</option>
-          <option value="3">3 块</option>
-          <option value="5">5 块</option>
-          <option value="99">不限</option>
-        </select>
-      </div>
-      <div id="editorList"></div>
-      <div class="settings-actions">
-        <button class="btn" onclick="closeSettings()">取消</button>
-        <button class="btn btn-primary" onclick="saveSettings()">✅ 保存</button>
-      </div>
+    <div class="form-group max-flips-setting">
+      <label>最多可翻数量</label>
+      <select id="maxFlips">
+        <option value="1">1 块</option><option value="2" selected>2 块</option>
+        <option value="3">3 块</option><option value="5">5 块</option>
+        <option value="99">不限</option>
+      </select>
+    </div>
+    <div id="editorList"></div>
+    <div class="settings-actions">
+      <button class="btn" onclick="closeSettings()">取消</button>
+      <button class="btn btn-primary" onclick="saveSettings()">✅ 保存</button>
     </div>
   </div>
+</div>
 
-  <div class="toast hidden" id="toast"></div>
+<div class="toast hidden" id="toast"></div>
 
-  <script>
-  // ===== 164 张蜡笔小新图片（全部来自互联网，已验证均为蜡笔小新动漫）=====
-  var ALL_IMAGES = [
-    "https://safebooru.org/samples/826/sample_75fec3f2a9515e13496359a88044cd4e30308601.jpg",
+<script>
+var ALL_IMAGES = [
+  "https://safebooru.org/samples/826/sample_75fec3f2a9515e13496359a88044cd4e30308601.jpg",
     "https://safebooru.org/samples/826/sample_690513a6a002296bc9cb3f9116d1c4efca8bd104.jpg",
     "https://safebooru.org/samples/826/sample_53e7fd717098a071fc7e280b1c24e8c00a9919ba.jpg",
     "https://safebooru.org/samples/826/sample_2ae00c2465d2a25112d22beb179cad26f56054c0.jpg",
@@ -404,196 +394,255 @@
     "https://safebooru.org/images/622/00f47ab8225bb92891aa53bcabc27f2d4e591232.jpg",
     "https://safebooru.org/images/622/7f54223400354006a27ec1831a824fc646456869.jpg",
     "https://safebooru.org/images/212/d9c9234c3044634e85a7789abf95c7ccff7956b4.jpg"
-  ];
-  var TOTAL_IMAGES = ALL_IMAGES.length;
+];
+var TOTAL_IMAGES = ALL_IMAGES.length;
 
-  var STORAGE_KEY = "fanpaizi_v6_data";
-  var cards = [];
-  var flippedSet = new Set();
-  var maxFlips = 2;
-  var currentImageIndexes = [];
+var STORAGE_KEY = "fanpaizi_v7_data";
+var cards = [];
+var flippedSet = new Set();
+var maxFlips = 2;
+var currentImageIndexes = [];
+var loadedImages = {};   // 已加载过的图片缓存
+var observer = null;      // IntersectionObserver 实例
 
-  var defaultCards = [
-    "今晚洗碗 🍽️", "按摩 10 分钟 💆", "承包明天早餐 🥐", "夸夸对方三句话 💕",
-    "免唠叨券一张 🎫", "做一杯手冲咖啡 ☕", "周末决定权归你 📅", "无条件道歉一次 🙇"
-  ];
+var defaultCards = [
+  "今晚洗碗 🍽️","按摩 10 分钟 💆","承包明天早餐 🥐","夸夸对方三句话 💕",
+  "免唠叨券一张 🎫","做一杯手冲咖啡 ☕","周末决定权归你 📅","无条件道歉一次 🙇"
+];
 
-  function shuffle(arr) {
-    var a = arr.slice();
-    for (var i = a.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+function shuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}
+  return a;
+}
+
+function pickRandomImages(count,previous){
+  var all=[];for(var i=0;i<TOTAL_IMAGES;i++)all.push(i);
+  var shuffled=shuffle(all);
+  if(previous&&previous.length>0&&count<=TOTAL_IMAGES-previous.length){
+    var prevSet={};
+    for(var p=0;p<previous.length;p++)prevSet[previous[p]]=true;
+    var fresh=[],reused=[];
+    for(var s=0;s<shuffled.length;s++){
+      if(prevSet[shuffled[s]])reused.push(shuffled[s]);else fresh.push(shuffled[s]);
     }
-    return a;
+    var picked=fresh.slice(0,count);
+    if(picked.length<count)picked=picked.concat(reused.slice(0,count-picked.length));
+    return picked;
   }
+  return shuffled.slice(0,count);
+}
 
-  function pickRandomImages(count, previous) {
-    var all = [];
-    for (var i = 0; i < TOTAL_IMAGES; i++) all.push(i);
-    var shuffled = shuffle(all);
-    if (previous && previous.length > 0 && count <= TOTAL_IMAGES - previous.length) {
-      var prevSet = {};
-      for (var p = 0; p < previous.length; p++) prevSet[previous[p]] = true;
-      var fresh = [], reused = [];
-      for (var s = 0; s < shuffled.length; s++) {
-        if (prevSet[shuffled[s]]) reused.push(shuffled[s]);
-        else fresh.push(shuffled[s]);
+function loadData(){
+  try{
+    var raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      var data=JSON.parse(raw);
+      cards=data.cards||[];
+      flippedSet=new Set(data.flipped||[]);
+      maxFlips=data.maxFlips!=null?data.maxFlips:2;
+      currentImageIndexes=data.imgIndexes||[];
+      while(currentImageIndexes.length<cards.length){
+        var used={};
+        for(var u=0;u<currentImageIndexes.length;u++)used[currentImageIndexes[u]]=true;
+        var found=false;
+        for(var k=0;k<TOTAL_IMAGES;k++){if(!used[k]){currentImageIndexes.push(k);found=true;break}}
+        if(!found)currentImageIndexes.push(0);
       }
-      var picked = fresh.slice(0, count);
-      if (picked.length < count) picked = picked.concat(reused.slice(0, count - picked.length));
-      return picked;
+      return;
     }
-    return shuffled.slice(0, count);
-  }
+  }catch(e){}
+  cards=defaultCards.slice();flippedSet=new Set();maxFlips=2;
+  currentImageIndexes=pickRandomImages(cards.length,[]);
+}
 
-  function loadData() {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        var data = JSON.parse(raw);
-        cards = data.cards || [];
-        flippedSet = new Set(data.flipped || []);
-        maxFlips = data.maxFlips != null ? data.maxFlips : 2;
-        currentImageIndexes = data.imgIndexes || [];
-        while (currentImageIndexes.length < cards.length) {
-          var used = {};
-          for (var u = 0; u < currentImageIndexes.length; u++) used[currentImageIndexes[u]] = true;
-          var found = false;
-          for (var k = 0; k < TOTAL_IMAGES; k++) {
-            if (!used[k]) { currentImageIndexes.push(k); found = true; break; }
-          }
-          if (!found) currentImageIndexes.push(0);
+function saveData(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify({
+    cards:cards,flipped:Array.from(flippedSet),maxFlips:maxFlips,imgIndexes:currentImageIndexes
+  }));
+}
+
+function isLocked(){return maxFlips!==99&&flippedSet.size>=maxFlips}
+
+/* ===== 懒加载图片 ===== */
+function setupLazyLoader(){
+  // 销毁旧的 observer
+  if(observer){observer.disconnect();observer=null}
+  
+  var backEls = document.querySelectorAll('.card-back[data-src]');
+  if(backEls.length===0)return;
+  
+  // 优先加载前 4 张（首屏可见）
+  var firstBatch = Math.min(4, backEls.length);
+  for(var i=0;i<firstBatch;i++){
+    loadCardImage(backEls[i]);
+  }
+  
+  // 其余的用 IntersectionObserver
+  if('IntersectionObserver' in window){
+    observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          loadCardImage(entry.target);
+          observer.unobserve(entry.target);
         }
-        return;
-      }
-    } catch(e) {}
-    cards = defaultCards.slice();
-    flippedSet = new Set();
-    maxFlips = 2;
-    currentImageIndexes = pickRandomImages(cards.length, []);
-  }
-
-  function saveData() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      cards: cards, flipped: Array.from(flippedSet), maxFlips: maxFlips, imgIndexes: currentImageIndexes
-    }));
-  }
-
-  function isLocked() { return maxFlips !== 99 && flippedSet.size >= maxFlips; }
-
-  function render() {
-    var cardArea = document.getElementById("cardArea");
-    var stats = document.getElementById("stats");
-    var limitBanner = document.getElementById("limitBanner");
-
-    if (cards.length === 0) {
-      cardArea.innerHTML = '<div class="empty-state"><div class="icon">🖍️</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>';
-      stats.innerHTML = ""; limitBanner.innerHTML = ""; return;
+      });
+    },{rootMargin:'300px'});
+    
+    for(var j=firstBatch;j<backEls.length;j++){
+      observer.observe(backEls[j]);
     }
-
-    var flippedCount = flippedSet.size;
-    var locked = isLocked();
-    var maxLabel = maxFlips === 99 ? "不限" : String(maxFlips);
-    stats.innerHTML = "已翻 <span>" + flippedCount + "</span> / " + cards.length + " 块 · 图库 <span>" + TOTAL_IMAGES + "</span> 张 （最多" + maxLabel + "块）";
-
-    if (locked) {
-      limitBanner.innerHTML = '<div class="limit-banner">🔒 已翻满 ' + maxFlips + ' 块，其余牌子已锁定 · 点击「↺ 重翻」可重新来过</div>';
-    } else { limitBanner.innerHTML = ""; }
-
-    var html = '<div class="card-grid">';
-    for (var i = 0; i < cards.length; i++) {
-      var isFlipped = flippedSet.has(i);
-      var sceneLocked = locked && !isFlipped;
-      var imgIdx = currentImageIndexes[i] || 0;
-      var imgUrl = ALL_IMAGES[imgIdx];
-      var div = document.createElement("div"); div.textContent = cards[i]; var safeContent = div.innerHTML;
-
-      html += '<div class="card-scene' + (sceneLocked ? " locked" : "") + '" onclick="' + (sceneLocked ? "" : "flipCard(" + i + ")") + '">';
-      html += '<div class="card' + (isFlipped ? " flipped" : "") + '" id="card-' + i + '">';
-      html += '<div class="card-face card-back" style="background-image:url(\'' + imgUrl + '\')">';
-      html += '<span class="num-tag">第' + (i + 1) + '号</span>';
-      html += '</div>';
-      html += '<div class="card-face card-front">';
-      html += '<span class="seal">✧ 御旨 ✧</span>';
-      html += '<span class="content">' + safeContent + '</span>';
-      html += '</div></div></div>';
+  } else {
+    // 降级方案：延迟批量加载
+    var remaining = Array.prototype.slice.call(backEls, firstBatch);
+    var idx = 0;
+    function loadNext(){
+      if(idx>=remaining.length)return;
+      loadCardImage(remaining[idx]);idx++;
+      setTimeout(loadNext,80);
     }
-    html += '</div>';
-    cardArea.innerHTML = html;
+    setTimeout(loadNext,300);
   }
+}
 
-  function flipCard(index) {
-    if (isLocked()) { showToast("⚠ 已翻满 " + maxFlips + " 块，不能再翻了"); return; }
-    var el = document.getElementById("card-" + index);
-    if (!el || flippedSet.has(index)) return;
-    flippedSet.add(index); el.classList.add("flipped");
-    saveData(); render();
-    if (navigator.vibrate) navigator.vibrate(10);
-  }
+function loadCardImage(el){
+  var src = el.getAttribute('data-src');
+  if(!src||loadedImages[src])return;
+  
+  var img = new Image();
+  img.onload = function(){
+    el.style.backgroundImage = 'url(' + src + ')';
+    el.classList.add('loaded');
+    loadedImages[src]=true;
+  };
+  img.onerror = function(){
+    // 加载失败保持骨架
+    el.classList.add('loaded');
+  };
+  img.src = src;
+}
 
-  function resetAll() {
-    if (cards.length === 0) return;
-    flippedSet.clear();
-    currentImageIndexes = pickRandomImages(cards.length, currentImageIndexes);
-    saveData(); render();
-    showToast("已重置，图片已刷新 🎴");
+/* ===== 渲染 ===== */
+function render(){
+  var cardArea=document.getElementById("cardArea");
+  var stats=document.getElementById("stats");
+  var limitBanner=document.getElementById("limitBanner");
+  
+  if(cards.length===0){
+    cardArea.innerHTML='<div class="empty-state"><div class="icon">🖍️</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>';
+    stats.innerHTML="";limitBanner.innerHTML="";return;
   }
+  
+  var flippedCount=flippedSet.size;
+  var locked=isLocked();
+  var maxLabel=maxFlips===99?"不限":String(maxFlips);
+  stats.innerHTML='已翻 <span>'+flippedCount+'</span> / '+cards.length+' 块 · 图库 <span>'+TOTAL_IMAGES+'</span> 张 （最多'+maxLabel+'块）';
+  
+  if(locked){
+    limitBanner.innerHTML='<div class="limit-banner">🔒 已翻满 '+maxFlips+' 块，其余牌子已锁定 · 点击「↺ 重翻」可重新来过</div>';
+  }else{limitBanner.innerHTML="";}
+  
+  var html='<div class="card-grid">';
+  for(var i=0;i<cards.length;i++){
+    var isFlipped=flippedSet.has(i);
+    var sceneLocked=locked&&!isFlipped;
+    var imgIdx=currentImageIndexes[i]||0;
+    var imgUrl=ALL_IMAGES[imgIdx];
+    var div=document.createElement("div");div.textContent=cards[i];var safeContent=div.innerHTML;
+    
+    html+='<div class="card-scene'+(sceneLocked?" locked":"")+'" onclick="'+(sceneLocked?"":"flipCard("+i+")")+'">';
+    html+='<div class="card'+(isFlipped?" flipped":"")+'" id="card-'+i+'">';
+    // 背面：用 data-src 延迟加载，初始显示骨架
+    html+='<div class="card-face card-back'+(loadedImages[imgUrl]?" loaded":"")+'" data-src="'+imgUrl+'"'+(loadedImages[imgUrl]?' style="background-image:url(\''+imgUrl+'\')"':'')+'>';
+    html+='<div class="skeleton"><span class="skeleton-emoji">🖍️</span><span class="skeleton-text">小新加载中…</span></div>';
+    html+='<span class="num-tag">第'+(i+1)+'号</span>';
+    html+='</div>';
+    // 正面
+    html+='<div class="card-face card-front">';
+    html+='<span class="seal">✧ 御旨 ✧</span>';
+    html+='<span class="content">'+safeContent+'</span>';
+    html+='</div></div></div>';
+  }
+  html+='</div>';
+  cardArea.innerHTML=html;
+  
+  // 设置懒加载
+  setupLazyLoader();
+}
 
-  function openSettings() {
-    document.getElementById("overlay").classList.remove("hidden");
-    document.getElementById("cardCount").value = cards.length || 8;
-    document.getElementById("maxFlips").value = String(maxFlips);
-    updateCountLabel(); renderEditors();
-  }
-  function closeSettings(e) {
-    if (e && e.target !== document.getElementById("overlay")) return;
-    document.getElementById("overlay").classList.add("hidden");
-  }
-  function updateCountLabel() {
-    var v = document.getElementById("cardCount").value;
-    document.getElementById("countLabel").textContent = v + " 块";
-    renderEditors();
-  }
-  function renderEditors() {
-    var count = parseInt(document.getElementById("cardCount").value);
-    var list = document.getElementById("editorList"), html = "";
-    for (var i = 0; i < count; i++) {
-      var val = cards[i] || "";
-      var div = document.createElement("div"); div.textContent = val;
-      html += '<div class="card-editor"><div class="card-label">🖍️ 第 ' + (i + 1) + ' 号牌子</div>';
-      html += '<input type="text" id="edit-' + i + '" value="' + div.innerHTML + '" placeholder="输入内容…" maxlength="50"></div>';
-    }
-    list.innerHTML = html;
-  }
-  function saveSettings() {
-    var count = parseInt(document.getElementById("cardCount").value);
-    var newMaxFlips = parseInt(document.getElementById("maxFlips").value);
-    var newCards = [];
-    for (var i = 0; i < count; i++) {
-      var input = document.getElementById("edit-" + i);
-      var val = (input ? input.value : "").trim();
-      newCards.push(val || ("牌子 " + (i + 1)));
-    }
-    var oldLen = cards.length; cards = newCards; maxFlips = newMaxFlips;
-    if (cards.length !== oldLen) {
-      var used = {};
-      for (var u = 0; u < currentImageIndexes.length; u++) used[currentImageIndexes[u]] = true;
-      var prevArr = []; for (var k in used) { if (used[k]) prevArr.push(parseInt(k)); }
-      currentImageIndexes = pickRandomImages(cards.length, prevArr);
-    }
-    var arr = []; flippedSet.forEach(function(v) { if (v < cards.length) arr.push(v); });
-    flippedSet = new Set(arr);
-    saveData(); document.getElementById("overlay").classList.add("hidden"); render();
-    showToast("设置已保存 ✅");
-  }
+function flipCard(index){
+  if(isLocked()){showToast("⚠ 已翻满 "+maxFlips+" 块，不能再翻了");return}
+  var el=document.getElementById("card-"+index);
+  if(!el||flippedSet.has(index))return;
+  flippedSet.add(index);el.classList.add("flipped");
+  saveData();render();
+  if(navigator.vibrate)navigator.vibrate(10);
+}
 
-  var toastTimer;
-  function showToast(msg) {
-    var el = document.getElementById("toast"); el.textContent = msg; el.classList.remove("hidden");
-    clearTimeout(toastTimer); toastTimer = setTimeout(function() { el.classList.add("hidden"); }, 1800);
-  }
+function resetAll(){
+  if(cards.length===0)return;
+  flippedSet.clear();
+  currentImageIndexes=pickRandomImages(cards.length,currentImageIndexes);
+  // 重置时清除图片缓存，确保新图片也能懒加载
+  loadedImages={};
+  saveData();render();
+  showToast("已重置，图片已刷新 🎴");
+}
 
-  loadData(); render();
-  </script>
+function openSettings(){
+  document.getElementById("overlay").classList.remove("hidden");
+  document.getElementById("cardCount").value=cards.length||8;
+  document.getElementById("maxFlips").value=String(maxFlips);
+  updateCountLabel();renderEditors();
+}
+function closeSettings(e){
+  if(e&&e.target!==document.getElementById("overlay"))return;
+  document.getElementById("overlay").classList.add("hidden");
+}
+function updateCountLabel(){
+  var v=document.getElementById("cardCount").value;
+  document.getElementById("countLabel").textContent=v+" 块";renderEditors();
+}
+function renderEditors(){
+  var count=parseInt(document.getElementById("cardCount").value);
+  var list=document.getElementById("editorList"),html="";
+  for(var i=0;i<count;i++){
+    var val=cards[i]||"";
+    var div=document.createElement("div");div.textContent=val;
+    html+='<div class="card-editor"><div class="card-label">🖍️ 第 '+(i+1)+' 号牌子</div>';
+    html+='<input type="text" id="edit-'+i+'" value="'+div.innerHTML+'" placeholder="输入内容…" maxlength="50"></div>';
+  }
+  list.innerHTML=html;
+}
+function saveSettings(){
+  var count=parseInt(document.getElementById("cardCount").value);
+  var newMaxFlips=parseInt(document.getElementById("maxFlips").value);
+  var newCards=[];
+  for(var i=0;i<count;i++){
+    var input=document.getElementById("edit-"+i);
+    var val=(input?input.value:"").trim();
+    newCards.push(val||("牌子 "+(i+1)));
+  }
+  var oldLen=cards.length;cards=newCards;maxFlips=newMaxFlips;
+  if(cards.length!==oldLen){
+    var used={};
+    for(var u=0;u<currentImageIndexes.length;u++)used[currentImageIndexes[u]]=true;
+    var prevArr=[];for(var k in used){if(used[k])prevArr.push(parseInt(k));}
+    currentImageIndexes=pickRandomImages(cards.length,prevArr);
+  }
+  var arr=[];flippedSet.forEach(function(v){if(v<cards.length)arr.push(v)});
+  flippedSet=new Set(arr);
+  saveData();document.getElementById("overlay").classList.add("hidden");render();
+  showToast("设置已保存 ✅");
+}
+
+var toastTimer;
+function showToast(msg){
+  var el=document.getElementById("toast");el.textContent=msg;el.classList.remove("hidden");
+  clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.add("hidden")},1800);
+}
+
+loadData();render();
+</script>
 </body>
 </html>
