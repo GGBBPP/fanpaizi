@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>翻牌子</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #1a0a0a;
+    --card-w: 140px;
+    --card-h: 180px;
+    --gold: #c9a84c;
+    --gold-light: #e8d48b;
+    --red: #8b1a1a;
+    --red-dark: #4a0a0a;
+    --cream: #f5f0e8;
+  }
+
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    min-height: 100dvh;
+    color: var(--cream);
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(139,26,26,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(139,26,26,0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, rgba(26,10,10,0.98) 60%, rgba(26,10,10,0) 100%);
+    padding: 16px 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(201,168,76,0.3);
+  }
+  .header-actions { display: flex; gap: 10px; }
+
+  .btn {
+    border: 1px solid var(--gold);
+    background: rgba(201,168,76,0.08);
+    color: var(--gold);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .btn:active { background: rgba(201,168,76,0.2); transform: scale(0.96); }
+  .btn-primary { background: var(--gold); color: var(--red-dark); font-weight: 600; border-color: var(--gold); }
+  .btn-primary:active { background: var(--gold-light); }
+
+  .main {
+    position: relative;
+    z-index: 1;
+    padding: 0 16px 40px;
+  }
+
+  .stats {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 0.85rem;
+    color: rgba(201,168,76,0.6);
+    letter-spacing: 0.04em;
+  }
+  .stats span { color: var(--gold-light); font-weight: 600; }
+
+  .limit-banner {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(139,26,26,0.1));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: rgba(201,168,76,0.4);
+  }
+  .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+  .empty-state p { font-size: 1rem; line-height: 1.8; }
+
+  .card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .card-scene {
+    perspective: 800px;
+    width: var(--card-w);
+    height: var(--card-h);
+  }
+
+  .card-scene.locked {
+    opacity: 0.35;
+    filter: grayscale(0.5);
+    pointer-events: none;
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .card-back {
+    background: linear-gradient(145deg, #6b1515 0%, #4a0a0a 40%, #3a0606 100%);
+    border: 2px solid var(--gold);
+    box-shadow:
+      0 4px 20px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(201,168,76,0.15);
+  }
+  .card-back::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+  .card-back-inner {
+    text-align: center;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+  .card-back-inner .dragon {
+    font-size: 2.2rem;
+    display: block;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .card-back-inner .num {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .card-front {
+    background: linear-gradient(145deg, #fdf6e8 0%, #f5e6c8 100%);
+    border: 2px solid var(--gold);
+    transform: rotateY(180deg);
+    color: #3a1a0a;
+    padding: 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.2);
+  }
+  .card-front .title {
+    font-size: 0.75rem;
+    color: var(--red);
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .card-front .content {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.5;
+    word-break: break-all;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: opacity 0.3s;
+  }
+  .overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .settings-panel {
+    background: #1e1010;
+    border-top: 2px solid var(--gold);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 500px;
+    max-height: 85vh;
+    max-height: 85dvh;
+    overflow-y: auto;
+    padding: 24px 20px 36px;
+    animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .settings-panel h2 {
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(201,168,76,0.8);
+    margin-bottom: 6px;
+  }
+  .form-group input[type="range"] {
+    width: 100%;
+    accent-color: var(--gold);
+    height: 6px;
+  }
+  .form-group .range-val {
+    text-align: center;
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .card-editor {
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: rgba(201,168,76,0.03);
+  }
+  .card-editor .card-label {
+    font-size: 0.8rem;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .card-editor input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px;
+    background: rgba(0,0,0,0.3);
+    color: var(--cream);
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .card-editor input:focus { border-color: var(--gold); }
+
+  .settings-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .settings-actions .btn { flex: 1; text-align: center; }
+
+  .max-flips-setting {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .max-flips-setting label {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(201,168,76,0.8);
+    margin-bottom: 6px;
+  }
+  .max-flips-setting select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px;
+    background: rgba(0,0,0,0.3);
+    color: var(--cream);
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 stroke=%27%23c9a84c%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+  }
+
+  .toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.85);
+    color: var(--gold-light);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .toast.hidden { opacity: 0; }
+
+  @media (max-width: 380px) {
+    :root { --card-w: 120px; --card-h: 155px; }
+    .card-grid { gap: 10px; }
+    .header h1 { font-size: 1.25rem; }
+  }
+  @media (min-width: 500px) {
+    :root { --card-w: 150px; --card-h: 195px; }
+    .card-grid { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>🏮 翻牌子</h1>
+    <div class="header-actions">
+      <button class="btn" onclick="openSettings()">⚙ 设置</button>
+      <button class="btn" onclick="resetAll()">↺ 重翻</button>
+    </div>
+  </header>
+
+  <main class="main" id="main">
+    <div class="stats" id="stats"></div>
+    <div id="limitBanner"></div>
+    <div id="cardArea"></div>
+  </main>
+
+  <div class="overlay hidden" id="overlay" onclick="closeSettings(event)">
+    <div class="settings-panel" onclick="event.stopPropagation()">
+      <h2>⚙ 设置牌子</h2>
+      <div class="form-group">
+        <label>牌子数量</label>
+        <input type="range" min="2" max="20" value="8" id="cardCount" oninput="updateCountLabel()">
+        <div class="range-val" id="countLabel">8 块</div>
+      </div>
+      <div class="form-group max-flips-setting">
+        <label>最多可翻数量</label>
+        <select id="maxFlips">
+          <option value="1">1 块</option>
+          <option value="2" selected>2 块</option>
+          <option value="3">3 块</option>
+          <option value="5">5 块</option>
+          <option value="99">不限</option>
+        </select>
+      </div>
+      <div id="editorList"></div>
+      <div class="settings-actions">
+        <button class="btn" onclick="closeSettings()">取消</button>
+        <button class="btn btn-primary" onclick="saveSettings()">✅ 保存</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script>
+  var STORAGE_KEY = "fanpaizi_v2_data";
+  var cards = [];
+  var flippedSet = new Set();
+  var maxFlips = 2;
+
+  var defaultCards = [
+    "今晚洗碗 🍽️",
+    "按摩 10 分钟 💆",
+    "承包明天早餐 🥐",
+    "夸夸对方三句话 💕",
+    "免唠叨券一张 🎫",
+    "做一杯手冲咖啡 ☕",
+    "周末决定权归你 📅",
+    "无条件道歉一次 🙇"
+  ];
+
+  function loadData() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var data = JSON.parse(raw);
+        cards = data.cards || [];
+        flippedSet = new Set(data.flipped || []);
+        maxFlips = data.maxFlips != null ? data.maxFlips : 2;
+        return;
+      }
+    } catch(e) {}
+    cards = defaultCards.slice();
+    flippedSet = new Set();
+    maxFlips = 2;
+  }
+
+  function saveData() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      cards: cards,
+      flipped: Array.from(flippedSet),
+      maxFlips: maxFlips
+    }));
+  }
+
+  function isLocked() {
+    return maxFlips !== 99 && flippedSet.size >= maxFlips;
+  }
+
+  function render() {
+    var cardArea = document.getElementById("cardArea");
+    var stats = document.getElementById("stats");
+    var limitBanner = document.getElementById("limitBanner");
+
+    if (cards.length === 0) {
+      cardArea.innerHTML = "<div class=\"empty-state\"><div class=\"icon\">🎴</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>";
+      stats.innerHTML = "";
+      limitBanner.innerHTML = "";
+      return;
+    }
+
+    var flippedCount = flippedSet.size;
+    var locked = isLocked();
+    var maxLabel = maxFlips === 99 ? "不限" : String(maxFlips);
+    stats.innerHTML = "已翻 <span>" + flippedCount + "</span> / " + cards.length + " 块 （最多" + maxLabel + "块）";
+
+    if (locked) {
+      limitBanner.innerHTML = "<div class=\"limit-banner\">🔒 已翻满 " + maxFlips + " 块，其余牌子已锁定 · 点击「↺ 重翻」可重新来过</div>";
+    } else {
+      limitBanner.innerHTML = "";
+    }
+
+    var html = "<div class=\"card-grid\">";
+    for (var i = 0; i < cards.length; i++) {
+      var isFlipped = flippedSet.has(i);
+      var sceneLocked = locked && !isFlipped;
+      var div = document.createElement("div");
+      div.textContent = cards[i];
+      var safeContent = div.innerHTML;
+      html += "<div class=\"card-scene" + (sceneLocked ? " locked" : "") + "\" onclick=\"" + (sceneLocked ? "" : "flipCard(" + i + ")") + "\">";
+      html += "<div class=\"card" + (isFlipped ? " flipped" : "") + "\" id=\"card-" + i + "\">";
+      html += "<div class=\"card-face card-back\">";
+      html += "<div class=\"card-back-inner\">";
+      html += "<span class=\"dragon\">🐉</span>";
+      html += "<span class=\"num\">第 " + (i + 1) + " 号</span>";
+      html += "</div></div>";
+      html += "<div class=\"card-face card-front\">";
+      html += "<span class=\"title\">✧ 御旨 ✧</span>";
+      html += "<span class=\"content\">" + safeContent + "</span>";
+      html += "</div></div></div>";
+    }
+    html += "</div>";
+    cardArea.innerHTML = html;
+  }
+
+  function flipCard(index) {
+    if (isLocked()) {
+      showToast("⚠ 已翻满 " + maxFlips + " 块，不能再翻了");
+      return;
+    }
+    var el = document.getElementById("card-" + index);
+    if (!el || flippedSet.has(index)) return;
+
+    flippedSet.add(index);
+    el.classList.add("flipped");
+    saveData();
+    render();
+    if (navigator.vibrate) navigator.vibrate(10);
+  }
+
+  function resetAll() {
+    if (cards.length === 0) return;
+    flippedSet.clear();
+    saveData();
+    render();
+    showToast("已重置所有牌子 🔄");
+  }
+
+  function openSettings() {
+    document.getElementById("overlay").classList.remove("hidden");
+    document.getElementById("cardCount").value = cards.length || 8;
+    document.getElementById("maxFlips").value = String(maxFlips);
+    updateCountLabel();
+    renderEditors();
+  }
+
+  function closeSettings(e) {
+    if (e && e.target !== document.getElementById("overlay")) return;
+    document.getElementById("overlay").classList.add("hidden");
+  }
+
+  function updateCountLabel() {
+    var v = document.getElementById("cardCount").value;
+    document.getElementById("countLabel").textContent = v + " 块";
+    renderEditors();
+  }
+
+  function renderEditors() {
+    var count = parseInt(document.getElementById("cardCount").value);
+    var list = document.getElementById("editorList");
+    var html = "";
+    for (var i = 0; i < count; i++) {
+      var val = cards[i] || "";
+      var div = document.createElement("div");
+      div.textContent = val;
+      html += "<div class=\"card-editor\">";
+      html += "<div class=\"card-label\">🏷 第 " + (i + 1) + " 号牌子</div>";
+      html += "<input type=\"text\" id=\"edit-" + i + "\" value=\"" + div.innerHTML + "\" placeholder=\"输入内容…\" maxlength=\"50\">";
+      html += "</div>";
+    }
+    list.innerHTML = html;
+  }
+
+  function saveSettings() {
+    var count = parseInt(document.getElementById("cardCount").value);
+    var newMaxFlips = parseInt(document.getElementById("maxFlips").value);
+    var newCards = [];
+    for (var i = 0; i < count; i++) {
+      var input = document.getElementById("edit-" + i);
+      var val = (input ? input.value : "").trim();
+      newCards.push(val || ("牌子 " + (i + 1)));
+    }
+
+    cards = newCards;
+    maxFlips = newMaxFlips;
+
+    var arr = [];
+    flippedSet.forEach(function(v) { if (v < cards.length) arr.push(v); });
+    flippedSet = new Set(arr);
+
+    saveData();
+    document.getElementById("overlay").classList.add("hidden");
+    render();
+    showToast("设置已保存 ✅");
+  }
+
+  var toastTimer;
+  function showToast(msg) {
+    var el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.remove("hidden");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { el.classList.add("hidden"); }, 1800);
+  }
+
+  loadData();
+  render();
+  </script>
+</body>
+</html>
