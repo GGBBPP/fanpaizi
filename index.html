@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>翻牌子</title>
-
-<!-- iOS Safari 主屏幕 Web App -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="翻牌子">
@@ -17,7 +15,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--cw:140px;--ch:180px}
 html,body{width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#fce4ec,#fff3e0,#e8f5e9,#e3f2fd);background-attachment:fixed;min-height:100vh;min-height:-webkit-fill-available;color:#5d4037;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#fce4ec,#fff3e0,#e8f5e9,#e3f2fd);background-attachment:fixed;min-height:100vh;min-height:-webkit-fill-available;color:#5d4037;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;padding:env(safe-area-inset-top)0 env(safe-area-inset-bottom)}
 .bg-float{position:fixed;pointer-events:none;z-index:0;animation:fa 14s ease-in-out infinite;opacity:.45;font-size:1.6rem}
 .bg-float:nth-child(1){top:6%;left:4%;animation-delay:0s;font-size:2rem}
 .bg-float:nth-child(2){top:12%;right:7%;animation-delay:-3.5s;font-size:1.4rem}
@@ -31,7 +29,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 .header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(255,243,224,.95)60%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:max(14px,env(safe-area-inset-top))14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
 .header h1{font-size:1.35rem;font-weight:800;color:#e84393}
 .header-actions{display:flex;gap:6px}
-.btn{display:inline-flex;align-items:center;justify-content:center;border:2px solid #e84393;background:rgba(255,255,255,.7);color:#e84393;padding:7px 13px;border-radius:18px;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;min-height:36px;-webkit-tap-highlight-color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:2px solid #e84393;background:rgba(255,255,255,.7);color:#e84393;padding:7px 13px;border-radius:18px;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;min-height:36px}
 .btn:active{background:#fce4ec;transform:scale(.94)}
 .btn-primary{background:#e84393;color:#fff}
 .main{position:relative;z-index:1;padding:0 10px max(50px,env(safe-area-inset-bottom))}
@@ -44,17 +42,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:750px;margin:0 auto;padding-bottom:10px}
 .card-scene{perspective:800px;width:var(--cw);height:var(--ch)}
 .card-scene.locked{opacity:.4;filter:grayscale(.5);pointer-events:none}
-.card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer}
 .card.flipped{transform:rotateY(180deg)}
 .card:not(.flipped):active{transform:scale(.94)}
 .card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .card-back{border:3px solid rgba(255,255,255,.7);box-shadow:0 5px 20px rgba(232,67,147,.15);background-color:#f0e0d0;background-size:cover;background-position:center;background-repeat:no-repeat}
-.card-front{background:linear-gradient(145deg,#fffdf7,#fff8e7);border:3px solid #ff6b8a;transform:rotateY(180deg);color:#5d4037;padding:14px 10px;flex-direction:column;text-align:center;gap:6px;box-shadow:0 5px 20px rgba(232,67,147,.18)}
-.card-front .seal{display:inline-block;border:2px solid #e84393;color:#e84393;padding:2px 10px;border-radius:10px;font-size:.68rem;font-weight:700;letter-spacing:.06em;transform:rotate(-2deg)}
-.card-front .content{font-size:.9rem;font-weight:600;line-height:1.45;word-break:break-all;flex:1;display:flex;align-items:center;color:#4a2c2a}
+.card-front{background:linear-gradient(145deg,#fffdf7,#fff8e7);border:3px solid #ff6b8a;transform:rotateY(180deg);color:#5d4037;padding:10px 8px;flex-direction:column;text-align:center;gap:2px;box-shadow:0 5px 20px rgba(232,67,147,.18)}
+.card-front .seal{display:inline-block;border:2px solid #e84393;color:#e84393;padding:2px 10px;border-radius:10px;font-size:.65rem;font-weight:700;letter-spacing:.06em;transform:rotate(-2deg)}
+.card-front .emoji{font-size:1.8rem;line-height:1;margin:2px 0;animation:popIn .35s ease}
+.card-front .content{font-size:.95rem;font-weight:700;line-height:1.3;word-break:keep-all;flex:1;display:flex;align-items:center;justify-content:center;color:#4a2c2a;letter-spacing:.03em}
+@keyframes popIn{0%{transform:scale(0);opacity:0}70%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:flex-end;justify-content:center;transition:opacity .3s}
 .overlay.hidden{opacity:0;pointer-events:none}
-.settings-panel{background:#fffdf7;border-radius:22px 22px 0 0;width:100%;max-width:500px;max-height:85vh;max-height:85dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:26px 18px max(34px,env(safe-area-inset-bottom));animation:slideUp .35s ease;box-shadow:0 -4px 28px rgba(0,0,0,.08)}
+.settings-panel{background:#fffdf7;border-radius:22px 22px 0 0;width:100%;max-width:500px;max-height:85dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:26px 18px max(34px,env(safe-area-inset-bottom));animation:slideUp .35s ease;box-shadow:0 -4px 28px rgba(0,0,0,.08)}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .settings-panel h2{font-size:1.15rem;color:#e84393;margin-bottom:18px;text-align:center;font-weight:800}
 .form-group{margin-bottom:12px}
@@ -71,10 +71,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 .settings-actions .btn{flex:1;text-align:center}
 .toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(232,67,147,.9);color:#fff;padding:13px 26px;border-radius:22px;font-size:.9rem;font-weight:700;z-index:999;pointer-events:none;transition:opacity .3s;text-align:center;white-space:nowrap;box-shadow:0 4px 18px rgba(232,67,147,.25)}
 .toast.hidden{opacity:0}
-@media(max-width:380px){:root{--cw:108px;--ch:140px}.card-grid{gap:8px}.header h1{font-size:1.15rem}}
+@media(max-width:380px){:root{--cw:108px;--ch:140px}.card-grid{gap:8px}.header h1{font-size:1.15rem}.card-front .emoji{font-size:1.4rem}.card-front .content{font-size:.82rem}}
 @media(min-width:500px){:root{--cw:150px;--ch:195px}.card-grid{gap:18px}}
-
-/* iOS 独立模式（主屏幕打开）适配 */
 @media(display-mode:standalone){body{padding-top:env(safe-area-inset-top)}}
 </style>
 </head>
@@ -94,15 +92,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 <script>
 var T=690;
 function U(i){var n=String(i+1);while(n.length<4)n='0'+n;return'images/mobile_'+n+'.jpg'}
-var SK='fp_v12',cards=[],flipped=new Set(),maxF=2,imgIdx=[];
-var df=['拼积木','练书法','弹吉他','弹尤克里里','弹古筝','弹卡林巴琴','画画','涂色','折纸','语言','学习考证','学习塔罗牌','看书','学习国学','玩游戏','休息'];
+var SK='fp_v13',cards=[],flipped=new Set(),maxF=2,imgIdx=[];
+
+// 16 项内容 + 专属 emoji
+var def=[
+  {t:'拼积木',e:'🧩'},{t:'练书法',e:'🖌️'},{t:'弹吉他',e:'🎸'},{t:'弹尤克里里',e:'🪕'},
+  {t:'弹古筝',e:'🎶'},{t:'弹卡林巴琴',e:'🎹'},{t:'画画',e:'🎨'},{t:'涂色',e:'🖍️'},
+  {t:'折纸',e:'📄'},{t:'语言',e:'🗣️'},{t:'学习考证',e:'📚'},{t:'学习塔罗牌',e:'🔮'},
+  {t:'看书',e:'📖'},{t:'学习国学',e:'📜'},{t:'玩游戏',e:'🎮'},{t:'休息',e:'😴'}
+];
 
 function shuf(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=b[i];b[i]=b[j];b[j]=t}return b}
 function pick(n,prev){var a=[];for(var i=0;i<T;i++)a.push(i);var s=shuf(a);if(prev&&prev.length&&n<=T-prev.length){var ps={},fr=[],ru=[];for(var p=0;p<prev.length;p++)ps[prev[p]]=1;for(var j=0;j<s.length;j++)ps[s[j]]?ru.push(s[j]):fr.push(s[j]);var pk=fr.slice(0,n);if(pk.length<n)pk=pk.concat(ru.slice(0,n-pk.length));return pk}return s.slice(0,n)}
 
 function ld(){
   try{var r=localStorage.getItem(SK);if(r){var d=JSON.parse(r);cards=d.c||[];flipped=new Set(d.f||[]);maxF=d.m!=null?d.m:2;imgIdx=d.i||[];while(imgIdx.length<cards.length){var u={};for(var j=0;j<imgIdx.length;j++)u[imgIdx[j]]=1;var ok=0;for(var k=0;k<T;k++)if(!u[k]){imgIdx.push(k);ok=1;break}if(!ok)imgIdx.push(0)}return}}catch(e){}
-  cards=df.slice();flipped=new Set();maxF=2;imgIdx=pick(cards.length,[])
+  cards=def.slice();flipped=new Set();maxF=2;imgIdx=pick(cards.length,[])
 }
 function sv(){localStorage.setItem(SK,JSON.stringify({c:cards,f:Array.from(flipped),m:maxF,i:imgIdx}))}
 function lk(){return maxF!==99&&flipped.size>=maxF}
@@ -116,11 +121,12 @@ function rd(){
   var h='<div class="card-grid">';
   for(var i=0;i<cards.length;i++){
     var fl=flipped.has(i),sl=lo&&!fl,idx=imgIdx[i]||0,url=U(idx);
-    var d=document.createElement('div');d.textContent=cards[i];var sc=d.innerHTML;
+    var item=cards[i],txt=item.t||item,em=item.e||'';
+    var d=document.createElement('div');d.textContent=txt;var sc=d.innerHTML;
     h+='<div class="card-scene'+(sl?' locked':'')+'" onclick="'+(sl?'':'fp('+i+')')+'">';
     h+='<div class="card'+(fl?' flipped':'')+'" id="c-'+i+'">';
     h+='<div class="card-face card-back" style="background-image:url(\''+url+'\')"></div>';
-    h+='<div class="card-face card-front"><span class="seal">✧ 御旨 ✧</span><span class="content">'+sc+'</span></div>';
+    h+='<div class="card-face card-front"><span class="seal">✧ 御旨 ✧</span><span class="emoji">'+em+'</span><span class="content">'+sc+'</span></div>';
     h+='</div></div>';
   }
   h+='</div>';ca.innerHTML=h
@@ -132,8 +138,8 @@ function mid(){var n=new Date(),m=new Date(n);m.setHours(24,0,0,0);var ms=m-n;if
 function oS(){document.getElementById('ov').classList.remove('hidden');document.getElementById('cn').value=cards.length||16;document.getElementById('mf').value=String(maxF);uL();rE()}
 function cS(e){if(e&&e.target!==document.getElementById('ov'))return;document.getElementById('ov').classList.add('hidden')}
 function uL(){document.getElementById('cl').textContent=document.getElementById('cn').value+' 块';rE()}
-function rE(){var n=parseInt(document.getElementById('cn').value),l=document.getElementById('el'),h='';for(var i=0;i<n;i++){var v=cards[i]||'';var d=document.createElement('div');d.textContent=v;h+='<div class="card-editor"><div class="card-label">🖍️ 第 '+(i+1)+' 号</div><input id="e-'+i+'" value="'+d.innerHTML+'" placeholder="输入内容…" maxlength="50"></div>'}l.innerHTML=h}
-function sS(){var n=parseInt(document.getElementById('cn').value),nm=parseInt(document.getElementById('mf').value),nc=[];for(var i=0;i<n;i++){var inp=document.getElementById('e-'+i);nc.push((inp?inp.value:'').trim()||('牌子 '+(i+1)))}var ol=cards.length;cards=nc;maxF=nm;if(cards.length!==ol){var u={};for(var k=0;k<imgIdx.length;k++)u[imgIdx[k]]=1;var pa=[];for(var x in u)if(u[x])pa.push(parseInt(x));imgIdx=pick(cards.length,pa)}var a=[];flipped.forEach(function(v){if(v<cards.length)a.push(v)});flipped=new Set(a);sv();document.getElementById('ov').classList.add('hidden');rd();tm('已保存 ✅')}
+function rE(){var n=parseInt(document.getElementById('cn').value),l=document.getElementById('el'),h='';for(var i=0;i<n;i++){var item=cards[i];var v=item?item.t||item:'';var d=document.createElement('div');d.textContent=v;h+='<div class="card-editor"><div class="card-label">🖍️ 第 '+(i+1)+' 号</div><input id="e-'+i+'" value="'+d.innerHTML+'" placeholder="输入内容…" maxlength="50"></div>'}l.innerHTML=h}
+function sS(){var n=parseInt(document.getElementById('cn').value),nm=parseInt(document.getElementById('mf').value),nc=[];for(var i=0;i<n;i++){var inp=document.getElementById('e-'+i);var txt=(inp?inp.value:'').trim()||('牌子 '+(i+1));var em=def[i]?def[i].e:'';nc.push({t:txt,e:em})}var ol=cards.length;cards=nc;maxF=nm;if(cards.length!==ol){var u={};for(var k=0;k<imgIdx.length;k++)u[imgIdx[k]]=1;var pa=[];for(var x in u)if(u[x])pa.push(parseInt(x));imgIdx=pick(cards.length,pa)}var a=[];flipped.forEach(function(v){if(v<cards.length)a.push(v)});flipped=new Set(a);sv();document.getElementById('ov').classList.add('hidden');rd();tm('已保存 ✅')}
 var tt;function tm(m){var e=document.getElementById('to');e.textContent=m;e.classList.remove('hidden');clearTimeout(tt);tt=setTimeout(function(){e.classList.add('hidden')},1500)}
 ld();rd();mid();
 </script>
