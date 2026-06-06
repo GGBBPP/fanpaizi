@@ -3,50 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>翻牌子</title>
+<title>翻牌子 · 蜡笔小新</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #1a0a0a;
     --card-w: 140px;
     --card-h: 180px;
-    --gold: #c9a84c;
-    --gold-light: #e8d48b;
-    --red: #8b1a1a;
-    --red-dark: #4a0a0a;
-    --cream: #f5f0e8;
+    --pink: #ff6b8a;
+    --yellow: #ffe066;
+    --green: #7bed9f;
+    --blue: #70a1ff;
+    --purple: #a29bfe;
+    --orange: #ffa502;
+    --white: #fffdf7;
   }
 
   body {
     font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-    background: var(--bg);
+    background: linear-gradient(135deg, #fce4ec 0%, #fff3e0 30%, #e8f5e9 60%, #e3f2fd 100%);
+    background-attachment: fixed;
     min-height: 100vh;
     min-height: 100dvh;
-    color: var(--cream);
+    color: #5d4037;
     overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     -webkit-user-select: none;
   }
 
-  body::before {
-    content: "";
+  /* ===== 可爱浮动背景元素 ===== */
+  .bg-float {
     position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 80%, rgba(139,26,26,0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(139,26,26,0.1) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
+    animation: floatAround 12s ease-in-out infinite;
+    opacity: 0.6;
+    font-size: 1.6rem;
+  }
+  .bg-float:nth-child(1) { top: 8%; left: 5%; animation-delay: 0s; font-size: 2rem; }
+  .bg-float:nth-child(2) { top: 15%; right: 8%; animation-delay: -3s; font-size: 1.4rem; }
+  .bg-float:nth-child(3) { top: 60%; left: 8%; animation-delay: -6s; font-size: 1.8rem; }
+  .bg-float:nth-child(4) { top: 75%; right: 5%; animation-delay: -9s; font-size: 1.5rem; }
+  .bg-float:nth-child(5) { top: 40%; left: 85%; animation-delay: -4s; font-size: 1.3rem; }
+  .bg-float:nth-child(6) { top: 85%; left: 40%; animation-delay: -7s; font-size: 1.7rem; }
+  .bg-float:nth-child(7) { top: 30%; left: 15%; animation-delay: -2s; font-size: 1.2rem; }
+  .bg-float:nth-child(8) { top: 50%; right: 12%; animation-delay: -5s; font-size: 1.6rem; }
+
+  @keyframes floatAround {
+    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    25% { transform: translate(10px, -15px) rotate(5deg) scale(1.1); }
+    50% { transform: translate(-5px, -25px) rotate(-3deg) scale(0.95); }
+    75% { transform: translate(-12px, -8px) rotate(4deg) scale(1.05); }
   }
 
   .header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: linear-gradient(180deg, rgba(26,10,10,0.98) 60%, rgba(26,10,10,0) 100%);
+    background: linear-gradient(180deg, rgba(255,243,224,0.95) 60%, rgba(255,243,224,0) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 16px 16px 24px;
     display: flex;
     align-items: center;
@@ -54,66 +71,77 @@
   }
   .header h1 {
     font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--gold);
-    text-shadow: 0 0 20px rgba(201,168,76,0.3);
+    font-weight: 800;
+    color: #e84393;
+    text-shadow: 2px 2px 0 rgba(255,107,138,0.2);
   }
-  .header-actions { display: flex; gap: 10px; }
+  .header-actions { display: flex; gap: 8px; }
 
   .btn {
-    border: 1px solid var(--gold);
-    background: rgba(201,168,76,0.08);
-    color: var(--gold);
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border: 2px solid #e84393;
+    background: rgba(255,255,255,0.7);
+    color: #e84393;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
     font-family: inherit;
     white-space: nowrap;
+    backdrop-filter: blur(4px);
   }
-  .btn:active { background: rgba(201,168,76,0.2); transform: scale(0.96); }
-  .btn-primary { background: var(--gold); color: var(--red-dark); font-weight: 600; border-color: var(--gold); }
-  .btn-primary:active { background: var(--gold-light); }
+  .btn:active { background: #fce4ec; transform: scale(0.94); }
+  .btn-primary { background: #e84393; color: #fff; border-color: #e84393; }
+  .btn-primary:active { background: #d63384; }
 
   .main {
     position: relative;
     z-index: 1;
-    padding: 0 16px 40px;
+    padding: 0 16px 50px;
   }
 
   .stats {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     font-size: 0.85rem;
-    color: rgba(201,168,76,0.6);
-    letter-spacing: 0.04em;
+    color: #e84393;
+    background: rgba(255,255,255,0.5);
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    backdrop-filter: blur(4px);
+    font-weight: 600;
   }
-  .stats span { color: var(--gold-light); font-weight: 600; }
+  .stats span { color: #6c5ce7; }
 
   .limit-banner {
     text-align: center;
-    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(139,26,26,0.1));
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 8px;
+    background: rgba(255,107,138,0.12);
+    border: 2px dashed #ff6b8a;
+    border-radius: 16px;
     padding: 10px 16px;
     margin-bottom: 20px;
-    max-width: 400px;
+    max-width: 420px;
     margin-left: auto;
     margin-right: auto;
     font-size: 0.85rem;
-    color: var(--gold-light);
+    color: #e84393;
     animation: fadeIn 0.4s ease;
+    font-weight: 600;
   }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
   .empty-state {
     text-align: center;
     padding: 80px 20px;
-    color: rgba(201,168,76,0.4);
+    color: #e84393;
+    opacity: 0.5;
   }
-  .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+  .empty-state .icon { font-size: 3.5rem; margin-bottom: 12px; }
   .empty-state p { font-size: 1rem; line-height: 1.8; }
 
   .card-grid {
@@ -130,10 +158,9 @@
     width: var(--card-w);
     height: var(--card-h);
   }
-
   .card-scene.locked {
-    opacity: 0.35;
-    filter: grayscale(0.5);
+    opacity: 0.4;
+    filter: grayscale(0.4);
     pointer-events: none;
   }
 
@@ -142,107 +169,145 @@
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
   }
   .card.flipped { transform: rotateY(180deg); }
+  .card:not(.flipped):active { transform: scale(0.94); }
 
   .card-face {
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    border-radius: 10px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
 
+  /* ----- 背面（未翻）蜡笔小新主题 ----- */
   .card-back {
-    background: linear-gradient(145deg, #6b1515 0%, #4a0a0a 40%, #3a0606 100%);
-    border: 2px solid var(--gold);
+    border: 3px solid rgba(255,255,255,0.6);
     box-shadow:
-      0 4px 20px rgba(0,0,0,0.5),
-      inset 0 1px 0 rgba(201,168,76,0.15);
+      0 6px 24px rgba(232,67,147,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    position: relative;
   }
-  .card-back::before {
+  .card-back::after {
     content: "";
     position: absolute;
-    inset: 6px;
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 6px;
+    inset: 4px;
+    border: 2px dashed rgba(255,255,255,0.5);
+    border-radius: 10px;
     pointer-events: none;
   }
   .card-back-inner {
     text-align: center;
-    color: var(--gold);
-    opacity: 0.7;
+    z-index: 1;
   }
-  .card-back-inner .dragon {
-    font-size: 2.2rem;
+  .card-back-inner .avatar {
+    font-size: 2.8rem;
     display: block;
     line-height: 1;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.15));
+    animation: wiggle 2s ease-in-out infinite;
   }
-  .card-back-inner .num {
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
+  .card-back-inner .label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    letter-spacing: 0.06em;
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
   }
 
+  /* ----- 多彩背面配色方案 ----- */
+  .card-back-0 { background: linear-gradient(145deg, #ff6b8a, #ff8e9e); }
+  .card-back-1 { background: linear-gradient(145deg, #ffa502, #ffbe76); }
+  .card-back-2 { background: linear-gradient(145deg, #7bed9f, #a3f7bf); }
+  .card-back-3 { background: linear-gradient(145deg, #70a1ff, #98bfff); }
+  .card-back-4 { background: linear-gradient(145deg, #a29bfe, #c4bfff); }
+  .card-back-5 { background: linear-gradient(145deg, #ff6b8a, #fd79a8); }
+  .card-back-6 { background: linear-gradient(145deg, #fdcb6e, #ffeaa7); }
+  .card-back-7 { background: linear-gradient(145deg, #55efc4, #81ecec); }
+  .card-back-8 { background: linear-gradient(145deg, #ff9ff3, #feca57); }
+  .card-back-9 { background: linear-gradient(145deg, #ff6b6b, #ff9a9e); }
+  .card-back-10 { background: linear-gradient(145deg, #a29bfe, #dfe6e9); }
+  .card-back-11 { background: linear-gradient(145deg, #fd79a8, #fab1a0); }
+  .card-back-12 { background: linear-gradient(145deg, #00cec9, #81ecec); }
+  .card-back-13 { background: linear-gradient(145deg, #e17055, #fab1a0); }
+  .card-back-14 { background: linear-gradient(145deg, #6c5ce7, #a29bfe); }
+  .card-back-15 { background: linear-gradient(145deg, #f8b500, #ffe066); }
+  .card-back-16 { background: linear-gradient(145deg, #26de81, #7bed9f); }
+  .card-back-17 { background: linear-gradient(145deg, #fc5c65, #ff6b8a); }
+  .card-back-18 { background: linear-gradient(145deg, #45aaf2, #70a1ff); }
+  .card-back-19 { background: linear-gradient(145deg, #a55eea, #c4bfff); }
+
+  /* ----- 正面（翻开）可爱风 ----- */
   .card-front {
-    background: linear-gradient(145deg, #fdf6e8 0%, #f5e6c8 100%);
-    border: 2px solid var(--gold);
+    background: linear-gradient(145deg, #fffdf7 0%, #fff8e7 100%);
+    border: 3px solid #ff6b8a;
     transform: rotateY(180deg);
-    color: #3a1a0a;
-    padding: 16px;
+    color: #5d4037;
+    padding: 16px 12px;
     flex-direction: column;
     text-align: center;
-    gap: 6px;
-    box-shadow: 0 4px 20px rgba(201,168,76,0.2);
+    gap: 8px;
+    box-shadow: 0 6px 24px rgba(232,67,147,0.2);
   }
-  .card-front .title {
-    font-size: 0.75rem;
-    color: var(--red);
-    letter-spacing: 0.06em;
-    font-weight: 600;
+  .card-front .seal {
+    display: inline-block;
+    border: 2px solid #e84393;
+    color: #e84393;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    transform: rotate(-3deg);
   }
   .card-front .content {
     font-size: 0.95rem;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.5;
     word-break: break-all;
     flex: 1;
     display: flex;
     align-items: center;
+    color: #4a2c2a;
   }
 
+  /* ===== 设置面板 ===== */
   .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.5);
     z-index: 200;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     transition: opacity 0.3s;
   }
-  .overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
+  .overlay.hidden { opacity: 0; pointer-events: none; }
 
   .settings-panel {
-    background: #1e1010;
-    border-top: 2px solid var(--gold);
-    border-radius: 20px 20px 0 0;
+    background: #fffdf7;
+    border-radius: 24px 24px 0 0;
     width: 100%;
     max-width: 500px;
     max-height: 85vh;
     max-height: 85dvh;
     overflow-y: auto;
-    padding: 24px 20px 36px;
+    padding: 28px 20px 36px;
     animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
   }
   @keyframes slideUp {
     from { transform: translateY(100%); }
@@ -251,59 +316,83 @@
 
   .settings-panel h2 {
     font-size: 1.2rem;
-    color: var(--gold);
+    color: #e84393;
     margin-bottom: 20px;
     text-align: center;
-    letter-spacing: 0.06em;
+    font-weight: 800;
   }
 
-  .form-group {
-    margin-bottom: 16px;
-  }
+  .form-group { margin-bottom: 14px; }
   .form-group label {
     display: block;
     font-size: 0.85rem;
-    color: rgba(201,168,76,0.8);
+    color: #e84393;
     margin-bottom: 6px;
+    font-weight: 700;
   }
   .form-group input[type="range"] {
     width: 100%;
-    accent-color: var(--gold);
+    accent-color: #e84393;
     height: 6px;
   }
   .form-group .range-val {
     text-align: center;
-    color: var(--gold-light);
+    color: #6c5ce7;
     font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .max-flips-setting {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 2px dashed #fce4ec;
+  }
+  .max-flips-setting select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #fce4ec;
+    border-radius: 12px;
+    background: #fff;
+    color: #5d4037;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 stroke=%27%23e84393%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
     font-weight: 600;
   }
 
   .card-editor {
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 8px;
+    border: 2px solid #fce4ec;
+    border-radius: 14px;
     padding: 12px;
     margin-bottom: 10px;
-    background: rgba(201,168,76,0.03);
+    background: #fffbfc;
   }
   .card-editor .card-label {
     font-size: 0.8rem;
-    color: var(--gold);
+    color: #e84393;
     margin-bottom: 6px;
-    font-weight: 600;
+    font-weight: 700;
   }
   .card-editor input {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 6px;
-    background: rgba(0,0,0,0.3);
-    color: var(--cream);
+    padding: 10px 14px;
+    border: 2px solid #fce4ec;
+    border-radius: 12px;
+    background: #fff;
+    color: #5d4037;
     font-size: 0.9rem;
     font-family: inherit;
     outline: none;
     transition: border-color 0.2s;
+    font-weight: 500;
   }
-  .card-editor input:focus { border-color: var(--gold); }
+  .card-editor input:focus { border-color: #ff6b8a; }
 
   .settings-actions {
     display: flex;
@@ -312,57 +401,31 @@
   }
   .settings-actions .btn { flex: 1; text-align: center; }
 
-  .max-flips-setting {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(201,168,76,0.15);
-  }
-  .max-flips-setting label {
-    display: block;
-    font-size: 0.85rem;
-    color: rgba(201,168,76,0.8);
-    margin-bottom: 6px;
-  }
-  .max-flips-setting select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 6px;
-    background: rgba(0,0,0,0.3);
-    color: var(--cream);
-    font-size: 0.9rem;
-    font-family: inherit;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 stroke=%27%23c9a84c%27 fill=%27none%27 stroke-width=%272%27/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    cursor: pointer;
-  }
-
   .toast {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.85);
-    color: var(--gold-light);
-    padding: 12px 24px;
-    border-radius: 8px;
+    background: rgba(232,67,147,0.92);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 24px;
     font-size: 0.95rem;
+    font-weight: 700;
     z-index: 999;
     pointer-events: none;
     transition: opacity 0.3s;
     text-align: center;
     white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(232,67,147,0.3);
   }
   .toast.hidden { opacity: 0; }
 
   @media (max-width: 380px) {
-    :root { --card-w: 120px; --card-h: 155px; }
+    :root { --card-w: 115px; --card-h: 150px; }
     .card-grid { gap: 10px; }
     .header h1 { font-size: 1.25rem; }
+    .card-back-inner .avatar { font-size: 2.2rem; }
   }
   @media (min-width: 500px) {
     :root { --card-w: 150px; --card-h: 195px; }
@@ -372,8 +435,18 @@
 </head>
 <body>
 
+  <!-- 浮动背景装饰 -->
+  <div class="bg-float">🌸</div>
+  <div class="bg-float">⭐</div>
+  <div class="bg-float">💕</div>
+  <div class="bg-float">🍡</div>
+  <div class="bg-float">🎀</div>
+  <div class="bg-float">🌟</div>
+  <div class="bg-float">🫧</div>
+  <div class="bg-float">💫</div>
+
   <header class="header">
-    <h1>🏮 翻牌子</h1>
+    <h1>🍡 翻牌子 · 蜡笔小新</h1>
     <div class="header-actions">
       <button class="btn" onclick="openSettings()">⚙ 设置</button>
       <button class="btn" onclick="resetAll()">↺ 重翻</button>
@@ -415,10 +488,34 @@
   <div class="toast hidden" id="toast"></div>
 
   <script>
-  var STORAGE_KEY = "fanpaizi_v2_data";
+  var STORAGE_KEY = "fanpaizi_v3_data";
   var cards = [];
   var flippedSet = new Set();
   var maxFlips = 2;
+
+  // 每张牌子的专属图案（蜡笔小新主题，各不相同）
+  var cardThemes = [
+    { emoji: "🖍️", label: "小新蜡笔" },
+    { emoji: "🐶", label: "小白" },
+    { emoji: "🦸", label: "动感超人" },
+    { emoji: "🍡", label: "小新最愛" },
+    { emoji: "👶", label: "小葵" },
+    { emoji: "🎒", label: "幼稚园" },
+    { emoji: "🕺", label: "屁股舞" },
+    { emoji: "🐷", label: "不理不理" },
+    { emoji: "🌸", label: "妮妮" },
+    { emoji: "⚽", label: "足球小新" },
+    { emoji: "🎨", label: "画画时间" },
+    { emoji: "🍛", label: "咖喱饭" },
+    { emoji: "🎮", label: "电动宅" },
+    { emoji: "😎", label: "墨镜新" },
+    { emoji: "🛴", label: "小新座驾" },
+    { emoji: "🎤", label: "卡拉OK" },
+    { emoji: "📺", label: "最爱电视" },
+    { emoji: "🍭", label: "糖果" },
+    { emoji: "🦖", label: "恐龙新" },
+    { emoji: "💤", label: "午睡时间" }
+  ];
 
   var defaultCards = [
     "今晚洗碗 🍽️",
@@ -465,7 +562,7 @@
     var limitBanner = document.getElementById("limitBanner");
 
     if (cards.length === 0) {
-      cardArea.innerHTML = "<div class=\"empty-state\"><div class=\"icon\">🎴</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>";
+      cardArea.innerHTML = "<div class=\"empty-state\"><div class=\"icon\">🖍️</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>";
       stats.innerHTML = "";
       limitBanner.innerHTML = "";
       return;
@@ -486,18 +583,25 @@
     for (var i = 0; i < cards.length; i++) {
       var isFlipped = flippedSet.has(i);
       var sceneLocked = locked && !isFlipped;
+      var theme = cardThemes[i % cardThemes.length];
+      var colorClass = "card-back-" + (i % 20);
       var div = document.createElement("div");
       div.textContent = cards[i];
       var safeContent = div.innerHTML;
+
       html += "<div class=\"card-scene" + (sceneLocked ? " locked" : "") + "\" onclick=\"" + (sceneLocked ? "" : "flipCard(" + i + ")") + "\">";
       html += "<div class=\"card" + (isFlipped ? " flipped" : "") + "\" id=\"card-" + i + "\">";
-      html += "<div class=\"card-face card-back\">";
+
+      // 背面：专属图案
+      html += "<div class=\"card-face card-back " + colorClass + "\">";
       html += "<div class=\"card-back-inner\">";
-      html += "<span class=\"dragon\">🐉</span>";
-      html += "<span class=\"num\">第 " + (i + 1) + " 号</span>";
+      html += "<span class=\"avatar\">" + theme.emoji + "</span>";
+      html += "<span class=\"label\">" + theme.label + "</span>";
       html += "</div></div>";
+
+      // 正面：内容
       html += "<div class=\"card-face card-front\">";
-      html += "<span class=\"title\">✧ 御旨 ✧</span>";
+      html += "<span class=\"seal\">✧ 御旨 ✧</span>";
       html += "<span class=\"content\">" + safeContent + "</span>";
       html += "</div></div></div>";
     }
@@ -552,11 +656,12 @@
     var list = document.getElementById("editorList");
     var html = "";
     for (var i = 0; i < count; i++) {
+      var theme = cardThemes[i % cardThemes.length];
       var val = cards[i] || "";
       var div = document.createElement("div");
       div.textContent = val;
       html += "<div class=\"card-editor\">";
-      html += "<div class=\"card-label\">🏷 第 " + (i + 1) + " 号牌子</div>";
+      html += "<div class=\"card-label\">" + theme.emoji + " 第 " + (i + 1) + " 号 · " + theme.label + "</div>";
       html += "<input type=\"text\" id=\"edit-" + i + "\" value=\"" + div.innerHTML + "\" placeholder=\"输入内容…\" maxlength=\"50\">";
       html += "</div>";
     }
