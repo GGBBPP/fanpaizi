@@ -31,8 +31,8 @@ body{font-family:var(--font);background:linear-gradient(135deg,#fce4ec,#fff3e0,#
 .bg-float:nth-child(8){top:48%;right:10%;animation-delay:-6s;font-size:1.6rem}
 @keyframes fa{0%,100%{transform:translate(0,0)rotate(0deg)scale(1)}25%{transform:translate(8px,-12px)rotate(4deg)scale(1.08)}50%{transform:translate(-4px,-20px)rotate(-2deg)scale(.95)}75%{transform:translate(-10px,-6px)rotate(3deg)scale(1.05)}}
 .header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(255,243,224,.95)60%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:max(14px,env(safe-area-inset-top))14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
-.header h1{font-family:var(--font);font-size:1.5rem;font-weight:400;color:#e84393;letter-spacing:.06em}
-.header-actions{display:flex;gap:6px}
+.header h1{cursor:pointer;font-family:var(--font);font-size:1.5rem;font-weight:400;color:#e84393;letter-spacing:.06em}
+.header-actions{display:none;gap:6px}.header-actions.visible{display:flex}
 .btn{display:inline-flex;align-items:center;justify-content:center;border:2px solid #e84393;background:rgba(255,255,255,.7);color:#e84393;padding:7px 13px;border-radius:18px;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;min-height:36px}
 .btn:active{background:#fce4ec;transform:scale(.94)}
 .btn-primary{background:#e84393;color:#fff}
@@ -85,7 +85,7 @@ body{font-family:var(--font);background:linear-gradient(135deg,#fce4ec,#fff3e0,#
 <div class="bg-float">🌸</div><div class="bg-float">⭐</div><div class="bg-float">💕</div><div class="bg-float">🍡</div>
 <div class="bg-float">🎀</div><div class="bg-float">🌟</div><div class="bg-float">🫧</div><div class="bg-float">💫</div>
 
-<header class="header"><h1>翻牌子</h1><div class="header-actions"><button class="btn" onclick="oS()">⚙ 设置</button><button class="btn" onclick="rst()">↺ 重翻</button></div></header>
+<header class="header"><h1 id="ti" onclick="tC()">翻牌子</h1><div class="header-actions" id="ha"><button class="btn" onclick="oS()">⚙ 设置</button><button class="btn" onclick="rst()">↺ 重翻</button></div></header>
 <main class="main" id="m"><div class="stats" id="st"></div><div id="lb"></div><div id="ca"></div></main>
 
 <div class="overlay hidden" id="ov" onclick="cS(event)"><div class="settings-panel" onclick="event.stopPropagation()"><h2>⚙ 设置牌子</h2>
@@ -103,22 +103,23 @@ var def=[{t:'拼积木',e:'🧩'},{t:'练书法',e:'🖌️'},{t:'弹吉他',e:'
 function shuf(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=b[i];b[i]=b[j];b[j]=t}return b}
 function pick(n,prev){var a=[];for(var i=0;i<T;i++)a.push(i);var s=shuf(a);if(prev&&prev.length&&n<=T-prev.length){var ps={},fr=[],ru=[];for(var p=0;p<prev.length;p++)ps[prev[p]]=1;for(var j=0;j<s.length;j++)ps[s[j]]?ru.push(s[j]):fr.push(s[j]);var pk=fr.slice(0,n);if(pk.length<n)pk=pk.concat(ru.slice(0,n-pk.length));return pk}return s.slice(0,n)}
 
-function ld(){try{var r=localStorage.getItem(SK);if(r){var d=JSON.parse(r);cards=d.c||[];flipped=new Set(d.f||[]);maxF=d.m!=null?d.m:2;imgIdx=d.i||[];while(imgIdx.length<cards.length){var u={};for(var j=0;j<imgIdx.length;j++)u[imgIdx[j]]=1;var ok=0;for(var k=0;k<T;k++)if(!u[k]){imgIdx.push(k);ok=1;break}if(!ok)imgIdx.push(0)}return}}catch(e){}cards=def.slice();flipped=new Set();maxF=2;imgIdx=pick(cards.length,[])}
-function sv(){localStorage.setItem(SK,JSON.stringify({c:cards,f:Array.from(flipped),m:maxF,i:imgIdx}))}
+function ld(){try{var r=localStorage.getItem(SK);if(r){var d=JSON.parse(r);cards=d.c||[];flipped=new Set(d.f||[]);maxF=d.m!=null?d.m:2;imgIdx=d.i||[];while(imgIdx.length<cards.length){var u={};for(var j=0;j<imgIdx.length;j++)u[imgIdx[j]]=1;var ok=0;for(var k=0;k<T;k++)if(!u[k]){imgIdx.push(k);ok=1;break}if(!ok)imgIdx.push(0)}return}}catch(e){}cards=def.slice();flipped=new Set();maxF=2;imgIdx=pick(cards.length,[]);try{var d2=JSON.parse(localStorage.getItem(SK));tu=d2.u||false;tc=tu?5:0}catch(e){}if(tu)document.getElementById("ha").classList.add("visible")}
+function sv(){localStorage.setItem(SK,JSON.stringify({c:cards,f:Array.from(flipped),m:maxF,i:imgIdx,u:tu}))}
 function lk(){return maxF!==99&&flipped.size>=maxF}
 
-function rd(){var ca=document.getElementById('ca'),st=document.getElementById('st'),lb=document.getElementById('lb');if(!cards.length){ca.innerHTML='<div class="empty-state"><div class="icon">🖍️</div><p>尚无牌子<br>点击右上角「⚙ 设置」添加</p></div>';st.innerHTML='';lb.innerHTML='';return}var fc=flipped.size,lo=lk(),ml=maxF===99?'不限':String(maxF);st.innerHTML='已翻 <span>'+fc+'</span> / '+cards.length+' 块 · 图库 <span>'+T+'</span> 张（最多'+ml+'块）';lb.innerHTML=lo?'<div class="limit-banner">🔒 已翻满 '+maxF+' 块，点击「↺ 重翻」重新来过</div>':'';var h='<div class="card-grid">';for(var i=0;i<cards.length;i++){var fl=flipped.has(i),sl=lo&&!fl,idx=imgIdx[i]||0,url=U(idx);var item=cards[i],txt=item.t||item,em=item.e||'';var d=document.createElement('div');d.textContent=txt;var sc=d.innerHTML;h+='<div class="card-scene'+(sl?' locked':'')+'" onclick="'+(sl?'':'fp('+i+')')+'"><div class="card'+(fl?' flipped':'')+'" id="c-'+i+'"><div class="card-face card-back" style="background-image:url(\''+url+'\')"></div><div class="card-face card-front"><span class="seal">✧ 御旨 ✧</span><span class="emoji">'+em+'</span><span class="content">'+sc+'</span></div></div></div>'}h+='</div>';ca.innerHTML=h}
+function rd(){var ca=document.getElementById('ca'),st=document.getElementById('st'),lb=document.getElementById('lb');if(!cards.length){ca.innerHTML='<div class="empty-state"><div class="icon">🖍️</div><p>尚无牌子<br>连续点击5次「翻牌子」解锁设置</p></div>';st.innerHTML='';lb.innerHTML='';return}var fc=flipped.size,lo=lk(),ml=maxF===99?'不限':String(maxF);st.innerHTML='已翻 <span>'+fc+'</span> / '+cards.length+' 块 · 图库 <span>'+T+'</span> 张（最多'+ml+'块）';lb.innerHTML=lo?'<div class="limit-banner">🔒 已翻满 '+maxF+' 块，点击「↺ 重翻」重新来过</div>':'';var h='<div class="card-grid">';for(var i=0;i<cards.length;i++){var fl=flipped.has(i),sl=lo&&!fl,idx=imgIdx[i]||0,url=U(idx);var item=cards[i],txt=item.t||item,em=item.e||'';var d=document.createElement('div');d.textContent=txt;var sc=d.innerHTML;h+='<div class="card-scene'+(sl?' locked':'')+'" onclick="'+(sl?'':'fp('+i+')')+'"><div class="card'+(fl?' flipped':'')+'" id="c-'+i+'"><div class="card-face card-back" style="background-image:url(\''+url+'\')"></div><div class="card-face card-front"><span class="seal">✧ 御旨 ✧</span><span class="emoji">'+em+'</span><span class="content">'+sc+'</span></div></div></div>'}h+='</div>';ca.innerHTML=h}
 
 function fp(i){if(lk()){tm('⚠ 已翻满 '+maxF+' 块');return}var el=document.getElementById('c-'+i);if(!el||flipped.has(i))return;flipped.add(i);el.classList.add('flipped');sv();rd();if(navigator.vibrate)navigator.vibrate(10)}
-function rst(){if(!cards.length)return;flipped.clear();cards=shuf(cards);imgIdx=pick(cards.length,imgIdx);sv();rd();tm('已刷新 🎴')}
+function rst(){if(!tu||!cards.length)return;flipped.clear();cards=shuf(cards);imgIdx=pick(cards.length,imgIdx);sv();rd();tm('已刷新 🎴')}
 function mid(){var n=new Date(),m=new Date(n);m.setHours(24,0,0,0);var ms=m-n;if(ms<6e4)ms=6e4;setTimeout(function(){location.reload()},ms)}
-function oS(){document.getElementById('ov').classList.remove('hidden');document.getElementById('cn').value=cards.length||16;document.getElementById('mf').value=String(maxF);uL();rE()}
+function oS(){if(!tu)return;document.getElementById('ov').classList.remove('hidden');document.getElementById('cn').value=cards.length||16;document.getElementById('mf').value=String(maxF);uL();rE()}
 function cS(e){if(e&&e.target!==document.getElementById('ov'))return;document.getElementById('ov').classList.add('hidden')}
 function uL(){document.getElementById('cl').textContent=document.getElementById('cn').value+' 块';rE()}
 function rE(){var n=parseInt(document.getElementById('cn').value),l=document.getElementById('el'),h='';for(var i=0;i<n;i++){var item=cards[i],v=item?item.t||item:'';var d=document.createElement('div');d.textContent=v;h+='<div class="card-editor"><div class="card-label">🖍️ 第 '+(i+1)+' 号</div><input id="e-'+i+'" value="'+d.innerHTML+'" placeholder="输入内容…" maxlength="50"></div>'}l.innerHTML=h}
 function sS(){var n=parseInt(document.getElementById('cn').value),nm=parseInt(document.getElementById('mf').value),nc=[];for(var i=0;i<n;i++){var inp=document.getElementById('e-'+i);var txt=(inp?inp.value:'').trim()||('牌子 '+(i+1));var em=def[i]?def[i].e:'';nc.push({t:txt,e:em})}var ol=cards.length;cards=nc;maxF=nm;if(cards.length!==ol){var u={};for(var k=0;k<imgIdx.length;k++)u[imgIdx[k]]=1;var pa=[];for(var x in u)if(u[x])pa.push(parseInt(x));imgIdx=pick(cards.length,pa)}var a=[];flipped.forEach(function(v){if(v<cards.length)a.push(v)});flipped=new Set(a);sv();document.getElementById('ov').classList.add('hidden');rd();tm('已保存 ✅')}
-var tt;function tm(m){var e=document.getElementById('to');e.textContent=m;e.classList.remove('hidden');clearTimeout(tt);tt=setTimeout(function(){e.classList.add('hidden')},1500)}
+var tt,tc=0,tu=false;function tC(){if(tu)return;tc++;if(tc>=5){tu=true;document.getElementById("ha").classList.add("visible");sv();tm("🔓 管理功能已解锁")}}function tm(m){var e=document.getElementById('to');e.textContent=m;e.classList.remove('hidden');clearTimeout(tt);tt=setTimeout(function(){e.classList.add('hidden')},1500)}
 ld();rd();mid();
 </script>
 </body>
 </html>
+
