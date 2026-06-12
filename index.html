@@ -97,13 +97,13 @@ body{font-family:var(--font);background:linear-gradient(135deg,#fce4ec,#fff3e0,#
 <script>
 var T=690;
 function U(i){var n=String(i+1);while(n.length<4)n='0'+n;return'images/mobile_'+n+'.jpg'}
-var SK='fp_v18',cards=[],flipped=new Set(),maxF=5,imgIdx=[];
+var SK='fp_v18',cards=[],flipped=new Set(),maxF=3,imgIdx=[];
 var def=[{t:'拼积木',e:'🧩'},{t:'练书法',e:'🖌️'},{t:'弹吉他',e:'🎸'},{t:'弹尤克里里',e:'🪕'},{t:'弹古筝',e:'🎶'},{t:'弹卡林巴琴',e:'🎹'},{t:'画画',e:'🎨'},{t:'涂色',e:'🖍️'},{t:'折纸',e:'📄'},{t:'语言',e:'🗣️'},{t:'学习考证',e:'📚'},{t:'学习塔罗牌',e:'🔮'},{t:'看书',e:'📖'},{t:'学习国学',e:'📜'},{t:'玩游戏',e:'🎮'},{t:'休息',e:'😴'},{t:'贴贴画',e:'🖼️'}];
 
 function shuf(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=b[i];b[i]=b[j];b[j]=t}return b}
 function pick(n,prev){var a=[];for(var i=0;i<T;i++)a.push(i);var s=shuf(a);if(prev&&prev.length&&n<=T-prev.length){var ps={},fr=[],ru=[];for(var p=0;p<prev.length;p++)ps[prev[p]]=1;for(var j=0;j<s.length;j++)ps[s[j]]?ru.push(s[j]):fr.push(s[j]);var pk=fr.slice(0,n);if(pk.length<n)pk=pk.concat(ru.slice(0,n-pk.length));return pk}return s.slice(0,n)}
 
-function ld(){try{var r=localStorage.getItem(SK);if(r){var d=JSON.parse(r);cards=d.c||[];flipped=new Set(d.f||[]);maxF=d.m!=null?d.m:2;imgIdx=d.i||[];while(imgIdx.length<cards.length){var u={};for(var j=0;j<imgIdx.length;j++)u[imgIdx[j]]=1;var ok=0;for(var k=0;k<T;k++)if(!u[k]){imgIdx.push(k);ok=1;break}if(!ok)imgIdx.push(0)}return}}catch(e){}cards=def.slice();flipped=new Set();maxF=5;imgIdx=pick(cards.length,[]);try{var d2=JSON.parse(localStorage.getItem(SK));tu=d2.u||false;tc=tu?5:0}catch(e){}if(tu)document.getElementById("ha").classList.add("visible")}
+function ld(){try{var r=localStorage.getItem(SK);if(r){var d=JSON.parse(r);cards=d.c||[];flipped=new Set(d.f||[]);maxF=d.m!=null?d.m:2;imgIdx=d.i||[];while(imgIdx.length<cards.length){var u={};for(var j=0;j<imgIdx.length;j++)u[imgIdx[j]]=1;var ok=0;for(var k=0;k<T;k++)if(!u[k]){imgIdx.push(k);ok=1;break}if(!ok)imgIdx.push(0)}return}}catch(e){}cards=def.slice();flipped=new Set();maxF=3;imgIdx=pick(cards.length,[]);try{var d2=JSON.parse(localStorage.getItem(SK));tu=d2.u||false;tc=tu?5:0}catch(e){}if(tu)document.getElementById("ha").classList.add("visible")}
 function sv(){localStorage.setItem(SK,JSON.stringify({c:cards,f:Array.from(flipped),m:maxF,i:imgIdx,u:tu}))}
 function lk(){return maxF!==99&&flipped.size>=maxF}
 
